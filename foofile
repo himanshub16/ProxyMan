@@ -1,0 +1,16 @@
+#Idea credit Alan Pope, from https://wiki.archlinux.org/index.php/Proxy_settings
+
+# Methodology credit Alan Pope, from https://wiki.archlinux.org/index.php/Proxy_settings
+
+export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+export http_proxy="http://<PROXY>"
+export https_proxy="https://<PROXY>"
+export ftp_proxy="ftp://<PROXY>"
+export socks_proxy="socks://<PROXY>"
+export rsync_proxy="rsync://<PROXY>"
+export http_proxy="http://<PROXY>"
+export HTTP="http://<PROXY>"
+export HTTPS="https://<PROXY>"
+export FTP="ftp://<PROXY>"
+export SOCKS="socks://<PROXY>"
+export RSYNC_PROXY="rsync://<PROXY>"

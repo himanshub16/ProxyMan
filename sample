@@ -1,0 +1,13 @@
+myfunc() {
+	if [[ $1 == "y" ]]; then
+		echo "you entered : yes"
+	elif [[ $1 == "n" ]]; then
+		echo "you entered : no"
+	else
+		echo "you entered : invalid value"
+	fi
+	echo "value entered was : $1"
+}
+
+read 
+myfunc $REPLY

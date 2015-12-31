@@ -11,7 +11,9 @@ Licensed under GNU GPL v2
 How to use this tool?
 =====================
 Browse to the directory containing this tool and the following commands would help you out.
+
 bash main.sh : To set up/unset proxy settings
+
 bash proxy_check.sh : To check your current proxy settings
 
 What does it requires on?

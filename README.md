@@ -6,7 +6,7 @@ CLI Tool to set up and manage proxy settings for Debian/Ubuntu Linux distributio
 Additionally, script proxy_check.sh is provided to check your current proxy settings.
 This helps much in debugging and observing the behaviour of proxy configuration tools.
 
-Licensed under GNU GPL v2
+Free software licensed under GNU GPL v2
 
 How to use this tool?
 =====================

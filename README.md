@@ -1,6 +1,9 @@
 ProxyMan (for Linux)
+
 Author : Himanshu Shekhar < https://github.com/himanshushekharb16/ProxyMan/ >
+
 The version number is mentioned in the main.sh file.
+
 CLI Tool to set up and manage proxy settings for Debian/Ubuntu Linux distributions.
 
 Additionally, script proxy_check.sh is provided to check your current proxy settings.

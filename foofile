@@ -1,5 +1,0 @@
-if [[ -e "bash_set.bak" && -e "apt_config.bak" ]]; then
-	echo "Things are okay."
-else
-	echo "Things are not okay."
-fi

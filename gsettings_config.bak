@@ -1,0 +1,19 @@
+# Configuration for gsettings
+# For Debian, Ubuntu and related distros which rely on gsettings
+
+gsettings set org.gnome.system.proxy use-same-proxy <USE-SAME> 
+gsettings set org.gnome.system.proxy mode 'manual'
+gsettings set org.gnome.system.proxy autoconfig-url ''
+gsettings set org.gnome.system.proxy ignore-hosts ['localhost', '127.0.0.0/8', '::1']
+gsettings set org.gnome.system.proxy.ftp host '<HOST>'
+gsettings set org.gnome.system.proxy.ftp port <PORT>
+gsettings set org.gnome.system.proxy.socks host '<HOST>'
+gsettings set org.gnome.system.proxy.socks port <PORT>
+gsettings set org.gnome.system.proxy.http host '<HOST>'
+gsettings set org.gnome.system.proxy.http port <PORT>
+gsettings set org.gnome.system.proxy.http use-authentication <USE-AUTH>
+gsettings set org.gnome.system.proxy.http authentication-password '<AUTH-PASSWORD>'
+gsettings set org.gnome.system.proxy.http authentication-user '<AUTH-USER>'
+gsettings set org.gnome.system.proxy.http enabled <HTTP-ENABLED>
+gsettings set org.gnome.system.proxy.https host '<HOST>'
+gsettings set org.gnome.system.proxy.https port <PORT>

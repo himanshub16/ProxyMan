@@ -1,0 +1,16 @@
+# Lines added through ProxyMan v1.1
+# Author : Himanshu Shekhar < https://github.com/himanshushekharb16/ProxyMan >
+# Methodology credit Alan Pope, via https://wiki.archlinux.org/index.php/Proxy_settings
+no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com";
+http_proxy="http://<PROXY>";
+https_proxy="https://<PROXY>";
+ftp_proxy="ftp://<PROXY>";
+socks_proxy="socks://<PROXY>";
+rsync_proxy="rsync://<PROXY>";
+http_proxy="http://<PROXY>";
+HTTP="http://<PROXY>";
+HTTPS="https://<PROXY>";
+FTP="ftp://<PROXY>";
+SOCKS="socks://<PROXY>";
+RSYNC_PROXY="rsync://<PROXY>";
+# end of proxy settings for CLI

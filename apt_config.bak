@@ -1,0 +1,4 @@
+Acquire::Http::Proxy "http://<USERID>:<PASSWORD>@<HOST>:<PORT>/";
+Acquire::Https::Proxy "https://<USERID>:<PASSWORD>@<HOST>:<PORT>/";
+Acquire::Ftp::Proxy "ftp://<USERID>:<PASSWORD>@<HOST>:<PORT>/";
+Acquire::Socks::Proxy "socks://<USERID>:<PASSWORD>@<HOST>:<PORT>/";

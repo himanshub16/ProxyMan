@@ -1,6 +1,12 @@
 ProxyMan changelog
 ===============================================================
 
+## v1.2 : Second release : January 1, 2016
+---------------------------------------------------------------
+* bashrc and bash_profile changes were not exported, fixed.
+* Message to restart terminal session added.
+* /etc/environment is not modified to avoid system-wide changes.
+
 ## v1.1 : First release : December 31, 2015
 ---------------------------------------------------------------
 * bash_set.conf had no eol, causing warnings from bash on Elementary OS Freya.

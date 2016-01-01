@@ -62,17 +62,17 @@ configure_environment() {
 			auth=''
 		fi
 		sed -i '/proxy/dI' bash_set.conf
-		echo "http_proxy=$auth$1:$2" > bash_set.conf
-		echo "HTTP_PROXY=$auth$1:$2" >> bash_set.conf
-		echo "https_proxy=$auth$7:$8" >> bash_set.conf
-		echo "HTTPS_PROXY=$auth$7:$8" >> bash_set.conf
-		echo "ftp_proxy=$auth$9:$10" >> bash_set.conf
-		echo "FTP_PROXY=$auth$9:$10" >> bash_set.conf
-		echo "socks_proxy=$auth$11:$12" >> bash_set.conf
-		echo "SOCKS_PROXY=$auth$11:$12" >> bash_set.conf
+		echo "export http_proxy=$auth$1:$2" > bash_set.conf
+		echo "export HTTP_PROXY=$auth$1:$2" >> bash_set.conf
+		echo "export https_proxy=$auth$7:$8" >> bash_set.conf
+		echo "export HTTPS_PROXY=$auth$7:$8" >> bash_set.conf
+		echo "export ftp_proxy=$auth$9:$10" >> bash_set.conf
+		echo "export FTP_PROXY=$auth$9:$10" >> bash_set.conf
+		echo "export socks_proxy=$auth$11:$12" >> bash_set.conf
+		echo "export SOCKS_PROXY=$auth$11:$12" >> bash_set.conf
 		read -e -p "Enter proxy settings for rsync in format host:port " -i $1:$2 rsync
-		echo "rsync_proxy=$auth$rsync" >> bash_set.conf
-		echo "RSYNC_PROXY=$auth$rsync" >> bash_set.conf
+		echo "export rsync_proxy=$auth$rsync" >> bash_set.conf
+		echo "export RSYNC_PROXY=$auth$rsync" >> bash_set.conf
 	fi
 
 	if [[ $3 == "y" ]]; then # require authentication
@@ -123,7 +123,7 @@ configure_apt() {
 		exit 1
 	fi
 	
-	sudo cp ./apt_config.conf /etc/apt/apt.conf
+	cp ./apt_config.conf /etc/apt/apt.conf
 }
 
 configure_gsettings() {
@@ -165,14 +165,14 @@ configure_gsettings() {
 
 unset_environment() {
 	# unset all environment variables from bash_profile and bashrc
-	if [[ -e "$HOME/.bash_profile" ]]; then
+	if [[ -e "/etc/environment" ]]; then
 		sed -i '/proxy\|PROXY\|Proxy/d' ~/.bash_profile
 		sed -i '/ProxyMan/d' ~/.bash_profile
 		sed -i '/github\.com/d' ~/.bash_profile
 		sed -i '/Alan\ Pope/d' ~/.bash_profile
 		sed -i '/end\ of\ proxy\ settings/d' ~/.bash_profile
 	fi
-	if [[ -e "$HOME/.bashrc" ]]; then
+	if [[ -e "/etc/environment" ]]; then
 		sed -i '/proxy\|PROXY\|Proxy/d' ~/.bashrc
 		sed -i '/ProxyMan/d' ~/.bashrc
 		sed -i '/github\.com/d' ~/.bashrc
@@ -188,7 +188,7 @@ unset_gsettings() {
 unset_apt() {
 	echo "Enter your system password if asked..."
 	if [[ -e "/etc/apt/apt.conf" ]]; then
-		sudo rm /etc/apt/apt.conf
+		rm /etc/apt/apt.conf
 	fi
 }
 

@@ -165,14 +165,14 @@ configure_gsettings() {
 
 unset_environment() {
 	# unset all environment variables from bash_profile and bashrc
-	if [[ -e "$HOME/.bash_profile" ]]; then
+	if [[ -e "/etc/environment" ]]; then
 		sed -i '/proxy\|PROXY\|Proxy/d' ~/.bash_profile
 		sed -i '/ProxyMan/d' ~/.bash_profile
 		sed -i '/github\.com/d' ~/.bash_profile
 		sed -i '/Alan\ Pope/d' ~/.bash_profile
 		sed -i '/end\ of\ proxy\ settings/d' ~/.bash_profile
 	fi
-	if [[ -e "$HOME/.bashrc" ]]; then
+	if [[ -e "/etc/environment" ]]; then
 		sed -i '/proxy\|PROXY\|Proxy/d' ~/.bashrc
 		sed -i '/ProxyMan/d' ~/.bashrc
 		sed -i '/github\.com/d' ~/.bashrc

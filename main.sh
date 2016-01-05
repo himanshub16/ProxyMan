@@ -123,7 +123,7 @@ configure_apt() {
 		exit 1
 	fi
 	
-	cp ./apt_config.conf /etc/apt/apt.conf
+	sudo cp ./apt_config.conf /etc/apt/apt.conf
 }
 
 configure_gsettings() {

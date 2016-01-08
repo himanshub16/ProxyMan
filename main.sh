@@ -1,5 +1,5 @@
 #!/bin/bash
-# ProxyMan v1.2
+# ProxyMan v1.3
 # Author : Himanshu Shekhar < https://github.com/himanshushekharb16/ProxyMan >
 
 # This program is free software; you can redistribute it and/or modify
@@ -183,6 +183,9 @@ unset_environment() {
 
 unset_gsettings() {
 	gsettings set org.gnome.system.proxy mode 'none'
+	gsettings set org.gnome.system.proxy.http use-authentication false
+	gsettings set org.gnome.system.proxy.http authentication-user "''"
+	gsettings set org.gnome.system.proxy.http authentication-password "'''
 }
 
 unset_apt() {
@@ -282,6 +285,18 @@ case "$choice" in
 			else
 				echo "Invalid values found! Please recheck gsettings."
 				exit
+			fi
+			auth=$(gsettings get org.gnome.system.proxy.http use-authentication)
+			if [[ $auth = 'true' ]]; then
+				read -p "Remove authentication credentials (id/password) saved on this system : " -i "y"
+				if [[ $REPLY = "y" ]]; then
+					gsettings set org.gnome.system.proxy.http use-authentication false
+					gsettings set org.gnome.system.proxy.http authentication-user "''"
+					gsettings set org.gnomee.system.proxy.http authentication-password "''"
+				else
+					echo "Your login credentials still exist on this system"
+					echo "Take care!"
+				fi
 			fi
 			echo "Operation completed successfully."
 		;;

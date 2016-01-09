@@ -185,13 +185,13 @@ unset_gsettings() {
 	gsettings set org.gnome.system.proxy mode 'none'
 	gsettings set org.gnome.system.proxy.http use-authentication false
 	gsettings set org.gnome.system.proxy.http authentication-user "''"
-	gsettings set org.gnome.system.proxy.http authentication-password "'''
+	gsettings set org.gnome.system.proxy.http authentication-password "''"
 }
 
 unset_apt() {
 	echo "Enter your system password if asked..."
 	if [[ -e "/etc/apt/apt.conf" ]]; then
-		rm /etc/apt/apt.conf
+		sudo rm /etc/apt/apt.conf
 	fi
 }
 
@@ -278,33 +278,33 @@ fi
 # take inputs and perform as necessary
 case "$choice" in 
 	toggle) mode=$(gsettings get org.gnome.system.proxy mode)
-			if [ $mode == "'none'" ]; then
-				gsettings set org.gnome.system.proxy mode 'manual'
-			elif [ $mode == "'manual'" ]; then
-				gsettings set org.gnome.system.proxy mode 'none'
+		if [ $mode == "'none'" ]; then
+			gsettings set org.gnome.system.proxy mode 'manual'
+		elif [ $mode == "'manual'" ]; then
+			gsettings set org.gnome.system.proxy mode 'none'
+		else
+			echo "Invalid values found! Please recheck gsettings."
+			exit
+		fi
+		auth=$(gsettings get org.gnome.system.proxy.http use-authentication)
+		if [[ $auth = 'true' && $mode = "'none'" ]]; then
+			read -p "Remove authentication credentials (id/password) saved on this system : " -i "y"
+			if [[ $REPLY = "y" ]]; then
+				gsettings set org.gnome.system.proxy.http use-authentication false
+				gsettings set org.gnome.system.proxy.http authentication-user "''"
+				gsettings set org.gnomee.system.proxy.http authentication-password "''"
 			else
-				echo "Invalid values found! Please recheck gsettings."
-				exit
+				echo "Your login credentials still exist on this system"
+				echo "Take care!"
 			fi
-			auth=$(gsettings get org.gnome.system.proxy.http use-authentication)
-			if [[ $auth = 'true' ]]; then
-				read -p "Remove authentication credentials (id/password) saved on this system : " -i "y"
-				if [[ $REPLY = "y" ]]; then
-					gsettings set org.gnome.system.proxy.http use-authentication false
-					gsettings set org.gnome.system.proxy.http authentication-user "''"
-					gsettings set org.gnomee.system.proxy.http authentication-password "''"
-				else
-					echo "Your login credentials still exist on this system"
-					echo "Take care!"
-				fi
-			fi
-			echo "Operation completed successfully."
+		fi
+		echo "Operation completed successfully."
 		;;
 	set)	set_parameters ALL
 		;;
 	unset)	unset_gsettings
-			unset_apt
-			unset_environment
+		unset_apt
+		unset_environment
 		;;
 	sfew)	echo 
 			echo "Where do you want to set proxy?"

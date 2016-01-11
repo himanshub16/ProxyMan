@@ -1,5 +1,5 @@
 #!/bin/bash
-# ProxyMan v1.3
+# ProxyMan v1.4
 # Author : Himanshu Shekhar < https://github.com/himanshushekharb16/ProxyMan >
 
 # This program is free software; you can redistribute it and/or modify
@@ -300,11 +300,14 @@ case "$choice" in
 		fi
 		echo "Operation completed successfully."
 		;;
-	set)	set_parameters ALL
+	set)
+		unset_gsettings
+		unset_environment	
+		set_parameters ALL
 		;;
 	unset)	unset_gsettings
-		unset_apt
-		unset_environment
+			unset_apt
+			unset_environment
 		;;
 	sfew)	echo 
 			echo "Where do you want to set proxy?"

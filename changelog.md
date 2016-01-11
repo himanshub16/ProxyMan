@@ -1,10 +1,14 @@
 ProxyMan changelog
 ===============================================================
 
+## v1.4 : Fourth release : January 11, 2016
+---------------------------------------------------------------
+* unset forced before set to avoid duplicate entries.
+
 ## v1.3 : Third release : January 9, 2016
 ---------------------------------------------------------------
 * sudo was missing on the statement that removed apt.conf on unset. Fixed.
-* Warning is displayed on toggle to none is any authentication is saved, with option to remove credentials.
+* Warning is displayed on toggle to none if any authentication is saved, with option to remove credentials.
 
 ## v1.2 : Second release : January 1, 2016
 ---------------------------------------------------------------

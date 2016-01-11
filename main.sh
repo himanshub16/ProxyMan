@@ -267,9 +267,9 @@ if [[ choice == 'q' ]]; then
 fi
 
 # create temporary files with extension .conf to be configured
-if [[ -e "apt_config.bak" && -e "bash_set.bak" ]]; then
-	cp apt_config.bak apt_config.conf
-	cp bash_set.bak bash_set.conf
+if [[ -e "apt_config.config" && -e "bash_set.config" ]]; then
+	cp apt_config.config apt_config.conf
+	cp bash_set.config bash_set.conf
 else  
 	echo "Required files are missing. Please check for files apt_config.bak and bash_set.bak" >&2
 	exit 1
@@ -315,6 +315,9 @@ case "$choice" in
 			echo "2 : Desktop-environment/GUI and apps"
 			echo "3 : APT/Software Center only"
 			read 
+			if [[ $REPLY -gt 3 ]]; then
+				echo "Invalid option."
+			fi
 			set_parameters $REPLY
 		;;
 	ufew)	echo 

@@ -1,0 +1,45 @@
+ProxyMan (for Linux)
+Author : Himanshu Shekhar < https://github.com/himanshushekharb16/ProxyMan/ >
+==============================================================================
+In order to use this tool, just browse to the directory containing the script along with this file using terminal.
+The following commands would help you out.
+
+***********************************************
+*---------------------------------------------*
+*To set/unset proxy settings :                *
+*	bash main.sh                          *
+*---------------------------------------------*
+*To check your current proxy setting :        *
+*	bash proxy_check.sh                   *
+*---------------------------------------------*
+***********************************************
+
+--Do not use "sh" insted of "bash". The script would give errors, rather than working as desired.
+-Make sure you have "sudo" privilege in order to set proxy settings for your package manager (apt, in this case).
+-You don't need to worry in case of Ubuntu and derivatives. However, if "sudo" permissions are not granted to you, you can get them or remove the keyword "sudo" from lines 126 and 194 and run the script as root. This would however, set the proxy settings for root user, in case of 'set'. Try 'sfew' or 'ufew' in such problematic cases.
+
+*************************************
+* About the menus in main.sh script *
+*************************************
+******************************************************************
+* toggle * this is same as changing the proxy mode from manual   *
+*        * to none in network settings. It changes the proxy     *
+*        * settings for your browser, and apps but not for the   *
+*        * software manager (apt), and command line applications.*
+*----------------------------------------------------------------*
+* set    * this is similar to setting up proxy settings on Ubuntu*
+*        * and then applying it system-wide. But, this script    *
+*        * also adds proxy authentications, if required.         *
+*----------------------------------------------------------------*
+* sfew   * as there are three places to set proxy (AFAIK), it    *
+*        * lets you choose which areas you want to apply proxy   *
+*        * settings.                                             *
+*----------------------------------------------------------------*
+* ufew   * counterpart of sfew                                   *
+*----------------------------------------------------------------*
+* q      * There always needs to be an exit, before you start.   *
+******************************************************************
+
+The version number is mentioned in main.sh file. Refer to changelog file for more details about changes.
+
+This is a CLI tool to set up proxy settings for Debian/Ubuntu family of distributions.

@@ -1,6 +1,13 @@
 ProxyMan changelog
 ===============================================================
 
+## v1.5 : Fifth release : January 23, 2016
+---------------------------------------------------------------
+* modified the version number which displayed incorrectly on each release
+* modified the readme file in case the user does not have sudo privileges, or sudo installed.
+* files were not deleted if user quit the script without making any changes to the system. fixed.
+* howtouse and tools_required added for help
+
 ## v1.4 : Fourth release : January 11, 2016
 ---------------------------------------------------------------
 * unset forced before set to avoid duplicate entries.

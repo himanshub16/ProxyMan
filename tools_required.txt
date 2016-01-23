@@ -1,0 +1,12 @@
+ProxyMan 
+Author : Himanshu Shekhar < https://github.com/himanshushekharb16/ProxyMan/ >
+-------------------------------------------------------------------------------
+The following tools need to be installed on your system for the script to run properly.
+They are normally pre-installed in almost all desktop distros. So, you don't need to worry.
+
+This file is however useful for cases the script does not work, or you want to know what tools does this use.
+
+	bash, sed, grep (with regex support), apt, gsettings-desktop-schemas (that's what you access indirectly in network manager).
+
+That's all.
+You could let me know in case there are any suggestions, bugs, issues. :)

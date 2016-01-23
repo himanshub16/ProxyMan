@@ -1,5 +1,5 @@
 #!/bin/bash
-# ProxyMan v1.4
+# ProxyMan v1.5
 # Author : Himanshu Shekhar < https://github.com/himanshushekharb16/ProxyMan >
 
 # This program is free software; you can redistribute it and/or modify
@@ -244,7 +244,7 @@ echo "
 MESSAGE : In case of options, one value is displayed as the default value.
 Do erase it to use other value.
 
-ProxyMan v1.1
+ProxyMan v1.5
 This script is documented in README.md file.
 
 There are the following options for this script
@@ -306,8 +306,8 @@ case "$choice" in
 		set_parameters ALL
 		;;
 	unset)	unset_gsettings
-			unset_apt
-			unset_environment
+		unset_apt
+		unset_environment
 		;;
 	sfew)	echo 
 			echo "Where do you want to set proxy?"
@@ -338,6 +338,7 @@ case "$choice" in
 					;;
 			esac
 		;;
+	q)	;;
 	*) exit 1
 		;;
 esac

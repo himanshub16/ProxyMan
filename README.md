@@ -25,6 +25,9 @@ Perhaps, nothing in a modern day GNU/Linux distribution.
 The entire script is written in bash and uses common GNU components. It is specifically written for distros having the following components :
 gsettings, apt, bash
 Tools used in the bash script are : sed, grep, regex.
+However, you should make sure that sed, grep and bash are available on your system.
+Also, you need to have sudo privilege in order to modify APT settings.
+If you don't have sudo permissions, remove the "sudo" word from lines 126 and 194 and run the script as root in order to set APT proxy settings.
 
 Why this tool?
 ==============

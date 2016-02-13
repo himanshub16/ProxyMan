@@ -87,6 +87,11 @@ configure_environment() {
 	if [[ -e "$HOME/.bash_profile" ]]; then
 		cat ./bash_set.conf >> $HOME/.bash_profile
 	fi
+
+	# concatenating to /etc/environment
+	if [[ -e "/etc/environment" ]]; then
+		sudo cat ./bash_set.conf >> "/etc/environment"
+	fi
 }
 
 configure_apt() {
@@ -178,6 +183,14 @@ unset_environment() {
 		sed -i '/github\.com/d' ~/.bashrc
 		sed -i '/Alan\ Pope/d' ~/.bashrc
 		sed -i '/end\ of\ proxy\ settings/d' ~/.bashrc
+	fi
+	# adding settings for /etc/environment
+	if [[ -e "$HOME/.bashrc" ]]; then
+		sudo sed -i '/proxy\|PROXY\|Proxy/d' /etc/environment
+		sudo sed -i '/ProxyMan/d' /etc/environment
+		sudo sed -i '/github\.com/d' /etc/environment
+		sudo sed -i '/Alan\ Pope/d' /etc/environment
+		sudo sed -i '/end\ of\ proxy\ settings/d' /etc/environment
 	fi
 }
 

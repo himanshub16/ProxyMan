@@ -11,6 +11,18 @@ else
 	echo ".bashrc does not exist."
 fi
 
+if [[ -e "/etc/environment" ]]; then
+	a=$(grep -i proxy /etc/environment | wc -l)
+	if [[ a -eq 0 ]]; then
+		echo "/etc/environment is not using proxy."
+	else
+		echo "For /etc/environment"
+		grep -i proxy /etc/environment
+	fi
+else
+	echo "/etc/environment does not exist."
+fi
+
 echo
 
 if [[ -e "$HOME/.bash_profile" ]]; then

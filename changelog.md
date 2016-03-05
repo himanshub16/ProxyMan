@@ -1,6 +1,10 @@
 ProxyMan changelog
 ===============================================================
 
+## v1.6 : Sixth release : February 14, 2016
+---------------------------------------------------------------
+* added support for /etc/environment
+
 ## v1.5 : Fifth release : January 23, 2016
 ---------------------------------------------------------------
 * modified the version number which displayed incorrectly on each release

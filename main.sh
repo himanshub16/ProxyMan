@@ -88,9 +88,13 @@ configure_environment() {
 		cat ./bash_set.conf >> $HOME/.bash_profile
 	fi
 
-	# concatenating to /etc/environment
-	if [[ -e "/etc/environment" ]]; then
-		sudo cat ./bash_set.conf >> "/etc/environment"
+	read -p "modify /etc/environment ? (y/n)" -e 
+	if [[ $REPLY = 'y' ]]; then
+		if [[ -e "/etc/environment" ]]; then
+			sudo cat ./bash_set.conf >> "/etc/environment"
+		else 
+			cat ./bash_set.conf > "/etc/environment"
+		fi
 	fi
 }
 
@@ -184,14 +188,18 @@ unset_environment() {
 		sed -i '/Alan\ Pope/d' ~/.bashrc
 		sed -i '/end\ of\ proxy\ settings/d' ~/.bashrc
 	fi
-	# adding settings for /etc/environment
-	if [[ -e "$HOME/.bashrc" ]]; then
-		sudo sed -i '/proxy\|PROXY\|Proxy/d' /etc/environment
-		sudo sed -i '/ProxyMan/d' /etc/environment
-		sudo sed -i '/github\.com/d' /etc/environment
-		sudo sed -i '/Alan\ Pope/d' /etc/environment
-		sudo sed -i '/end\ of\ proxy\ settings/d' /etc/environment
+	read -p "modify /etc/environment ? (y/n)" -e 
+	if [[ $REPLY = 'y' ]]; then
+		# adding settings for /etc/environment
+		if [[ -e "$HOME/.bashrc" ]]; then
+			sudo sed -i '/proxy\|PROXY\|Proxy/d' /etc/environment
+			sudo sed -i '/ProxyMan/d' /etc/environment
+			sudo sed -i '/github\.com/d' /etc/environment
+			sudo sed -i '/Alan\ Pope/d' /etc/environment
+			sudo sed -i '/end\ of\ proxy\ settings/d' /etc/environment
+		fi
 	fi
+	
 }
 
 unset_gsettings() {
@@ -202,7 +210,6 @@ unset_gsettings() {
 }
 
 unset_apt() {
-	echo "Enter your system password if asked..."
 	if [[ -e "/etc/apt/apt.conf" ]]; then
 		sudo rm /etc/apt/apt.conf
 	fi
@@ -212,14 +219,14 @@ set_parameters() {
 	echo "HTTP parameters : "
 	read -p "Enter Host IP          : " http_host
 	read -p "Enter Host Port        : " http_port
-	read -e -p "Enable authentication (y/n)	: " -i "n" use_auth
+	read -e -p "Enable authentication (y/n)	: " use_auth
 	if [[ $use_auth == 'y' ]]; then
 		read -p "Enter Proxy Username   : " username
 		echo -n "Enter password         : "
 		read -s password
 		echo
 	fi
-	read -e -p "Use the same values for all http, https, ftp, socks (y/n) : " -i "y" use_same
+	read -e -p "Use the same values for all http, https, ftp, socks (y/n) : " use_same
 	if [[ $use_same == 'n' ]]; then
 		echo 
 		echo "FTP parameters : "
@@ -279,6 +286,8 @@ if [[ choice == 'q' ]]; then
 	exit
 fi
 
+echo "Enter your system password if asked..."
+	
 # create temporary files with extension .conf to be configured
 if [[ -e "apt_config.config" && -e "bash_set.config" ]]; then
 	cp apt_config.config apt_config.conf
@@ -319,8 +328,8 @@ case "$choice" in
 		set_parameters ALL
 		;;
 	unset)	unset_gsettings
-		unset_apt
-		unset_environment
+			unset_apt
+			unset_environment
 		;;
 	sfew)	echo 
 			echo "Where do you want to set proxy?"

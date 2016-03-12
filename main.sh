@@ -61,18 +61,18 @@ configure_environment() {
 		else
 			auth=''
 		fi
-		sed -i '/proxy/dI' bash_set.conf
-		echo "export http_proxy=$auth$1:$2" > bash_set.conf
-		echo "export HTTP_PROXY=$auth$1:$2" >> bash_set.conf
-		echo "export https_proxy=$auth$7:$8" >> bash_set.conf
-		echo "export HTTPS_PROXY=$auth$7:$8" >> bash_set.conf
-		echo "export ftp_proxy=$auth$9:$10" >> bash_set.conf
-		echo "export FTP_PROXY=$auth$9:$10" >> bash_set.conf
-		echo "export socks_proxy=$auth$11:$12" >> bash_set.conf
-		echo "export SOCKS_PROXY=$auth$11:$12" >> bash_set.conf
+		sed -i '/proxy\|proxy\|PROXY/d' bash_set.conf
+		echo "http_proxy=$auth$1:$2" > bash_set.conf
+		echo "HTTP_PROXY=$auth$1:$2" >> bash_set.conf
+		echo "https_proxy=$auth$7:$8" >> bash_set.conf
+		echo "HTTPS_PROXY=$auth$7:$8" >> bash_set.conf
+		echo "ftp_proxy=$auth$9:$10" >> bash_set.conf
+		echo "FTP_PROXY=$auth$9:$10" >> bash_set.conf
+		echo "socks_proxy=$auth$11:$12" >> bash_set.conf
+		echo "SOCKS_PROXY=$auth$11:$12" >> bash_set.conf
 		read -e -p "Enter proxy settings for rsync in format host:port " -i $1:$2 rsync
-		echo "export rsync_proxy=$auth$rsync" >> bash_set.conf
-		echo "export RSYNC_PROXY=$auth$rsync" >> bash_set.conf
+		echo "rsync_proxy=$auth$rsync" >> bash_set.conf
+		echo "RSYNC_PROXY=$auth$rsync" >> bash_set.conf
 	fi
 
 	if [[ $3 == "y" ]]; then # require authentication
@@ -264,7 +264,7 @@ echo "
 MESSAGE : In case of options, one value is displayed as the default value.
 Do erase it to use other value.
 
-ProxyMan v1.5
+ProxyMan v1.7
 This script is documented in README.md file.
 
 There are the following options for this script
@@ -339,6 +339,8 @@ case "$choice" in
 			read 
 			if [[ $REPLY -gt 3 ]]; then
 				echo "Invalid option."
+			elif [[ $REPLY -eq 1 ]]; then
+				unset_environment
 			fi
 			set_parameters $REPLY
 		;;

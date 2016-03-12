@@ -1,6 +1,13 @@
 ProxyMan changelog
 ===============================================================
 
+## v1.7 : Seventh release : March 13, 2016
+---------------------------------------------------------------
+* unset_environment forced before setting environment / Terminal proxy
+* there were multiple variables in environment, fixed
+* 'export' was included in one of the case before environment variables, fixed, but it worked fine
+* other crucial bug fixes, as spelling mistakes I didn't notice yet
+
 ## v1.6 : Sixth release : February 14, 2016
 ---------------------------------------------------------------
 * added support for /etc/environment

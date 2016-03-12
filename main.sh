@@ -317,7 +317,7 @@ case "$choice" in
 				gsettings set org.gnome.system.proxy.http authentication-password "''"
 			else
 				echo "Your login credentials still exist on this system"
-				echo "Take care!"
+				echo "Take care! :)"
 			fi
 		fi
 		echo "Operation completed successfully."

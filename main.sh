@@ -188,7 +188,7 @@ unset_environment() {
 		sed -i '/Alan\ Pope/d' ~/.bashrc
 		sed -i '/end\ of\ proxy\ settings/d' ~/.bashrc
 	fi
-	read -p "modify /etc/environment ? (y/n)" -e 
+	read -p "modify /etc/environment ? (y/n) " -e 
 	if [[ $REPLY = 'y' ]]; then
 		# adding settings for /etc/environment
 		if [[ -e "$HOME/.bashrc" ]]; then
@@ -216,6 +216,7 @@ unset_apt() {
 }
 
 set_parameters() {
+	echo "Set parameters received" $1
 	echo "HTTP parameters : "
 	read -p "Enter Host IP          : " http_host
 	read -p "Enter Host Port        : " http_port
@@ -336,13 +337,13 @@ case "$choice" in
 			echo "1 : Terminal only."
 			echo "2 : Desktop-environment/GUI and apps"
 			echo "3 : APT/Software Center only"
-			read 
-			if [[ $REPLY -gt 3 ]]; then
+			read response
+			if [[ $response -gt 3 ]]; then
 				echo "Invalid option."
-			elif [[ $REPLY -eq 1 ]]; then
+			elif [[ $response -eq 1 ]]; then
 				unset_environment
 			fi
-			set_parameters $REPLY
+			set_parameters $response
 		;;
 	ufew)	echo 
 			echo "Where do you want to unset proxy?"

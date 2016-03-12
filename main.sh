@@ -314,7 +314,7 @@ case "$choice" in
 			if [[ $REPLY = "y" ]]; then
 				gsettings set org.gnome.system.proxy.http use-authentication false
 				gsettings set org.gnome.system.proxy.http authentication-user "''"
-				gsettings set org.gnomee.system.proxy.http authentication-password "''"
+				gsettings set org.gnome.system.proxy.http authentication-password "''"
 			else
 				echo "Your login credentials still exist on this system"
 				echo "Take care!"

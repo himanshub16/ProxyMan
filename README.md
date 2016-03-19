@@ -1,4 +1,4 @@
-ProxyMan (for Linux)
+#ProxyMan (for Linux)
 
 Author : Himanshu Shekhar < https://github.com/himanshushekharb16/ProxyMan/ >
 

@@ -100,6 +100,13 @@ configure_environment() {
 
 configure_apt() {
 #configure_apt $http_host $http_port $use_auth $use_same $username $password $https_host $https_port $ftp_host $ftp_port $socks_host $socks_port
+	if [[ ! -e "/etc/apt" ]]; then
+		echo "/etc/apt/ does not exist. Make sure apt is configured properly on this system."
+		return 1
+	fi
+	if [[ ! -e "/etc/apt/apt.conf" ]]; then
+		sudo touch "/etc/apt/apt.conf"
+	fi
 	echo $3:"Enter your System password (if asked)..."
 	if [[ $3 == "n" ]]; then
 		if [[ $4 == "y" ]]; then
@@ -132,7 +139,7 @@ configure_apt() {
 		exit 1
 	fi
 	
-	sudo cp ./apt_config.conf /etc/apt/apt.conf
+	sudo cat ./apt_config.conf >> /etc/apt/apt.conf
 }
 
 configure_gsettings() {

@@ -211,7 +211,7 @@ unset_gsettings() {
 
 unset_apt() {
 	if [[ -e "/etc/apt/apt.conf" ]]; then
-		sudo rm /etc/apt/apt.conf
+		sudo sed -i '/Proxy/d' /etc/apt/apt.conf
 	fi
 }
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# ProxyMan v1.7
+# ProxyMan v1.8
 # Author : Himanshu Shekhar < https://github.com/himanshub16/ProxyMan >
 
 # This program is free software; you can redistribute it and/or modify

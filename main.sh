@@ -91,7 +91,7 @@ configure_environment() {
 	read -p "modify /etc/environment ? (y/n)" -e 
 	if [[ $REPLY = 'y' ]]; then
 		if [[ -e "/etc/environment" ]]; then
-			sudo cat ./bash_set.conf >> "/etc/environment"
+			cat ./bash_set.conf | sudo tee -a "/etc/environment"
 		else 
 			cat ./bash_set.conf > "/etc/environment"
 		fi
@@ -139,7 +139,7 @@ configure_apt() {
 		exit 1
 	fi
 	
-	sudo cat ./apt_config.conf >> /etc/apt/apt.conf
+	cat ./apt_config.conf | sudo tee -a /etc/apt/apt.conf
 }
 
 configure_gsettings() {

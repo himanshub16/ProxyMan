@@ -8,5 +8,6 @@ This file is however useful for cases the script does not work, or you want to k
 
 	bash, sed, grep (with regex support), apt, gsettings-desktop-schemas (that's what you access indirectly in network manager).
 
-That's all.
-You could let me know in case there are any suggestions, bugs, issues. :)
+	That's all.
+	You could let me know in case there are any suggestions, bugs, issues. :)
+

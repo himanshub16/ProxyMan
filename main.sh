@@ -21,6 +21,11 @@
 # and of-course privilege for setting up apt. 
 # The user should be in the sudoers to set up apt, or modify the script as required.
 #
+# Addition made on 11 Aug, 2016
+# If users is not in sudoers or sudo is not available, check the username.
+# If not root, then exit the script with a message about starting the script as root.
+#
+#
 # Credits : https://wiki.archlinux.org/index.php/Proxy_settings
 #           https://wiki.archlinux.org/index.php/Environment_variables
 #           https://developer.gnome.org/ProxyConfiguration/
@@ -82,19 +87,31 @@ configure_environment() {
 	fi
 
 	if [[ -e "$HOME/.bashrc" ]]; then
-		cat ./bash_set.conf >> $HOME/.bashrc
+		cat bash_set.conf >> $HOME/.bashrc
 	fi
 	if [[ -e "$HOME/.bash_profile" ]]; then
-		cat ./bash_set.conf >> $HOME/.bash_profile
+		cat bash_set.conf >> $HOME/.bash_profile
 	fi
 
-	read -p "modify /etc/environment ? (y/n)" -e 
+	read -p "Configure Terminal proxy for root user? (at /etc/environment) ? (y/n) " -e 
 	if [[ $REPLY = 'y' ]]; then
-		if [[ -e "/etc/environment" ]]; then
-			sudo cat ./bash_set.conf >> "/etc/environment"
-		else 
-			cat ./bash_set.conf > "/etc/environment"
-		fi
+		case "$superusermethod" in
+		0)	echo "You need sudo/root privileges"
+			break
+			;;
+		1)	if [[ -e "/etc/environment" ]]; then
+				cat bash_set.conf | sudo tee -a "/etc/environment" > /dev/null
+			else 
+				cat bash_set.conf | sudo tee -a "/etc/environment" > /dev/null
+			fi
+			;;
+		2)	if [[ -e "/etc/environment" ]]; then
+				cat bash_set.conf | tee -a "/etc/environment" > /dev/null
+			else 
+				cat bash_set.conf | tee -a "/etc/environment" > /dev/null
+			fi
+			;;
+		esac
 	fi
 }
 
@@ -104,10 +121,6 @@ configure_apt() {
 		echo "/etc/apt/ does not exist. Make sure apt is configured properly on this system."
 		return 1
 	fi
-	if [[ ! -e "/etc/apt/apt.conf" ]]; then
-		sudo touch "/etc/apt/apt.conf"
-	fi
-	echo $3:"Enter your System password (if asked)..."
 	if [[ $3 == "n" ]]; then
 		if [[ $4 == "y" ]]; then
 			sed -i "s/<HOST>/$http_host/g" apt_config.conf
@@ -138,12 +151,31 @@ configure_apt() {
 		echo "Error encountered!"
 		exit 1
 	fi
+
+		
+	case "$superusermethod" in
+	0)	echo "You need sudo/root privileges"
+		return
+		;;
+	1)	if [[ -e "/etc/apt/apt.conf" ]]; then
+			sudo touch "/etc/apt/apt.conf"
+		fi
+		cat apt_config.conf | sudo tee -a /etc/apt/apt.conf > /dev/null
+		;;
+	2)	if [[ -e "/etc/apt/apt.conf" ]]; then
+			touch "/etc/apt/apt.conf"
+		fi
+		cat apt_config.conf | tee -a /etc/apt/apt.conf > /dev/null
+		;;
+	esac
 	
-	sudo cat ./apt_config.conf >> /etc/apt/apt.conf
 }
 
 configure_gsettings() {
 # configure_gsettings $http_host $http_port $use_auth $use_same $username $password $https_host $https_port $ftp_host $ftp_port $socks_host $socks_port
+	if [[ "$gsettingsavailable" = '' ]];then
+		return
+	fi
 	gsettings set org.gnome.system.proxy mode 'manual'
 	if [[ $4 == "y" ]]; then
 		gsettings set org.gnome.system.proxy use-same-proxy true
@@ -195,21 +227,35 @@ unset_environment() {
 		sed -i '/Alan\ Pope/d' ~/.bashrc
 		sed -i '/end\ of\ proxy\ settings/d' ~/.bashrc
 	fi
-	read -p "modify /etc/environment ? (y/n) " -e 
+	read -p "modify root user settings (/etc/environment) ? (y/n) " -e 
 	if [[ $REPLY = 'y' ]]; then
 		# adding settings for /etc/environment
-		if [[ -e "$HOME/.bashrc" ]]; then
-			sudo sed -i '/proxy\|PROXY\|Proxy/d' /etc/environment
+		case "$superusermethod" in
+		0)	echo "You need sudo/root privileges"
+			return
+			;;
+		1)	sudo sed -i '/proxy\|PROXY\|Proxy/d' /etc/environment
 			sudo sed -i '/ProxyMan/d' /etc/environment
 			sudo sed -i '/github\.com/d' /etc/environment
 			sudo sed -i '/Alan\ Pope/d' /etc/environment
 			sudo sed -i '/end\ of\ proxy\ settings/d' /etc/environment
-		fi
+			;;
+		2)	sed -i '/proxy\|PROXY\|Proxy/d' /etc/environment
+			sed -i '/ProxyMan/d' /etc/environment
+			sed -i '/github\.com/d' /etc/environment
+			sed -i '/Alan\ Pope/d' /etc/environment
+			sed -i '/end\ of\ proxy\ settings/d' /etc/environment
+			;;
+		esac
 	fi
 	
 }
 
 unset_gsettings() {
+	if [[ "$gsettingsavailable" = '' ]];then
+		return
+	fi
+
 	gsettings set org.gnome.system.proxy mode 'none'
 	gsettings set org.gnome.system.proxy.http use-authentication false
 	gsettings set org.gnome.system.proxy.http authentication-user "''"
@@ -218,19 +264,27 @@ unset_gsettings() {
 
 unset_apt() {
 	if [[ -e "/etc/apt/apt.conf" ]]; then
-		sudo sed -i '/Proxy/d' /etc/apt/apt.conf
+		case "$superusermethod" in
+		0)	echo "You need sudo/root privileges"
+			return
+			;;
+		1)	sudo sed -i '/Proxy/d' /etc/apt/apt.conf
+			;;
+		2)	sed -i '/Proxy/d' /etc/apt/apt.conf
+			;;
+		esac
 	fi
 }
 
 set_parameters() {
-	echo "Set parameters received" $1
+# 	echo "Set parameters received" $1
 	echo "HTTP parameters : "
 	read -p "Enter Host IP          : " http_host
 	read -p "Enter Host Port        : " http_port
 	read -e -p "Enable authentication (y/n)	: " use_auth
 	if [[ $use_auth == 'y' ]]; then
-		read -p "Enter Proxy Username   : " username
-		echo -n "Enter password         : "
+		read -p "Enter Proxy Username        : " username
+		echo -n "Enter password (%40 for @)  : "
 		read -s password
 		echo
 	fi
@@ -272,7 +326,7 @@ echo "
 MESSAGE : In case of options, one value is displayed as the default value.
 Do erase it to use other value.
 
-ProxyMan v1.7
+ProxyMan v1.8
 This script is documented in README.md file.
 
 There are the following options for this script
@@ -294,7 +348,7 @@ if [[ choice == 'q' ]]; then
 	exit
 fi
 
-echo "Enter your system password if asked..."
+echo "Enter your system password (if asked)..."
 	
 # create temporary files with extension .conf to be configured
 if [[ -e "apt_config.config" && -e "bash_set.config" ]]; then
@@ -305,9 +359,38 @@ else
 	exit 1
 fi
 
+# check for possibilities if sudo is not available or sudo is not configured
+sudoperms=false
+sudoavailable="$(which sudo)"
+superusermethod=0
+# 1 means sudo, 2 means is root user, 0 means can't be super user... a lame one
+if [[ "$sudoavailable" = '' ]]; then
+	sudoavailable=false
+	if [[ "$USER" = 'root' ]]; then
+		superusermethod=2
+	else
+		superusermethod=0
+	fi
+else
+	sudoavailable=true
+	sudo -v &> /dev/null && sudoperms="true" || sudoperms="false"
+	if [[ "$sudoperms" = "true" ]]; then
+		superusermethod=1
+	else
+		superusermethod=0
+	fi
+fi
+
+gsetttingsavailable="$(which gsettings)"
+
 # take inputs and perform as necessary
 case "$choice" in 
-	toggle) mode=$(gsettings get org.gnome.system.proxy mode)
+	toggle)	if [[ "$gsettingsavailable" = '' ]]; then
+			echo "Desktop environment proxy settings are available for GNOME based environments."
+			echo "Please refer to the conventional GUI method for your DE."
+			break
+		fi
+		mode=$(gsettings get org.gnome.system.proxy mode)
 		if [ $mode == "'none'" ]; then
 			gsettings set org.gnome.system.proxy mode 'manual'
 		elif [ $mode == "'manual'" ]; then
@@ -330,14 +413,18 @@ case "$choice" in
 		fi
 		echo "Operation completed successfully."
 		;;
-	set)
-		unset_gsettings
+	set)	if [[ "$gsettingsavailable" != '' ]]; then
+			unset_gsettings
+		fi
+
 		unset_environment	
 		set_parameters ALL
 		;;
-	unset)	unset_gsettings
-			unset_apt
-			unset_environment
+	unset)	if [[ "$gsettingsavailable" != '' ]]; then
+			unset_gsettings
+		fi
+		unset_apt
+		unset_environment
 		;;
 	sfew)	echo 
 			echo "Where do you want to set proxy?"

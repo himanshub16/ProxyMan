@@ -11,6 +11,8 @@ else
 	echo ".bashrc does not exist."
 fi
 
+echo 
+
 if [[ -e "/etc/environment" ]]; then
 	a=$(grep -i proxy /etc/environment | wc -l)
 	if [[ a -eq 0 ]]; then

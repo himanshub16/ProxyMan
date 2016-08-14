@@ -381,7 +381,7 @@ else
 	fi
 fi
 
-gsetttingsavailable="$(which gsettings)"
+gsettingsavailable="$(which gsettings)"
 
 # take inputs and perform as necessary
 case "$choice" in 
@@ -418,6 +418,7 @@ case "$choice" in
 		fi
 
 		unset_environment	
+		unset_apt
 		set_parameters ALL
 		;;
 	unset)	if [[ "$gsettingsavailable" != '' ]]; then

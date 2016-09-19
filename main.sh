@@ -33,6 +33,7 @@
 #			The Linux Command Line, William E. Shotts
 #           Ubuntu Forums
 #           Stack Exchange
+#			Anurag Sharma (for demanding npm proxy configuration)
 # and many more Google search links.
 #
 # This script sets the proxy configuration for a general system from the Debian family.
@@ -211,6 +212,28 @@ configure_gsettings() {
 	fi
 }
 
+configure_npm() {
+	# configure_npm $http_host $http_port $use_auth $use_same $username $password $https_host $https_post
+	echo "1: $1, 2: $2, 3: $3, 4: $4, 5: $5, 6: $6, 7: $7, 8: $8"
+	if [ "$4" = "y" ]; then
+		if [ "$3" = "y" ]; then
+			npm config set proxy "http://$5:$6@$1:$2/"
+			npm config set https-proxy "https://$5:$6@$1:$2/"
+		else
+			npm config set proxy "http://$1:$2/"
+			npm config set proxy "https://$1:$2/"
+		fi
+	else
+		if [ "$3" = "y" ]; then
+			npm config set proxy "http://$5:$6@$1:$2/"
+			npm config set https-proxy "https://$5:$6@$7:$8/"
+		else
+			npm config set proxy "http://$1:$2/"
+			npm config set proxy "https://$7:$8/"
+		fi
+	fi
+}
+
 unset_environment() {
 	# unset all environment variables from bash_profile and bashrc
 	if [[ -e "$HOME/.bash_profile" ]]; then
@@ -276,6 +299,11 @@ unset_apt() {
 	fi
 }
 
+unset_npm() {
+	npm config rm proxy
+	npm config rm https-proxy
+}
+
 set_parameters() {
 # 	echo "Set parameters received" $1
 	echo "HTTP parameters : "
@@ -306,12 +334,15 @@ set_parameters() {
 		configure_apt $http_host $http_port $use_auth $use_same $username $password $https_host $https_port $ftp_host $ftp_port $socks_host $socks_port
 		configure_gsettings $http_host $http_port $use_auth $use_same $username $password $https_host $https_port $ftp_host $ftp_port $socks_host $socks_port
 		configure_environment $http_host $http_port $use_auth $use_same $username $password $https_host $https_port $ftp_host $ftp_port $socks_host $socks_port
+		configure_npm $http_host $http_port $use_auth $use_same $username $password $https_host $https_port
 	elif [[ $1 -eq 1 ]]; then
 		configure_environment $http_host $http_port $use_auth $use_same $username $password $https_host $https_port $ftp_host $ftp_port $socks_host $socks_port
 	elif [[ $1 -eq 2 ]]; then
 		configure_gsettings $http_host $http_port $use_auth $use_same $username $password $https_host $https_port $ftp_host $ftp_port $socks_host $socks_port
 	elif [[ $1 -eq 3 ]]; then
 		configure_apt $http_host $http_port $use_auth $use_same $username $password $https_host $https_port $ftp_host $ftp_port $socks_host $socks_port
+	elif [[ $1 -eq 4 ]]; then 
+		configure_npm $http_host $http_port $use_auth $use_same $username $password $https_host $https_port
 	else
 		echo "Invalid arguments! ERROR encountered."
 		exit 1
@@ -382,6 +413,7 @@ else
 fi
 
 gsettingsavailable="$(which gsettings)"
+npmavailable="$(which npm)"
 
 # take inputs and perform as necessary
 case "$choice" in 
@@ -426,12 +458,16 @@ case "$choice" in
 		fi
 		unset_apt
 		unset_environment
+		if [[ "$npmavailable" != '' ]]; then
+			unset_npm
+		fi
 		;;
 	sfew)	echo 
 			echo "Where do you want to set proxy?"
 			echo "1 : Terminal only."
 			echo "2 : Desktop-environment/GUI and apps"
 			echo "3 : APT/Software Center only"
+			echo "4 : npm proxy settings only"
 			read response
 			if [[ $response -gt 3 ]]; then
 				echo "Invalid option."
@@ -445,6 +481,7 @@ case "$choice" in
 			echo "1 : Terminal only."
 			echo "2 : Desktop-environment/GUI and apps"
 			echo "3 : APT/Software Center only"
+			echo "4 : npm proxy settings only"
 			read 
 			case $REPLY in 
 				1) unset_environment
@@ -452,6 +489,8 @@ case "$choice" in
 				2) unset_gsettings
 					;;
 				3) unset_apt
+					;;
+				4) unset_npm
 					;;
 				*)	echo "Invalid arguments! Please retry."
 					exit 1

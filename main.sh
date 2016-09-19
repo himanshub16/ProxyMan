@@ -278,7 +278,6 @@ unset_gsettings() {
 	if [[ "$gsettingsavailable" = '' ]];then
 		return
 	fi
-
 	gsettings set org.gnome.system.proxy mode 'none'
 	gsettings set org.gnome.system.proxy.http use-authentication false
 	gsettings set org.gnome.system.proxy.http authentication-user "''"

@@ -1,6 +1,10 @@
 ProxyMan changelog
 ===============================================================
 
+## v1.9 : Ninth release : September 19, 2017
+---------------------------------------------------------------
+* Options added to set user's npm proxy
+
 ## v1.8 : Eighth release : August 12, 2016
 ---------------------------------------------------------------
 * Checks added for sudo permissions before performing root ops.

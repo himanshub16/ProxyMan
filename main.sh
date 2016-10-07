@@ -83,13 +83,13 @@ if [ "$choice" = "set" ]; then
 	echo -e "\e[4mEnter details \e[0m : \e[2m\e[3m(leave blank if you don't to use any proxy settings) \e[0m"
 	echo
 	echo -ne "\e[36m HTTP Proxy host \e[0m"; read http_host
-	echo -ne "\e[32m HTTP Proxy port \e[0m "; read http_port
+	echo -ne "\e[32m HTTP Proxy port \e[0m"; read http_port
 	echo -ne "\e[0m Use same for HTTPS and FTP (y/n) ? \e[0m"; read use_same
 	echo -ne "\e[0m Use authentication (y/n) ? \e[0m        "; read use_auth
 
 	if [[ "$use_auth" = "y" || "$use_auth" = "Y" ]]; then
-		read -p "Enter username                 : " username
-		read -p "Enter password (use %40 for @) : " password
+		read -p " Enter username                 : " username
+		read -p " Enter password (use %40 for @) : " password
 	fi
 
 	if [[ "$use_same" = "y" || "$use_same" = "Y" ]]; then
@@ -113,7 +113,7 @@ if [ "$choice" = "set" ]; then
 fi
 
 echo
-echo -e "\e[0m\e[4m\e[33mEnter targets where you want to modify settings : \e[0m"
+echo -e " \e[0m\e[4m\e[33mEnter targets where you want to modify settings : \e[0m"
 echo -e " |\e[36m 1 \e[0m| All of them ... Don't bother me"
 echo -e " |\e[36m 2 \e[0m| Terminal / Bash (current user) "
 echo -e " |\e[36m 3 \e[0m| Environment variables (/etc/environment)"
@@ -122,8 +122,8 @@ echo -e " |\e[36m 5 \e[0m| Desktop settings (GNOME/Ubuntu)"
 echo -e " |\e[36m 6 \e[0m| npm"
 echo
 
-echo -e "Enter your choices (\e[3m\e[2m separate multiple choices by a space \e[0m ) "
-echo -ne "\e[5m? \e[0m" ; read -a targets
+echo -e " Enter your choices (\e[3m\e[2m separate multiple choices by a space \e[0m ) "
+echo -ne "\e[5m ? \e[0m" ; read -a targets
 
 echo
 

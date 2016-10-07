@@ -56,7 +56,7 @@ set_proxy() {
 	if [ "$3" = "y" ]; then
 		newvar="://$var$1:$2"
 		npm config set proxy "http$newvar"
-		npm config set https-proxy "https:$newvar"
+		npm config set https-proxy "https$newvar"
 	elif [ "$3" = "n" ]; then
 		npm config set proxy "http://$var$1:$2"
 		npm config set https-proxy "https://$var$7:$8"
@@ -65,17 +65,15 @@ set_proxy() {
 
 
 npm_available="$(which npm)"
-if [ "$dnf_available" = "" ]; then
+if [ "$npm_available" = "" ]; then
 	exit
 fi
-
 
 if [ "$#" = 0 ]; then
 	exit 
 fi
 
 if [ "$1" = "unset" ]; then
-	echo "Unset routine"
 	# that's what is needed
 	unset_proxy
 	exit

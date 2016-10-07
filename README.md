@@ -5,6 +5,8 @@ The master branch is version2, [v2](https://github.com/himanshub16/ProxyMan/) of
 For older version, checkout [branch v1](https://github.com/himanshub16/ProxyMan/tree/v1).
 To download older versions, checkout releases tagged v1.* [here](https://github.com/himanshub16/ProxyMan/releases).
 
+NOTE : It does not support PAC proxy using "proxy configuration URL". It is for setting up "manual" proxy.
+
 #### What's new in v2?
 * Modular approach. Individual scripts handle individual targets requiring proxy settings.
 * This means, a script can be for a single application/domain can be created and easily integrated with main.sh, without much modifications in main.sh (which was not available in v1).

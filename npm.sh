@@ -44,6 +44,13 @@
 
 # privileges has to be set by the process which starts this script
 
+list_proxy() {
+	echo 
+	echo -e "\e[1m NPM proxy settings \e[0m"
+	echo -e "\e[36m HTTP  Proxy \e[0m" $(npm config get proxy)
+	echo -e "\e[36m HTTPS Proxy \e[0m" $(npm config get https-proxy)
+}
+
 unset_proxy() {
 	npm config rm proxy
 	npm config rm https-proxy
@@ -79,6 +86,9 @@ if [ "$1" = "unset" ]; then
 	exit
 	# toggle proxy had issues with commenting and uncommenting
 	# dropping the feature currently
+elif [ "$1" = "list" ]; then
+	list_proxy
+	exit
 fi
 
 unset_proxy

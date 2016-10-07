@@ -44,6 +44,18 @@
 
 # privileges has to be set by the process which starts this script
 
+list_proxy() {
+	# inefficient way as the file is read twice.. think of some better way
+	echo 
+	echo -e "\e[1m APT proxy settings \e[0m"
+	lines="$(cat /etc/apt/apt.conf | grep proxy -i | wc -l)"
+	if [ "$lines" -gt 0 ]; then
+		cat /etc/apt/apt.conf | grep proxy -i | sed -e "s/Acquire//g" -e "s/\:\:/\ /g" -e "s/\;//g" 
+	else
+		echo -e "\e[36m None \e[0m"
+	fi
+}
+
 unset_proxy() {
 	if [ ! -e "/etc/apt/apt.conf" ]; then
 		return 
@@ -99,6 +111,9 @@ if [ "$1" = "unset" ]; then
 	exit
 	# toggle proxy had issues with commenting and uncommenting
 	# dropping the feature currently
+elif [ "$1" = "list" ]; then
+	list_proxy
+	exit
 fi
 
 unset_proxy

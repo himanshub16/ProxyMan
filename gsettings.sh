@@ -49,6 +49,22 @@
 # for storing configuration
 # Your system settings UI uses gsettings at the backend.
 
+list_proxy() {
+	echo 
+	echo -e "\e[1m Desktop proxy settings (GNOME)\e[0m"
+	mode="$(gsettings get org.gnome.system.proxy mode)"
+	if [ "$mode" = "'none'" ]; then
+		echo -e "\e[36m None \e[0m"
+		return
+	fi
+	
+	echo -e "\e[36m HTTP  Proxy \e[0m" Host : $(gsettings get org.gnome.system.proxy.http host) Port : $(gsettings get org.gnome.system.proxy.http port)
+	echo -e "\e[36m HTTPS Proxy \e[0m" Host : $(gsettings get org.gnome.system.proxy.https host) Port : $(gsettings get org.gnome.system.proxy.https port)
+	echo -e "\e[36m FTP   Proxy \e[0m" Host : $(gsettings get org.gnome.system.proxy.ftp host) Port : $(gsettings get org.gnome.system.proxy.ftp port)
+	echo -e "\e[36m SOCKS Proxy \e[0m" Host : $(gsettings get org.gnome.system.proxy.socks host) Port : $(gsettings get org.gnome.system.proxy.socks port)
+	
+}
+
 toggle_proxy() {
 	if [ "$(gsettings get org.gnome.system.proxy mode)" = "none" ]; then
 		gsettings set org.gnome.system.proxy mode "manual"
@@ -111,8 +127,11 @@ if [ "$1" = "unset" ]; then
 	# that's what is needed
 	unset_proxy
 	exit
-elif [ "$1" = "toggle" ]; then
-	toggle_proxy
+# elif [ "$1" = "toggle" ]; then
+# 	toggle_proxy
+	exit
+elif [ "$1" = "list" ]; then
+	list_proxy
 	exit
 fi
 

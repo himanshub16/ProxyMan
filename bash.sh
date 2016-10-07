@@ -54,6 +54,17 @@
 # 	fi
 # }
 
+list_proxy() {
+	echo 
+	echo -e "\e[1m Bash proxy settings \e[0m"
+	lines="$(cat $HOME/.bashrc | grep proxy | wc -l)"
+	if [ "$lines" -gt 0 ]; then
+		cat $HOME/.bashrc | grep proxy | sed "s/\=/\ /g"
+	else
+		echo -e "\e[36m None \e[0m"
+	fi
+}
+
 unset_proxy() {
 	if [ ! -e "$HOME/.bashrc" ]; then
 		return 
@@ -104,6 +115,9 @@ if [ "$1" = "unset" ]; then
 # elif [ "$1" = "toggle" ]; then
 # 	toggle_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11 $12
 # 	exit
+elif [ "$1" = "list" ]; then
+	list_proxy
+	exit
 fi
 
 

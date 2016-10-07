@@ -44,6 +44,17 @@
 
 # privileges has to be set by the process which starts this script
 
+list_proxy() {
+	echo 
+	echo -e "\e[1m DNF proxy settings (raw) \e[0m"
+	lines="$(cat /etc/dnf/dnf.conf | grep proxy -i | wc -l)"
+	if [ "$lines" -gt 0 ]; then
+		cat /etc/dnf/dnf.conf | grep proxy -i | sed -e "s/\=/\ /g"  
+	else
+		echo -e "\e[36m None \e[0m"
+	fi
+}
+
 unset_proxy() {
 	if [ ! -e "/etc/dnf/dnf.conf" ]; then
 		return 
@@ -86,6 +97,9 @@ if [ "$1" = "unset" ]; then
 	exit
 	# toggle proxy had issues with commenting and uncommenting
 	# dropping the feature currently
+elif [ "$1" = "list" ]; then
+	list_proxy
+	exit
 fi
 
 unset_proxy

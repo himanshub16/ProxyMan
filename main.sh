@@ -52,15 +52,16 @@ echo -e "
 \e[1m\e[33mProxyMan
 =========\e[0m
 Tool to set up system wide proxy settings on Linux. 
-\e[2m\e[33m🌟\e[0m\e[3m Star it\e[0m : \e[4m\e[34mhttps://github.com/himanshub16/ProxyMan\e[0m
+\e[2m\e[33m🌟\e[0m\e[3m Star it \e[0m : \e[4m\e[34m https://github.com/himanshub16/ProxyMan \e[0m
 
-\e[4mThe following options are available : \e[0m
-\e[1mset\e[0m    : \e[2mSet proxy settings\e[0m
-\e[1munset\e[0m  : \e[2mUnset proxy settings\e[0m
+ \e[4mThe following options are available : \e[0m
+\e[1m set \e[0m    : \e[2m Set proxy settings \e[0m
+\e[1m unset \e[0m  : \e[2m Unset proxy settings \e[0m
+\e[1m list \e[0m   : \e[2m List current settings \e[0m
 
 "
 
-read -p "Enter your choice : " choice
+read -p " Enter your choice : " choice
 
 if [ "$choice" = "set" ]; then
 
@@ -80,7 +81,7 @@ if [ "$choice" = "set" ]; then
 	password=""
 
 	echo
-	echo -e "\e[4mEnter details \e[0m : \e[2m\e[3m(leave blank if you don't to use any proxy settings) \e[0m"
+	echo -e "\e[4m Enter details \e[0m : \e[2m\e[3m (leave blank if you don't to use any proxy settings) \e[0m"
 	echo
 	echo -ne "\e[36m HTTP Proxy host \e[0m"; read http_host
 	echo -ne "\e[32m HTTP Proxy port \e[0m"; read http_port
@@ -187,8 +188,42 @@ case $choice in
 		done
 		;;
 
+	"list")
+		echo -ne "\e[1m \e[31m This will list all your passwords. Continue ? (y/n) \e[0m"; read 
+		if [[ "$REPLY" = "y" || "$REPLY" = "Y" ]]; then
+			for i in "${targets[@]}"
+			do
+				case $i in
+					1)	echo "Someone wants to list all"
+						bash "bash.sh" "list"
+						sudo bash "environment.sh" "list"
+						sudo bash "apt.sh" "list"
+						sudo bash "dnf.sh" "list"
+						bash "gsettings.sh" "list"
+						bash "npm.sh" "list"
+						;;
+					2)
+						bash "bash.sh" "list"
+						;;
+					3)	sudo bash "environment.sh" "list"
+						;;
+					4)	sudo bash "apt.sh" "list"
+						sudo bash "dnf.sh" "list"
+						;;
+					5)	bash "gsettings.sh" "list"
+						;;
+					6)	bash "npm.sh" "list"
+						;;
+					*)	;;
+				esac
+			done
+			
+		fi
+		;;
+
 	*)	
 		;;
 esac
 
+echo
 echo -e "\e[1m\e[36mDone!\e[0m \e[2mThanks for using :)\e[0m"

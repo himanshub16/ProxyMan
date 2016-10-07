@@ -81,7 +81,7 @@ if [ "$choice" = "set" ]; then
 	password=""
 
 	echo
-	echo -e "\e[4m Enter details \e[0m : \e[2m\e[3m (leave blank if you don't to use any proxy settings) \e[0m"
+	echo -e " \e[4mEnter details \e[0m : \e[2m\e[3m (leave blank if you don't to use any proxy settings) \e[0m"
 	echo
 	echo -ne "\e[36m HTTP Proxy host \e[0m"; read http_host
 	echo -ne "\e[32m HTTP Proxy port \e[0m"; read http_port
@@ -90,7 +90,7 @@ if [ "$choice" = "set" ]; then
 
 	if [[ "$use_auth" = "y" || "$use_auth" = "Y" ]]; then
 		read -p " Enter username                 : " username
-		read -p " Enter password (use %40 for @) : " password
+		echo -n " Enter password (use %40 for @) : " ; read -s password
 	fi
 
 	if [[ "$use_same" = "y" || "$use_same" = "Y" ]]; then

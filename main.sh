@@ -175,7 +175,7 @@ case $choice in
 					;;
 				3)	sudo bash "environment.sh" "unset"
 					;;
-				6)	sudo bash "apt.sh" "unset"
+				4)	sudo bash "apt.sh" "unset"
 					sudo bash "dnf.sh" "unset"
 					;;
 				5)	bash "gsettings.sh" "unset"

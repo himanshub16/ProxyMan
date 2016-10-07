@@ -94,7 +94,6 @@ if [ "$#" = 0 ]; then
 fi
 
 if [ "$1" = "unset" ]; then
-	echo "Unset routine"
 	# that's what is needed
 	unset_proxy
 	exit

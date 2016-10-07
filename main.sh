@@ -132,7 +132,6 @@ case $choice in
 		args=("$http_host" "$http_port" "$use_same" "$use_auth" "$username" "$password" "$https_host" "$https_port" "$ftp_host" "$ftp_port" "$rsync_host" "$rsync_port")
 		for i in "${targets[@]}"
 		do
-			echo "looping for $i"
 			case $i in
 				1)
 					bash "bash.sh" "${args[@]}"

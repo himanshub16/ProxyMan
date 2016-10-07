@@ -93,8 +93,6 @@ set_proxy() {
 	fi
 }
 
-echo "bash.sh invoked with arguments : $@ $#"
-
 if [ "$#" = 0 ]; then
 	exit 
 fi
@@ -110,6 +108,5 @@ fi
 
 
 unset_proxy
-echo "setting bashrc proxy"
 set_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11 $12
 

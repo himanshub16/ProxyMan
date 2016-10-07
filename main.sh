@@ -80,12 +80,12 @@ if [ "$choice" = "set" ]; then
 	password=""
 
 	echo
-	echo -e "\e[4m Enter details \e[0m : \e[2m\e[3m(leave blank if you don't to use any proxy settings) \e[0m"
+	echo -e "\e[4mEnter details \e[0m : \e[2m\e[3m(leave blank if you don't to use any proxy settings) \e[0m"
 	echo
 	echo -ne "\e[36m HTTP Proxy host \e[0m"; read http_host
 	echo -ne "\e[32m HTTP Proxy port \e[0m "; read http_port
 	echo -ne "\e[0m Use same for HTTPS and FTP (y/n) ? \e[0m"; read use_same
-	echo -ne "\e[0m Use authentication ? \e[0m              "; read use_auth
+	echo -ne "\e[0m Use authentication (y/n) ? \e[0m        "; read use_auth
 
 	if [[ "$use_auth" = "y" || "$use_auth" = "Y" ]]; then
 		read -p "Enter username                 : " username

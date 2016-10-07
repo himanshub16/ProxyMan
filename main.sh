@@ -121,6 +121,7 @@ echo -e " |\e[36m 3 \e[0m| Environment variables (/etc/environment)"
 echo -e " |\e[36m 4 \e[0m| apt/dnf (package manager)"
 echo -e " |\e[36m 5 \e[0m| Desktop settings (GNOME/Ubuntu)"
 echo -e " |\e[36m 6 \e[0m| npm"
+echo -e " |\e[36m 7 \e[0m| Dropbox"
 echo
 
 echo -e " Enter your choices (\e[3m\e[2m separate multiple choices by a space \e[0m ) "
@@ -141,6 +142,7 @@ case $choice in
 					sudo bash "dnf.sh" "${args[@]}"
 					bash "gsettings.sh" "${args[@]}"
 					bash "npm.sh" "${args[@]}"
+					bash "dropbox.sh" "${args[@]}"
 					;;
 				2)
 					bash "bash.sh" "${args[@]}"
@@ -153,6 +155,8 @@ case $choice in
 				5)	bash "gsettings.sh" "${args[@]}"
 					;;
 				6)	bash "npm.sh" "${args[@]}"
+					;;
+				7)	bash "dropbox.sh" "$${args[@]}"
 					;;
 				*)	;;
 			esac
@@ -170,6 +174,7 @@ case $choice in
 					sudo bash "dnf.sh" "unset"
 					bash "gsettings.sh" "unset"
 					bash "npm.sh" "unset"
+					bash "dropbox.sh" "unset"
 					;;
 				2)
 					bash "bash.sh" "unset"
@@ -182,6 +187,8 @@ case $choice in
 				5)	bash "gsettings.sh" "unset"
 					;;
 				6)	bash "npm.sh" "unset"
+					;;
+				7)	bash "dropbox.sh" "unset"
 					;;
 				*)	;;
 			esac
@@ -201,6 +208,7 @@ case $choice in
 						sudo bash "dnf.sh" "list"
 						bash "gsettings.sh" "list"
 						bash "npm.sh" "list"
+						bash "dropbox.sh" "list"
 						;;
 					2)
 						bash "bash.sh" "list"
@@ -213,6 +221,8 @@ case $choice in
 					5)	bash "gsettings.sh" "list"
 						;;
 					6)	bash "npm.sh" "list"
+						;;
+					7) 	bash "dropbox.sh" "list"
 						;;
 					*)	;;
 				esac

@@ -125,15 +125,6 @@ echo
 echo -e "Enter your choices (\e[3m\e[2m separate multiple choices by a space \e[0m ) "
 echo -ne "\e[5m? \e[0m" ; read -a targets
 
-for i in "${targets[@]}"
-do
-	echo "$i is to be set"
-done
-
-
-echo $choice
-echo $http_host $http_port $https_host $https_port $ftp_host $ftp_port $socks_host $socks_port
-
 echo
 
 case $choice in 
@@ -152,7 +143,6 @@ case $choice in
 					bash "npm.sh" "${args[@]}"
 					;;
 				2)
-					echo "setting bash"
 					bash "bash.sh" "${args[@]}"
 					;;
 				3)	sudo bash "environment.sh" "${args[@]}"
@@ -170,12 +160,10 @@ case $choice in
 		;;
 
 	"unset") 
-		echo "reached unset reoutine for ${targets[@]}"
 		for i in "${targets[@]}"
 		do
-			echo " loopting for i + $i"
 			case $i in
-				1)	echo "someone wants to unset all"
+				1)	echo "Someone wants to unset all"
 					bash "bash.sh" "unset"
 					sudo bash "environment.sh" "unset"
 					sudo bash "apt.sh" "unset"
@@ -204,4 +192,4 @@ case $choice in
 		;;
 esac
 
-echo "End of script"
+echo -e "\e[1m\e[36mDone!\e[0m \e[2mThanks for using :)\e[0m"

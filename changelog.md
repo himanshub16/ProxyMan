@@ -1,7 +1,18 @@
 ProxyMan changelog
 ===============================================================
 
-## v1.9 : Ninth release : September 19, 2017
+## v2.0 : Version 2 10th Release : October 7, 2016
+---------------------------------------------------------------
+* Proxyman became modular.
+* Settings are governed by individual scripts rather than the 
+  main file 
+* Bug fixes from version 1 
+* Dropbox proxy support added. 
+
+***************************************************************
+***************************************************************
+
+## v1.9 : Ninth release : September 19, 2016
 ---------------------------------------------------------------
 * Options added to set user's npm proxy
 

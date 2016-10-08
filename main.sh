@@ -114,6 +114,8 @@ configure_environment() {
 			;;
 		esac
 	fi
+
+	source "$HOME/.bashrc"
 }
 
 configure_apt() {
@@ -271,7 +273,7 @@ unset_environment() {
 			;;
 		esac
 	fi
-	
+	source "$HOME/.bashrc"
 }
 
 unset_gsettings() {

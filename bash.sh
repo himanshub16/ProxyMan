@@ -111,6 +111,7 @@ fi
 if [ "$1" = "unset" ]; then
 	# that's what is needed
 	unset_proxy
+	source "$HOME/.bashrc"
 	exit
 # elif [ "$1" = "toggle" ]; then
 # 	toggle_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11 $12
@@ -123,4 +124,4 @@ fi
 
 unset_proxy
 set_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11 $12
-
+source "$HOME/.bashrc"

@@ -36,10 +36,6 @@
 # $8  : https_port 
 # $9  : ftp_host 
 # $10 : ftp_port 
-# $11 : socks_host 
-# $12 : socks_port 
-# $13 : rsync_host ; added to support rsync ; no offence to rsync haters 
-# $14 : rsync_port
  
 # here your code starts
 
@@ -73,10 +69,6 @@ if [ "$choice" = "set" ]; then
 	https_port=""
 	ftp_host=""
 	ftp_port=""
-	socks_port=""
-	socks_host=""
-	rsync_host=""
-	rsync_port=""
 	username=""
 	password=""
 
@@ -105,10 +97,6 @@ if [ "$choice" = "set" ]; then
 		echo -ne "\e[32m HTTPS Proxy port \e[0m " ; read https_port
 		echo -ne "\e[36m FTP   Proxy host \e[0m " ; read ftp_host
 		echo -ne "\e[32m FTP   Proxy port \e[0m " ; read ftp_port
-		echo -ne "\e[36m SOCKS Proxy host \e[0m " ; read socks_host
-		echo -ne "\e[32m SOCKS Proxy port \e[0m " ; read socks_port
-		echo -ne "\e[36m RSYNC Proxy host \e[0m"  ; read rsync_host
-		echo -ne "\e[32m RSYNC Proxy port \e[0m"  ; read rsync_port
 	fi
 
 fi
@@ -131,7 +119,7 @@ echo
 
 case $choice in 
 	"set")	
-		args=("$http_host" "$http_port" "$use_same" "$use_auth" "$username" "$password" "$https_host" "$https_port" "$ftp_host" "$ftp_port" "$rsync_host" "$rsync_port")
+		args=("$http_host" "$http_port" "$use_same" "$use_auth" "$username" "$password" "$https_host" "$https_port" "$ftp_host" "$ftp_port" )
 		for i in "${targets[@]}"
 		do
 			case $i in

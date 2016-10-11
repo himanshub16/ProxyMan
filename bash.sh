@@ -37,11 +37,7 @@
 # $8  : https_port 
 # $9  : ftp_host 
 # $10 : ftp_port 
-# $11 : socks_host 
-# $12 : socks_port 
-# $13 : rsync_host ; added to support rsync ; no offence to rsync haters 
-# $14 : rsync_port
- 
+
 # here your code starts 
 
 # privileges has to be set by the process which starts this script
@@ -89,7 +85,7 @@ set_proxy() {
 		echo "https_proxy=\"https$newvar\"" >> bash_config.tmp
 		echo "ftp_proxy=\"ftp$newvar\"" >> bash_config.tmp
 
-		cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
+		# cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
 		rm bash_config.tmp
 		return 
 
@@ -98,7 +94,7 @@ set_proxy() {
 		echo "https_proxy=\"https://$var$7:$8\"" >> bash_config.tmp
 		echo "ftp_proxy=\"ftp://$var$9:$10\"" >> bash_config.tmp
 
-		cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
+		# cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
 		rm bash_config.tmp
 		return
 	fi

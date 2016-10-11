@@ -35,10 +35,6 @@
 # $8  : https_port 
 # $9  : ftp_host 
 # $10 : ftp_port 
-# $11 : socks_host 
-# $12 : socks_port 
-# $13 : rsync_host ; added to support rsync ; no offence to rsync haters 
-# $14 : rsync_port
  
 # here your code starts 
 

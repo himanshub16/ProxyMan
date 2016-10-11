@@ -31,10 +31,19 @@
 # $8  : https_port 
 # $9  : ftp_host 
 # $10 : ftp_port 
-# $11 : socks_host 
-# $12 : socks_port 
-# $13 : rsync_host ; added to support rsync ; no offence to rsync haters 
-# $14 : rsync_port
+
+# below settings are removed as of now
+# reason : they are generally not required in daily use
+# and some applications (like whatsapp web) are not comfortable
+# with them.
+# also, handling them requires rework on certain areas.
+#
+# most applications do follow http proxy
+## $11 : socks_host 
+## $12 : socks_port 
+## $13 : rsync_host 
+## $14 : rsync_port
+###########
  
 # here your code starts
 

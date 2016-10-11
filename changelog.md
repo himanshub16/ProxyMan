@@ -8,6 +8,7 @@ ProxyMan changelog
   main file 
 * Bug fixes from version 1 
 * Dropbox proxy support added. 
+* Socks proxy is not configured unless asked by the user explicitly.
 
 ***************************************************************
 ***************************************************************

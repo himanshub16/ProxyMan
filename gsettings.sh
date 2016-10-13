@@ -55,6 +55,7 @@ list_proxy() {
 	fi
 	
 	echo -e "\e[36m HTTP  Proxy \e[0m" Host : $(gsettings get org.gnome.system.proxy.http host) Port : $(gsettings get org.gnome.system.proxy.http port)
+	echo -e "\e[36m HTTP  Proxy \e[0m" Username : $(gsettings get org.gnome.system.proxy.http authentication-user) Password : $(gsettings get org.gnome.system.proxy.http authentication-password)
 	echo -e "\e[36m HTTPS Proxy \e[0m" Host : $(gsettings get org.gnome.system.proxy.https host) Port : $(gsettings get org.gnome.system.proxy.https port)
 	echo -e "\e[36m FTP   Proxy \e[0m" Host : $(gsettings get org.gnome.system.proxy.ftp host) Port : $(gsettings get org.gnome.system.proxy.ftp port)
 	echo -e "\e[36m SOCKS Proxy \e[0m" Host : $(gsettings get org.gnome.system.proxy.socks host) Port : $(gsettings get org.gnome.system.proxy.socks port)

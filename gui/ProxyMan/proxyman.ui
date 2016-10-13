@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ProxyMan</class>
+ <widget class="QWidget" name="ProxyMan">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>503</width>
+    <height>392</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>ProxyMan</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #fff;
+border: 1px solid black;</string>
+  </property>
+  <widget class="QGroupBox" name="targetGroup">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>461</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Select targets</string>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>441</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="targetElems">
+     <property name="leftMargin">
+      <number>1</number>
+     </property>
+     <property name="topMargin">
+      <number>1</number>
+     </property>
+     <property name="rightMargin">
+      <number>1</number>
+     </property>
+     <property name="bottomMargin">
+      <number>1</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QCheckBox" name="checkBash">
+       <property name="styleSheet">
+        <string notr="true">border: none</string>
+       </property>
+       <property name="text">
+        <string>Bash</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QCheckBox" name="checkEnv">
+       <property name="styleSheet">
+        <string notr="true">border: none</string>
+       </property>
+       <property name="text">
+        <string>Environment variables</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QCheckBox" name="checkGsettings">
+       <property name="styleSheet">
+        <string notr="true">border: none</string>
+       </property>
+       <property name="text">
+        <string>Desktop settings</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QCheckBox" name="checkApt">
+       <property name="styleSheet">
+        <string notr="true">border: none</string>
+       </property>
+       <property name="text">
+        <string>Package manager</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QCheckBox" name="checkNpm">
+       <property name="styleSheet">
+        <string notr="true">border: none	</string>
+       </property>
+       <property name="text">
+        <string>npm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QCheckBox" name="checkDropbox">
+       <property name="styleSheet">
+        <string notr="true">border: none</string>
+       </property>
+       <property name="text">
+        <string>Dropbox</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QCheckBox" name="checkSelectAll">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>10</y>
+      <width>85</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none</string>
+    </property>
+    <property name="text">
+     <string>Select All</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>170</y>
+     <width>461</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="configGrid" columnstretch="1,2,1,1">
+    <item row="5" column="3">
+     <widget class="QSpinBox" name="HttpsPort">
+      <property name="maximum">
+       <number>65535</number>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="2">
+     <widget class="QLabel" name="lblFtpPort">
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string>FTP port</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QLabel" name="lblFtpHost">
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string>FTP host</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QLabel" name="lblHttpPort">
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string>HTTP port</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3">
+     <widget class="QSpinBox" name="HttpPort">
+      <property name="maximum">
+       <number>65535</number>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="lblHttpsHost">
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string>HTTPS host</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="HttpHost">
+      <property name="placeholderText">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <widget class="QCheckBox" name="useAuth">
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string>Use authentication</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0" colspan="2">
+     <widget class="QCheckBox" name="useSame">
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string>Use same for HTTPS and FTP </string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="password">
+      <property name="inputMethodHints">
+       <set>Qt::ImhSensitiveData</set>
+      </property>
+      <property name="placeholderText">
+       <string>Use %40 for @</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLineEdit" name="HttpsHost"/>
+    </item>
+    <item row="5" column="2">
+     <widget class="QLabel" name="lblHttpsPort">
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string>HTTPS port</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="3">
+     <widget class="QSpinBox" name="FtpPort">
+      <property name="maximum">
+       <number>65535</number>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="lblUsername">
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string>Username</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QLineEdit" name="FtpHost"/>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="lblPassword">
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string>Password</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="username"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="lblHttpHost">
+      <property name="styleSheet">
+       <string notr="true">border: none</string>
+      </property>
+      <property name="text">
+       <string>HTTP host</string>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+   <zorder>HttpHost</zorder>
+   <zorder>lblFtpHost</zorder>
+   <zorder>FtpPort</zorder>
+   <zorder>lblHttpsHost</zorder>
+   <zorder>lblFtpPort</zorder>
+   <zorder>HttpsPort</zorder>
+   <zorder>lblHttpPort</zorder>
+   <zorder>FtpHost</zorder>
+   <zorder>HttpPort</zorder>
+   <zorder>lblHttpHost</zorder>
+   <zorder>lblHttpsPort</zorder>
+   <zorder>useAuth</zorder>
+   <zorder>password</zorder>
+   <zorder>username</zorder>
+   <zorder>useSame</zorder>
+   <zorder>lblUsername</zorder>
+   <zorder>lblPassword</zorder>
+   <zorder>HttpsHost</zorder>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>120</y>
+     <width>461</width>
+     <height>39</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="actionWidgets" stretch="1,0">
+    <property name="leftMargin">
+     <number>2</number>
+    </property>
+    <property name="rightMargin">
+     <number>2</number>
+    </property>
+    <item>
+     <widget class="QComboBox" name="actionsCombo">
+      <item>
+       <property name="text">
+        <string extracomment="Save settings">Set</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Unset</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCommandLinkButton" name="actionCmd">
+      <property name="text">
+       <string>Apply</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>checkSelectAll</tabstop>
+  <tabstop>checkBash</tabstop>
+  <tabstop>checkEnv</tabstop>
+  <tabstop>checkGsettings</tabstop>
+  <tabstop>checkApt</tabstop>
+  <tabstop>checkNpm</tabstop>
+  <tabstop>checkDropbox</tabstop>
+  <tabstop>HttpHost</tabstop>
+  <tabstop>HttpPort</tabstop>
+  <tabstop>useAuth</tabstop>
+  <tabstop>username</tabstop>
+  <tabstop>password</tabstop>
+  <tabstop>useSame</tabstop>
+  <tabstop>HttpsHost</tabstop>
+  <tabstop>HttpsPort</tabstop>
+  <tabstop>FtpHost</tabstop>
+  <tabstop>FtpPort</tabstop>
+  <tabstop>actionsCombo</tabstop>
+  <tabstop>actionCmd</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

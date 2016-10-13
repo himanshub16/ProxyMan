@@ -42,6 +42,18 @@
 # This is the main script which calls other respective scripts.
 # In case of doubts regarding how to use, refer the README.md file.
 clear
+if [ "$1" = "list" ]; then
+	echo "Someone wants to list all"
+	bash "bash.sh" "list"
+	sudo bash "environment.sh" "list"
+	sudo bash "apt.sh" "list"
+	sudo bash "dnf.sh" "list"
+	bash "gsettings.sh" "list"
+	bash "npm.sh" "list"
+	bash "dropbox.sh" "list"
+	exit
+fi
+
 use_same=""
 use_auth=""
 echo -e "

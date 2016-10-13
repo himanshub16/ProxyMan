@@ -85,7 +85,7 @@ set_proxy() {
 		echo "https_proxy=\"https$newvar\"" >> bash_config.tmp
 		echo "ftp_proxy=\"ftp$newvar\"" >> bash_config.tmp
 
-		# cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
+		cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
 		rm bash_config.tmp
 		return 
 
@@ -94,7 +94,7 @@ set_proxy() {
 		echo "https_proxy=\"https://$var$7:$8\"" >> bash_config.tmp
 		echo "ftp_proxy=\"ftp://$var$9:$10\"" >> bash_config.tmp
 
-		# cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
+		cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
 		rm bash_config.tmp
 		return
 	fi

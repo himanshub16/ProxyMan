@@ -12,4 +12,13 @@ NOTE : It does not support PAC proxy using "proxy configuration URL". It is for 
 * This means, a script can be for a single application/domain can be created and easily integrated with main.sh, without much modifications in main.sh (which was not available in v1).
 * No issues of privileges for individual scripts. Main script is responsible of executing child script with required privileges. 
 
+#### As of now, the GUI is buggy. It works for most cases, but doesn't always work for setting up apt.conf or /etc/environment. 
+#### Hope to find a fix soon.
+
+#### Steps taken to fix it as of now : 
+  * Use pkexec to gain privileged access.
+  * Use sudo with system function from cstdlib.
+  * Use gksu (avoiding as it's not preinstalled in most distros).
+  
+
 

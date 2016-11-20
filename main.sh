@@ -51,6 +51,7 @@ if [ "$1" = "list" ]; then
 	bash "gsettings.sh" "list"
 	bash "npm.sh" "list"
 	bash "dropbox.sh" "list"
+	bahs "git_config.sh" "list"
 	exit
 fi
 
@@ -122,6 +123,7 @@ echo -e " |\e[36m 4 \e[0m| apt/dnf (package manager)"
 echo -e " |\e[36m 5 \e[0m| Desktop settings (GNOME/Ubuntu)"
 echo -e " |\e[36m 6 \e[0m| npm"
 echo -e " |\e[36m 7 \e[0m| Dropbox"
+echo -e " |\e[36m 8 \e[0m| Git"
 echo
 
 echo -e " Enter your choices (\e[3m\e[2m separate multiple choices by a space \e[0m ) "
@@ -143,6 +145,7 @@ case $choice in
 					bash "gsettings.sh" "${args[@]}"
 					bash "npm.sh" "${args[@]}"
 					bash "dropbox.sh" "${args[@]}"
+					bash "git_config.sh" "${args[0]}"
 					;;
 				2)
 					bash "bash.sh" "${args[@]}"
@@ -156,8 +159,9 @@ case $choice in
 					;;
 				6)	bash "npm.sh" "${args[@]}"
 					;;
-				7)	bash "dropbox.sh" "$${args[@]}"
+				7)	bash "dropbox.sh" "${args[@]}"
 					;;
+				8)	bash "git_config" "${args[@]}"
 				*)	;;
 			esac
 		done
@@ -175,6 +179,7 @@ case $choice in
 					bash "gsettings.sh" "unset"
 					bash "npm.sh" "unset"
 					bash "dropbox.sh" "unset"
+					bash "git_config.sh" "unset"
 					;;
 				2)
 					bash "bash.sh" "unset"
@@ -190,6 +195,7 @@ case $choice in
 					;;
 				7)	bash "dropbox.sh" "unset"
 					;;
+				8) 	bash "git_config.sh" "unset"
 				*)	;;
 			esac
 		done

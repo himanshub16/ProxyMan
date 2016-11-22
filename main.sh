@@ -232,7 +232,7 @@ case $choice in
 						;;
 					7) 	bash "dropbox.sh" "list"
 						;;
-					7) 	bash "git_config.sh" "list"
+					8) 	bash "git_config.sh" "list"
 						;;
 					*)	;;
 				esac

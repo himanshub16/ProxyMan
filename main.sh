@@ -162,6 +162,7 @@ case $choice in
 				7)	bash "dropbox.sh" "${args[@]}"
 					;;
 				8)	bash "git_config" "${args[@]}"
+					;;
 				*)	;;
 			esac
 		done
@@ -196,6 +197,7 @@ case $choice in
 				7)	bash "dropbox.sh" "unset"
 					;;
 				8) 	bash "git_config.sh" "unset"
+					;;
 				*)	;;
 			esac
 		done
@@ -229,6 +231,8 @@ case $choice in
 					6)	bash "npm.sh" "list"
 						;;
 					7) 	bash "dropbox.sh" "list"
+						;;
+					7) 	bash "git_config.sh" "list"
 						;;
 					*)	;;
 				esac

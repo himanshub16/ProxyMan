@@ -47,7 +47,8 @@ list_proxy() {
 }
 
 unset_proxy() {
-	git config rm proxy
+	git config rm http.proxy
+	git config rm https.proxy
 }
 
 set_proxy() {

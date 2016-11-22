@@ -1,7 +1,17 @@
 ProxyMan changelog
 ===============================================================
 
-## v2.0 : Version 2 10th Release : October 7, 2016
+## v2.2 : Version 2 3rd release : November 20, 2016
+---------------------------------------------------------------
+* Bug fixes in git configuration
+* Bug fixes in main.sh switch cases
+
+## v2.1 : Version 2 2nd release : November 20, 2016
+---------------------------------------------------------------
+* Git config added because git ignores environment variables
+  on some environments
+
+## v2.0 : Version 2 1st Release : October 7, 2016
 ---------------------------------------------------------------
 * Proxyman became modular.
 * Settings are governed by individual scripts rather than the 

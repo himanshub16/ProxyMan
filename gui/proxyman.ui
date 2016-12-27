@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>503</width>
-    <height>392</height>
+    <width>481</width>
+    <height>402</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,10 +26,10 @@ border: 1px solid black;</string>
   <widget class="QGroupBox" name="targetGroup">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
+     <x>10</x>
+     <y>10</y>
      <width>461</width>
-     <height>100</height>
+     <height>121</height>
     </rect>
    </property>
    <property name="title">
@@ -50,7 +50,7 @@ border: 1px solid black;</string>
       <x>10</x>
       <y>40</y>
       <width>441</width>
-      <height>50</height>
+      <height>76</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="targetElems">
@@ -126,6 +126,13 @@ border: 1px solid black;</string>
        </property>
       </widget>
      </item>
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="checkGit">
+       <property name="text">
+        <string>git</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
    <widget class="QCheckBox" name="checkSelectAll">
@@ -148,8 +155,8 @@ border: 1px solid black;</string>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>170</y>
+     <x>10</x>
+     <y>190</y>
      <width>461</width>
      <height>201</height>
     </rect>
@@ -328,8 +335,8 @@ border: 1px solid black;</string>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>120</y>
+     <x>10</x>
+     <y>140</y>
      <width>461</width>
      <height>39</height>
     </rect>
@@ -374,6 +381,8 @@ border: 1px solid black;</string>
   <tabstop>checkApt</tabstop>
   <tabstop>checkNpm</tabstop>
   <tabstop>checkDropbox</tabstop>
+  <tabstop>checkGit</tabstop>
+  <tabstop>actionsCombo</tabstop>
   <tabstop>HttpHost</tabstop>
   <tabstop>HttpPort</tabstop>
   <tabstop>useAuth</tabstop>
@@ -381,10 +390,9 @@ border: 1px solid black;</string>
   <tabstop>password</tabstop>
   <tabstop>useSame</tabstop>
   <tabstop>HttpsHost</tabstop>
-  <tabstop>HttpsPort</tabstop>
   <tabstop>FtpHost</tabstop>
+  <tabstop>HttpsPort</tabstop>
   <tabstop>FtpPort</tabstop>
-  <tabstop>actionsCombo</tabstop>
   <tabstop>actionCmd</tabstop>
  </tabstops>
  <resources/>

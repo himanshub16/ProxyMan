@@ -1,5 +1,8 @@
 ProxyMan changelog
 ===============================================================
+## v2.1 : Version 2 update : Release : November 20, 2016
+---------------------------------------------------------------
+* Git support added, after facing some problems on MacOS.
 
 ## v2.0 : Version 2 10th Release : October 7, 2016
 ---------------------------------------------------------------

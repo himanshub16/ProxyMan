@@ -132,6 +132,12 @@ void ProxyMan::on_actionCmd_clicked()
         system(mystring);
     }
 
+    if (ui->checkGit->isChecked()) {
+        out << sysarg.arg("git_config.sh").arg(argument) << endl;
+        mystring = (sysarg.arg("git_config.sh").arg(argument)).toLatin1().data();
+        system(mystring);
+    }
+
     msg.setText("<b>Done!</b>");
     msg.setInformativeText("Thanks for using :)");
     msg.exec();

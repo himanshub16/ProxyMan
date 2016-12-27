@@ -39,6 +39,7 @@ public:
     QCheckBox *checkApt;
     QCheckBox *checkNpm;
     QCheckBox *checkDropbox;
+    QCheckBox *checkGit;
     QCheckBox *checkSelectAll;
     QGroupBox *groupBox;
     QGridLayout *configGrid;
@@ -69,7 +70,7 @@ public:
     {
         if (ProxyMan->objectName().isEmpty())
             ProxyMan->setObjectName(QStringLiteral("ProxyMan"));
-        ProxyMan->resize(503, 392);
+        ProxyMan->resize(481, 402);
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -79,13 +80,13 @@ public:
 "border: 1px solid black;"));
         targetGroup = new QGroupBox(ProxyMan);
         targetGroup->setObjectName(QStringLiteral("targetGroup"));
-        targetGroup->setGeometry(QRect(20, 20, 461, 100));
+        targetGroup->setGeometry(QRect(10, 10, 461, 121));
         targetGroup->setFlat(false);
         targetGroup->setCheckable(false);
         targetGroup->setChecked(false);
         layoutWidget = new QWidget(targetGroup);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 40, 441, 50));
+        layoutWidget->setGeometry(QRect(10, 40, 441, 76));
         targetElems = new QGridLayout(layoutWidget);
         targetElems->setSpacing(6);
         targetElems->setContentsMargins(11, 11, 11, 11);
@@ -127,13 +128,18 @@ public:
 
         targetElems->addWidget(checkDropbox, 1, 2, 1, 1);
 
+        checkGit = new QCheckBox(layoutWidget);
+        checkGit->setObjectName(QStringLiteral("checkGit"));
+
+        targetElems->addWidget(checkGit, 2, 0, 1, 1);
+
         checkSelectAll = new QCheckBox(targetGroup);
         checkSelectAll->setObjectName(QStringLiteral("checkSelectAll"));
         checkSelectAll->setGeometry(QRect(120, 10, 85, 20));
         checkSelectAll->setStyleSheet(QStringLiteral("border: none"));
         groupBox = new QGroupBox(ProxyMan);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(20, 170, 461, 201));
+        groupBox->setGeometry(QRect(10, 190, 461, 201));
         configGrid = new QGridLayout(groupBox);
         configGrid->setSpacing(6);
         configGrid->setContentsMargins(11, 11, 11, 11);
@@ -267,7 +273,7 @@ public:
         HttpsHost->raise();
         layoutWidget1 = new QWidget(ProxyMan);
         layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(20, 120, 461, 39));
+        layoutWidget1->setGeometry(QRect(10, 140, 461, 39));
         actionWidgets = new QHBoxLayout(layoutWidget1);
         actionWidgets->setSpacing(6);
         actionWidgets->setContentsMargins(11, 11, 11, 11);
@@ -290,18 +296,19 @@ public:
         QWidget::setTabOrder(checkGsettings, checkApt);
         QWidget::setTabOrder(checkApt, checkNpm);
         QWidget::setTabOrder(checkNpm, checkDropbox);
-        QWidget::setTabOrder(checkDropbox, HttpHost);
+        QWidget::setTabOrder(checkDropbox, checkGit);
+        QWidget::setTabOrder(checkGit, actionsCombo);
+        QWidget::setTabOrder(actionsCombo, HttpHost);
         QWidget::setTabOrder(HttpHost, HttpPort);
         QWidget::setTabOrder(HttpPort, useAuth);
         QWidget::setTabOrder(useAuth, username);
         QWidget::setTabOrder(username, password);
         QWidget::setTabOrder(password, useSame);
         QWidget::setTabOrder(useSame, HttpsHost);
-        QWidget::setTabOrder(HttpsHost, HttpsPort);
-        QWidget::setTabOrder(HttpsPort, FtpHost);
-        QWidget::setTabOrder(FtpHost, FtpPort);
-        QWidget::setTabOrder(FtpPort, actionsCombo);
-        QWidget::setTabOrder(actionsCombo, actionCmd);
+        QWidget::setTabOrder(HttpsHost, FtpHost);
+        QWidget::setTabOrder(FtpHost, HttpsPort);
+        QWidget::setTabOrder(HttpsPort, FtpPort);
+        QWidget::setTabOrder(FtpPort, actionCmd);
 
         retranslateUi(ProxyMan);
 
@@ -318,6 +325,7 @@ public:
         checkApt->setText(QApplication::translate("ProxyMan", "Package manager", 0));
         checkNpm->setText(QApplication::translate("ProxyMan", "npm", 0));
         checkDropbox->setText(QApplication::translate("ProxyMan", "Dropbox", 0));
+        checkGit->setText(QApplication::translate("ProxyMan", "git", 0));
         checkSelectAll->setText(QApplication::translate("ProxyMan", "Select All", 0));
         lblFtpPort->setText(QApplication::translate("ProxyMan", "FTP port", 0));
         lblFtpHost->setText(QApplication::translate("ProxyMan", "FTP host", 0));

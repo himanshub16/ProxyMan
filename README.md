@@ -1,6 +1,12 @@
 ## ProxyMan (download [here](https://github.com/himanshub16/ProxyMan/releases/latest/))
 ### Tool to set up and manage proxy settings for Linux (download from [releases](https://github.com/himanshub16/ProxyMan/releases/) )
 
+Usage :
+cd to the folder and enter the following command:
+`
+bash main.sh
+`
+
 The master branch is version2, [v2](https://github.com/himanshub16/ProxyMan/) of ProxyMan.
 For older version, checkout [branch v1](https://github.com/himanshub16/ProxyMan/tree/v1).
 To download older versions, checkout releases tagged v1.* [here](https://github.com/himanshub16/ProxyMan/releases).

@@ -51,7 +51,7 @@ if [ "$1" = "list" ]; then
 	bash "gsettings.sh" "list"
 	bash "npm.sh" "list"
 	bash "dropbox.sh" "list"
-	bahs "git_config.sh" "list"
+	bash "git_config.sh" "list"
 	exit
 fi
 

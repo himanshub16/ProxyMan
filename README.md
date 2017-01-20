@@ -9,8 +9,8 @@
 `
 bash main.sh
 `
-![Screenshot]
-(https://raw.githubusercontent.com/himanshub16/ProxyMan/master/screenshot.png)
+
+![Screenshot](https://raw.githubusercontent.com/himanshub16/ProxyMan/master/screenshot.png)
 
 # FAQ
 * **Why do someone need it?**
@@ -41,4 +41,5 @@ To download older versions, checkout releases tagged v1.* [here](https://github.
 
  
 NOTE : It does not support PAC proxy using "proxy configuration URL". It is for setting up "manual" proxy.
+
 #### A GUI version is under progress. However, it is not ready. If you like to contribute, you can checkout to the [gui branch](https://github.com/himanshub16/ProxyMan/tree/gui) of this project.

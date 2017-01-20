@@ -1,6 +1,6 @@
 ## ProxyMan 
-(Download [here](https://github.com/himanshub16/ProxyMan/releases/latest/))
 #### Configuring proxy made so simple on Linux ([releases](https://github.com/himanshub16/ProxyMan/releases/))
+(Download [here](https://github.com/himanshub16/ProxyMan/releases/latest/))
 
 #### Usage :
 * Download the [zip from here](https://github.com/himanshub16/ProxyMan/releases/latest).
@@ -13,17 +13,21 @@ bash main.sh
 (https://raw.githubusercontent.com/himanshub16/ProxyMan/master/screenshot.png)
 
 # FAQ
-* Why do someone need it?
+* **Why do someone need it?**
+
   Because many times, setting up proxy on Linux sucks (esp. authenticated proxies). There are a lot of locations to configure. This tool reduces your effort by setting the proper configuration at the desired place.
 
-* For which softwares the settings by ProxyMan is effective?
+* **For which softwares the settings by ProxyMan is effective?**
+
   ProxyMan sets proxy for `apt`, `bashrc`, `npm`, `dropbox`, `/etc/environment`.
 
-* There is some application/location it does not support. Any workaround?
+* **There is some application/location it does not support. Any workaround?**
+
   Why not? Everything is possible. Just raise an issue [here](https://github.com/himanshub16/ProxyMan/issues). 
   If you are a developer, then your contributions are welcome.
 
-* My distro works like charm. I don't need it.
+* **My distro works like charm. I don't need it.**
+
   It's great that your distro supports everything. However, many disros do not support authenticated proxy settings. 
   Moreover, there are several apps which don't use system proxy on certain platforms and need their own workaround.
 

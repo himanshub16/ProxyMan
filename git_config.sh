@@ -58,8 +58,10 @@ set_proxy() {
 	if [ "$3" = "y" ]; then
 		newvar="://$var$1:$2"
 		git config --global http.proxy "http$newvar"
+		git config --global https.proxy "https$newvar"
 	elif [ "$3" = "n" ]; then
 		git config --global http.proxy "http://$var$1:$2"
+		git config --global https.proxy "https://$var$1:$2"
 	fi
 }
 

@@ -1,5 +1,5 @@
 ## ProxyMan 
-#### Configuring proxy made so simple on Linux ([releases](https://github.com/himanshub16/ProxyMan/releases/))
+### Configuring proxy made so simple on Linux ([releases](https://github.com/himanshub16/ProxyMan/releases/))
 (Download [here](https://github.com/himanshub16/ProxyMan/releases/latest/))
 
 #### Usage :

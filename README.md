@@ -10,7 +10,7 @@
 bash main.sh
 `
 ![Screenshot]
-(https://raw.githubusercontent.com/himanshub16/ProxyMan/master/icon.png)
+(https://raw.githubusercontent.com/himanshub16/ProxyMan/master/screenshot.png)
 
 # FAQ
 * Why do someone need it?

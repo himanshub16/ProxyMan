@@ -17,10 +17,10 @@ ProxyMan changelog
 ## v2.0 : Version 2 1st Release : October 7, 2016
 ---------------------------------------------------------------
 * Proxyman became modular.
-* Settings are governed by individual scripts rather than the 
-  main file 
-* Bug fixes from version 1 
-* Dropbox proxy support added. 
+* Settings are governed by individual scripts rather than the
+  main file
+* Bug fixes from version 1
+* Dropbox proxy support added.
 * Socks proxy is not configured unless asked by the user explicitly.
 
 ***************************************************************
@@ -35,7 +35,7 @@ ProxyMan changelog
 * Checks added for sudo permissions before performing root ops.
 * If user is already root, there's no need of sudo.
 * tee used to cat to root owned files, as it caused errors. @yasn77
-* check added for gsettings to avoid error messages on systems not 
+* check added for gsettings to avoid error messages on systems not
   using gsettings ( are not gnome based )
 
 ## v1.7 : Seventh release : March 13, 2016

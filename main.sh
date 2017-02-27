@@ -1,42 +1,42 @@
 #!/bin/bash
 #
-# If you have found some issues, or some feature request : 
+# If you have found some issues, or some feature request :
 # Raise them here : https://github.com/himanshub16/ProxyMan/issues
 
-# expected command line arguments 
+# expected command line arguments
 #
 # Created by "Himanshu Shekhar"
 # For ProxyMan "https://github.com/himanshub16/ProxyMan/"
 #
 # convention to be followed across extension made / to be made
-# include this comment section in all plugins to avoid confusions while coding 
+# include this comment section in all plugins to avoid confusions while coding
 #
 # plugin to set "TARGET ENVIRON" proxy settings for ProxyMan
 #
 # The arguments are given in bash syntax to maintain universality and ease
-# across all UNIX systems. 
-# Your language can use it's respective syntax for 
+# across all UNIX systems.
+# Your language can use it's respective syntax for
 # arguments and comments.
 # If you don't need any particular proxy settings, ignore the variables.
 
-# $#  : number of arguments 
-# $1  : http_host 
+# $#  : number of arguments
+# $1  : http_host
 # if this argument is "unset", proxy settings should be unset.
 # if this is "toggle", toggle settings.
 
-# $2  : http_port 
+# $2  : http_port
 # $3  : use_same ; "yes" or "no"
-# $4  : use_auth 
-# $5  : username ; send empty string if not available 
-# $6  : password ; send empty string if not available 
-# 
+# $4  : use_auth
+# $5  : username ; send empty string if not available
+# $6  : password ; send empty string if not available
+#
 # if use same is yes, then no further arguments are considered
-# 
-# $7  : https_host 
-# $8  : https_port 
-# $9  : ftp_host 
-# $10 : ftp_port 
- 
+#
+# $7  : https_host
+# $8  : https_port
+# $9  : ftp_host
+# $10 : ftp_port
+
 # here your code starts
 
 # This is the main script which calls other respective scripts.
@@ -60,7 +60,7 @@ use_auth=""
 echo -e "
 \e[1m\e[33mProxyMan
 =========\e[0m
-Tool to set up system wide proxy settings on Linux. 
+Tool to set up system wide proxy settings on Linux.
 \e[2m\e[33m🌟\e[0m\e[3m Star it \e[0m : \e[4m\e[34m https://github.com/himanshub16/ProxyMan \e[0m
 
  \e[4mThe following options are available : \e[0m
@@ -131,8 +131,8 @@ echo -ne "\e[5m ? \e[0m" ; read -a targets
 
 echo
 
-case $choice in 
-	"set")	
+case $choice in
+	"set")
 		args=("$http_host" "$http_port" "$use_same" "$use_auth" "$username" "$password" "$https_host" "$https_port" "$ftp_host" "$ftp_port" )
 		for i in "${targets[@]}"
 		do
@@ -168,7 +168,7 @@ case $choice in
 		done
 		;;
 
-	"unset") 
+	"unset")
 		for i in "${targets[@]}"
 		do
 			case $i in
@@ -204,7 +204,7 @@ case $choice in
 		;;
 
 	"list")
-		echo -ne "\e[1m \e[31m This will list all your passwords. Continue ? (y/n) \e[0m"; read 
+		echo -ne "\e[1m \e[31m This will list all your passwords. Continue ? (y/n) \e[0m"; read
 		if [[ "$REPLY" = "y" || "$REPLY" = "Y" ]]; then
 			for i in "${targets[@]}"
 			do
@@ -237,11 +237,11 @@ case $choice in
 					*)	;;
 				esac
 			done
-			
+
 		fi
 		;;
 
-	*)	
+	*)
 		;;
 esac
 

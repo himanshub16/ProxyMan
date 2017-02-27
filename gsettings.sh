@@ -1,43 +1,43 @@
 #!/bin/bash
 #
-# If you have found some issues, or some feature request : 
+# If you have found some issues, or some feature request :
 # Raise them here : https://github.com/himanshub16/ProxyMan/issues
 #
-# expected command line arguments 
+# expected command line arguments
 #
-# Created by "Himanshu Shekhar" 
+# Created by "Himanshu Shekhar"
 # For ProxyMan "https://github.com/himanshub16/ProxyMan/"
 #
 # convention to be followed across extension made / to be made
-# include this comment section in all plugins to avoid confusions while coding 
+# include this comment section in all plugins to avoid confusions while coding
 #
 # plugin to set "GNOME Desktop" proxy settings for ProxyMan
 #
 # The arguments are given in bash syntax to maintain universality and ease
-# across all UNIX systems. 
-# Your language can use it's respective syntax for 
+# across all UNIX systems.
+# Your language can use it's respective syntax for
 # arguments and comments.
 # If you don't need any particular proxy settings, ignore the variables.
 
-# $#  : number of arguments 
-# $1  : http_host 
+# $#  : number of arguments
+# $1  : http_host
 # if this is "toggle", toggle settings.
 # if this argument is "unset", proxy settings should be unset.
 
-# $2  : http_port 
+# $2  : http_port
 # $3  : use_same ; "y" or "n"
-# $4  : use_auth 
-# $5  : username ; send empty string if not available 
-# $6  : password ; send empty string if not available 
-# 
+# $4  : use_auth
+# $5  : username ; send empty string if not available
+# $6  : password ; send empty string if not available
+#
 # if use same is yes, then no further arguments are considered
-# 
-# $7  : https_host 
-# $8  : https_port 
-# $9  : ftp_host 
-# $10 : ftp_port 
- 
-# here your code starts 
+#
+# $7  : https_host
+# $8  : https_port
+# $9  : ftp_host
+# $10 : ftp_port
+
+# here your code starts
 
 # privileges has to be set by the process which starts this script
 
@@ -46,20 +46,20 @@
 # Your system settings UI uses gsettings at the backend.
 
 list_proxy() {
-	echo 
+	echo
 	echo -e "\e[1m Desktop proxy settings (GNOME)\e[0m"
 	mode="$(gsettings get org.gnome.system.proxy mode)"
 	if [ "$mode" = "'none'" ]; then
 		echo -e "\e[36m None \e[0m"
 		return
 	fi
-	
+
 	echo -e "\e[36m HTTP  Proxy \e[0m" Host : $(gsettings get org.gnome.system.proxy.http host) Port : $(gsettings get org.gnome.system.proxy.http port)
 	echo -e "\e[36m Auth        \e[0m" User  : $(gsettings get org.gnome.system.proxy.http authentication-user) Password : $(gsettings get org.gnome.system.proxy.http authentication-password)
 	echo -e "\e[36m HTTPS Proxy \e[0m" Host : $(gsettings get org.gnome.system.proxy.https host) Port : $(gsettings get org.gnome.system.proxy.https port)
 	echo -e "\e[36m FTP   Proxy \e[0m" Host : $(gsettings get org.gnome.system.proxy.ftp host) Port : $(gsettings get org.gnome.system.proxy.ftp port)
 	echo -e "\e[36m SOCKS Proxy \e[0m" Host : $(gsettings get org.gnome.system.proxy.socks host) Port : $(gsettings get org.gnome.system.proxy.socks port)
-	
+
 }
 
 toggle_proxy() {
@@ -113,7 +113,7 @@ if [ "$gsettings_available" = "" ]; then
 fi
 
 if [ "$#" = 0 ]; then
-	exit 
+	exit
 fi
 
 if [ "$1" = "unset" ]; then
@@ -130,5 +130,4 @@ fi
 
 
 unset_proxy
-set_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10 
-
+set_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10

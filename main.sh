@@ -217,6 +217,7 @@ case $choice in
 						bash "gsettings.sh" "list"
 						bash "npm.sh" "list"
 						bash "dropbox.sh" "list"
+            bash "git_config.sh" "list"
 						;;
 					2)
 						bash "bash.sh" "list"

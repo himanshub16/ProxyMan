@@ -43,16 +43,16 @@
 # In case of doubts regarding how to use, refer the README.md file.
 clear
 if [ "$1" = "list" ]; then
-	echo "Someone wants to list all"
-	bash "bash.sh" "list"
-	sudo bash "environment.sh" "list"
-	sudo bash "apt.sh" "list"
-	sudo bash "dnf.sh" "list"
-	bash "gsettings.sh" "list"
-	bash "npm.sh" "list"
-	bash "dropbox.sh" "list"
-	bash "git_config.sh" "list"
-	exit
+    echo "Someone wants to list all"
+    bash "bash.sh" "list"
+    sudo bash "environment.sh" "list"
+    sudo bash "apt.sh" "list"
+    sudo bash "dnf.sh" "list"
+    bash "gsettings.sh" "list"
+    bash "npm.sh" "list"
+    bash "dropbox.sh" "list"
+    bash "git_config.sh" "list"
+    exit
 fi
 
 use_same=""
@@ -72,46 +72,49 @@ Tool to set up system wide proxy settings on Linux.
 
 read -p " Enter your choice : " choice
 
+if [[ (! "$choice" = "set") && (! "$choice" = "unset") && (! "$choice" = "list") ]]; then
+    echo "Invalid choice! Start again."
+fi
+
 if [ "$choice" = "set" ]; then
 
-	# default values
-	http_host=""
-	http_port=""
-	use_same="no"
-	https_host=""
-	https_port=""
-	ftp_host=""
-	ftp_port=""
-	username=""
-	password=""
+    # default values
+    http_host=""
+    http_port=""
+    use_same="no"
+    https_host=""
+    https_port=""
+    ftp_host=""
+    ftp_port=""
+    username=""
+    password=""
 
-	echo
-	echo -e " \e[4mEnter details \e[0m : \e[2m\e[3m (leave blank if you don't to use any proxy settings) \e[0m"
-	echo
-	echo -ne "\e[36m HTTP Proxy host \e[0m"; read http_host
-	echo -ne "\e[32m HTTP Proxy port \e[0m"; read http_port
-	echo -ne "\e[0m Use same for HTTPS and FTP (y/n) ? \e[0m"; read use_same
-	echo -ne "\e[0m Use authentication (y/n) ? \e[0m        "; read use_auth
+    echo
+    echo -e " \e[4mEnter details \e[0m : \e[2m\e[3m (leave blank if you don't to use any proxy settings) \e[0m"
+    echo
+    echo -ne "\e[36m HTTP Proxy host \e[0m"; read http_host
+    echo -ne "\e[32m HTTP Proxy port \e[0m"; read http_port
+    echo -ne "\e[0m Use same for HTTPS and FTP (y/n) ? \e[0m"; read use_same
+    echo -ne "\e[0m Use authentication (y/n) ? \e[0m        "; read use_auth
 
-	if [[ "$use_auth" = "y" || "$use_auth" = "Y" ]]; then
-		read -p " Enter username                 : " username
-		echo -n " Enter password (use %40 for @) : " ; read -s password
-	fi
+    if [[ "$use_auth" = "y" || "$use_auth" = "Y" ]]; then
+        read -p " Enter username                 : " username
+        echo -n " Enter password (use %40 for @) : " ; read -s password
+    fi
 
-	if [[ "$use_same" = "y" || "$use_same" = "Y" ]]; then
-		https_host=$http_host
-		ftp_host=$http_host
-		https_port=$http_port
-		ftp_port=$http_port
-		rsync_host=$http_host
-		rsync_port=$https_port
-	else
-		echo -ne "\e[36m HTTPS Proxy host \e[0m " ; read https_host
-		echo -ne "\e[32m HTTPS Proxy port \e[0m " ; read https_port
-		echo -ne "\e[36m FTP   Proxy host \e[0m " ; read ftp_host
-		echo -ne "\e[32m FTP   Proxy port \e[0m " ; read ftp_port
-	fi
-
+    if [[ "$use_same" = "y" || "$use_same" = "Y" ]]; then
+        https_host=$http_host
+        ftp_host=$http_host
+        https_port=$http_port
+        ftp_port=$http_port
+        rsync_host=$http_host
+        rsync_port=$https_port
+    else
+        echo -ne "\e[36m HTTPS Proxy host \e[0m " ; read https_host
+        echo -ne "\e[32m HTTPS Proxy port \e[0m " ; read https_port
+        echo -ne "\e[36m FTP   Proxy host \e[0m " ; read ftp_host
+        echo -ne "\e[32m FTP   Proxy port \e[0m " ; read ftp_port
+    fi
 fi
 
 echo
@@ -132,118 +135,119 @@ echo -ne "\e[5m ? \e[0m" ; read -a targets
 echo
 
 case $choice in
-	"set")
-		args=("$http_host" "$http_port" "$use_same" "$use_auth" "$username" "$password" "$https_host" "$https_port" "$ftp_host" "$ftp_port" )
-		for i in "${targets[@]}"
-		do
-			case $i in
-				1)
-					bash "bash.sh" "${args[@]}"
-					sudo bash "environment.sh" "${args[@]}"
-					sudo bash "apt.sh" "${args[@]}"
-					sudo bash "dnf.sh" "${args[@]}"
-					bash "gsettings.sh" "${args[@]}"
-					bash "npm.sh" "${args[@]}"
-					bash "dropbox.sh" "${args[@]}"
-					bash "git_config.sh" "${args[0]}"
-					;;
-				2)
-					bash "bash.sh" "${args[@]}"
-					;;
-				3)	sudo bash "environment.sh" "${args[@]}"
-					;;
-				4)	sudo bash "apt.sh" "${args[@]}"
-					sudo bash "dnf.sh" "${args[@]}"
-					;;
-				5)	bash "gsettings.sh" "${args[@]}"
-					;;
-				6)	bash "npm.sh" "${args[@]}"
-					;;
-				7)	bash "dropbox.sh" "${args[@]}"
-					;;
-				8)	bash "git_config" "${args[@]}"
-					;;
-				*)	;;
-			esac
-		done
-		;;
+    "set")
+        args=("$http_host" "$http_port" "$use_same" "$use_auth" "$username" "$password" "$https_host" "$https_port" "$ftp_host" "$ftp_port" )
+        for i in "${targets[@]}"
+        do
+            case $i in
+                1)
+                    bash "bash.sh" "${args[@]}"
+                    sudo bash "environment.sh" "${args[@]}"
+                    sudo bash "apt.sh" "${args[@]}"
+                    sudo bash "dnf.sh" "${args[@]}"
+                    bash "gsettings.sh" "${args[@]}"
+                    bash "npm.sh" "${args[@]}"
+                    bash "dropbox.sh" "${args[@]}"
+                    bash "git_config.sh" "${args[0]}"
+                    ;;
+                2)
+                    bash "bash.sh" "${args[@]}"
+                    ;;
+                3)	sudo bash "environment.sh" "${args[@]}"
+                    ;;
+                4)	sudo bash "apt.sh" "${args[@]}"
+                    sudo bash "dnf.sh" "${args[@]}"
+                    ;;
+                5)	bash "gsettings.sh" "${args[@]}"
+                    ;;
+                6)	bash "npm.sh" "${args[@]}"
+                    ;;
+                7)	bash "dropbox.sh" "${args[@]}"
+                    ;;
+                8)	bash "git_config" "${args[@]}"
+                    ;;
+                *)	;;
+            esac
+        done
+        ;;
 
-	"unset")
-		for i in "${targets[@]}"
-		do
-			case $i in
-				1)	echo "Someone wants to unset all"
-					bash "bash.sh" "unset"
-					sudo bash "environment.sh" "unset"
-					sudo bash "apt.sh" "unset"
-					sudo bash "dnf.sh" "unset"
-					bash "gsettings.sh" "unset"
-					bash "npm.sh" "unset"
-					bash "dropbox.sh" "unset"
-					bash "git_config.sh" "unset"
-					;;
-				2)
-					bash "bash.sh" "unset"
-					;;
-				3)	sudo bash "environment.sh" "unset"
-					;;
-				4)	sudo bash "apt.sh" "unset"
-					sudo bash "dnf.sh" "unset"
-					;;
-				5)	bash "gsettings.sh" "unset"
-					;;
-				6)	bash "npm.sh" "unset"
-					;;
-				7)	bash "dropbox.sh" "unset"
-					;;
-				8) 	bash "git_config.sh" "unset"
-					;;
-				*)	;;
-			esac
-		done
-		;;
+    "unset")
+        for i in "${targets[@]}"
+        do
+            case $i in
+                1)	echo "Someone wants to unset all"
+                    bash "bash.sh" "unset"
+                    sudo bash "environment.sh" "unset"
+                    sudo bash "apt.sh" "unset"
+                    sudo bash "dnf.sh" "unset"
+                    bash "gsettings.sh" "unset"
+                    bash "npm.sh" "unset"
+                    bash "dropbox.sh" "unset"
+                    bash "git_config.sh" "unset"
+                    ;;
+                2)
+                    bash "bash.sh" "unset"
+                    ;;
+                3)	sudo bash "environment.sh" "unset"
+                    ;;
+                4)	sudo bash "apt.sh" "unset"
+                    sudo bash "dnf.sh" "unset"
+                    ;;
+                5)	bash "gsettings.sh" "unset"
+                    ;;
+                6)	bash "npm.sh" "unset"
+                    ;;
+                7)	bash "dropbox.sh" "unset"
+                    ;;
+                8) 	bash "git_config.sh" "unset"
+                    ;;
+                *)	;;
+            esac
+        done
+        ;;
 
-	"list")
-		echo -ne "\e[1m \e[31m This will list all your passwords. Continue ? (y/n) \e[0m"; read
-		if [[ "$REPLY" = "y" || "$REPLY" = "Y" ]]; then
-			for i in "${targets[@]}"
-			do
-				case $i in
-					1)	echo "Someone wants to list all"
-						bash "bash.sh" "list"
-						sudo bash "environment.sh" "list"
-						sudo bash "apt.sh" "list"
-						sudo bash "dnf.sh" "list"
-						bash "gsettings.sh" "list"
-						bash "npm.sh" "list"
-						bash "dropbox.sh" "list"
-            bash "git_config.sh" "list"
-						;;
-					2)
-						bash "bash.sh" "list"
-						;;
-					3)	sudo bash "environment.sh" "list"
-						;;
-					4)	sudo bash "apt.sh" "list"
-						sudo bash "dnf.sh" "list"
-						;;
-					5)	bash "gsettings.sh" "list"
-						;;
-					6)	bash "npm.sh" "list"
-						;;
-					7) 	bash "dropbox.sh" "list"
-						;;
-					8) 	bash "git_config.sh" "list"
-						;;
-					*)	;;
-				esac
-			done
+    "list")
+        echo -ne "\e[1m \e[31m This will list all your passwords. Continue ? (y/n) \e[0m"; read
+        if [[ "$REPLY" = "y" || "$REPLY" = "Y" ]]; then
+            for i in "${targets[@]}"
+            do
+                case $i in
+                    1)	echo "Someone wants to list all"
+                        bash "bash.sh" "list"
+						            sudo bash "environment.sh" "list"
+						            sudo bash "apt.sh" "list"
+						            sudo bash "dnf.sh" "list"
+						            bash "gsettings.sh" "list"
+						            bash "npm.sh" "list"
+						            bash "dropbox.sh" "list"
+                        bash "git_config.sh" "list"
+						            ;;
+					          2)
+						            bash "bash.sh" "list"
+						            ;;
+					          3)	sudo bash "environment.sh" "list"
+						            ;;
+					          4)	sudo bash "apt.sh" "list"
+						            sudo bash "dnf.sh" "list"
+						            ;;
+					          5)	bash "gsettings.sh" "list"
+						            ;;
+					          6)	bash "npm.sh" "list"
+						            ;;
+					          7) 	bash "dropbox.sh" "list"
+						            ;;
+					          8) 	bash "git_config.sh" "list"
+						            ;;
+					          *)	;;
+				        esac
+			      done
 
-		fi
-		;;
+		    fi
+		    ;;
 
-	*)
-		;;
+	  *)
+        echo "Invalid choice. Start again!"
+		    ;;
 esac
 
 echo

@@ -40,6 +40,12 @@
 
 # privileges has to be set by the process which starts this script
 
+fix_new_line() {
+    if [[ $(tail -c 1 "$1" | wc --lines ) = 0 ]]; then
+        echo >> "$1"
+    fi
+}
+
 list_proxy() {
 	# inefficient way as the file is read twice.. think of some better way
 	echo
@@ -75,6 +81,8 @@ set_proxy() {
 		echo "Acquire::Http::Proxy \"http$newvar\";" >> apt_config.tmp
 		echo "Acquire::Https::Proxy \"https$newvar\";" >> apt_config.tmp
 		echo "Acquire::Ftp::Proxy \"ftp$newvar\";" >> apt_config.tmp
+
+    fix_new_line "/etc/apt/apt.conf"
 		cat apt_config.tmp | tee -a /etc/apt/apt.conf > /dev/null
 		rm apt_config.tmp
 		return

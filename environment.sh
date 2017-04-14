@@ -51,6 +51,12 @@
 # 	fi
 # }
 
+fix_new_line() {
+    if [[ $(tail -c 1 "$1" | wc --lines ) = 0 ]]; then
+        echo >> "$1"
+    fi
+}
+
 list_proxy() {
 	echo
 	echo -e "\e[1m Environment proxy settings \e[0m"
@@ -95,6 +101,7 @@ set_proxy() {
 		echo "https_proxy=\"https://$var$7:$8\"" >> bash_config.tmp
 		echo "ftp_proxy=\"ftp://$var$9:$10\"" >> bash_config.tmp
 
+    fix_new_line "/etc/environment"
 		cat bash_config.tmp | tee -a /etc/environment > /dev/null
 		rm bash_config.tmp
 		return

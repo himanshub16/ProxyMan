@@ -40,6 +40,12 @@
 
 # privileges has to be set by the process which starts this script
 
+fix_new_line() {
+    if [[ $(tail -c 1 "$1" | wc --lines ) = 0 ]]; then
+        echo >> "$1"
+    fi
+}
+
 list_proxy() {
 	echo
 	echo -e "\e[1m DNF proxy settings (raw) \e[0m"
@@ -72,6 +78,8 @@ set_proxy() {
 		echo "proxy_username=$5" >> dnf_config.tmp
 		echo "proxy_password=$6" >> dnf_config.tmp
 	fi
+
+  fix_new_line "/etc/dnf/dnf.conf"
 	cat dnf_config.tmp | tee -a /etc/dnf/dnf.conf > /dev/null
 	rm dnf_config.tmp
 	return

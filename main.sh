@@ -51,7 +51,7 @@ if [ "$1" = "list" ]; then
     bash "gsettings.sh" "list"
     bash "npm.sh" "list"
     bash "dropbox.sh" "list"
-    bash "git_config.sh" "list"
+    bash "git.sh" "list"
     exit
 fi
 
@@ -148,7 +148,7 @@ case $choice in
                     bash "gsettings.sh" "${args[@]}"
                     bash "npm.sh" "${args[@]}"
                     bash "dropbox.sh" "${args[@]}"
-                    bash "git_config.sh" "${args[0]}"
+                    bash "git.sh" "${args[0]}"
                     ;;
                 2)
                     bash "bash.sh" "${args[@]}"
@@ -164,7 +164,7 @@ case $choice in
                     ;;
                 7)	bash "dropbox.sh" "${args[@]}"
                     ;;
-                8)	bash "git_config" "${args[@]}"
+                8)	bash "git" "${args[@]}"
                     ;;
                 *)	;;
             esac
@@ -183,7 +183,7 @@ case $choice in
                     bash "gsettings.sh" "unset"
                     bash "npm.sh" "unset"
                     bash "dropbox.sh" "unset"
-                    bash "git_config.sh" "unset"
+                    bash "git.sh" "unset"
                     ;;
                 2)
                     bash "bash.sh" "unset"
@@ -199,7 +199,7 @@ case $choice in
                     ;;
                 7)	bash "dropbox.sh" "unset"
                     ;;
-                8) 	bash "git_config.sh" "unset"
+                8) 	bash "git.sh" "unset"
                     ;;
                 *)	;;
             esac
@@ -220,7 +220,7 @@ case $choice in
 						            bash "gsettings.sh" "list"
 						            bash "npm.sh" "list"
 						            bash "dropbox.sh" "list"
-                        bash "git_config.sh" "list"
+                        bash "git.sh" "list"
 						            ;;
 					          2)
 						            bash "bash.sh" "list"
@@ -236,7 +236,7 @@ case $choice in
 						            ;;
 					          7) 	bash "dropbox.sh" "list"
 						            ;;
-					          8) 	bash "git_config.sh" "list"
+					          8) 	bash "git.sh" "list"
 						            ;;
 					          *)	;;
 				        esac

@@ -21,7 +21,7 @@ bash main.sh
 
 * **For which softwares the settings by ProxyMan is effective?**
 
-  ProxyMan sets proxy for `apt`, `bashrc`, `npm`, `dropbox`, `/etc/environment`.
+  ProxyMan sets proxy for `apt`, `dnf`, `bashrc`, `npm`, `git`, `dropbox`, `/etc/environment`, `gsettings`. 
 
 * **There is some application/location it does not support. Any workaround?**
 

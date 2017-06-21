@@ -54,7 +54,6 @@ list_proxy() {
 	if [ "$lines" -gt 0 ]; then
 		cat /etc/apt/apt.conf | grep proxy -i | sed -e "s/Acquire//g" -e "s/\:\:/\ /g" -e "s/\;//g"
 	else
-		echo -e "\e[36m None \e[0m"
 	fi
 }
 

@@ -59,9 +59,9 @@ fix_new_line() {
 list_proxy() {
 	echo
 	echo -e "\e[1m Bash proxy settings \e[0m"
-	lines="$(cat $HOME/.bashrc | grep proxy | wc -l)"
+	lines="$(cat $HOME/.bashrc | grep proxy -i | wc -l)"
 	if [ "$lines" -gt 0 ]; then
-		cat $HOME/.bashrc | grep proxy | sed "s/\=/\ /g"
+		cat $HOME/.bashrc | grep proxy -i | sed "s/\=/\ /g"
 	else
 		echo -e "\e[36m None \e[0m"
 	fi

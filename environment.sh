@@ -60,9 +60,9 @@ fix_new_line() {
 list_proxy() {
 	echo
 	echo -e "\e[1m Environment proxy settings \e[0m"
-	lines="$(cat /etc/environment | grep proxy | wc -l)"
+	lines="$(cat /etc/environment | grep proxy -i | wc -l)"
 	if [ "$lines" -gt 0 ]; then
-		cat "/etc/environment" | grep proxy | sed "s/\=/\ /g"
+		cat "/etc/environment" | grep proxy -i | sed "s/\=/\ /g"
 	else
 		echo -e "\e[36m None \e[0m"
 	fi

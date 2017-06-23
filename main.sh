@@ -148,7 +148,7 @@ case $choice in
                     bash "gsettings.sh" "${args[@]}"
                     bash "npm.sh" "${args[@]}"
                     bash "dropbox.sh" "${args[@]}"
-                    bash "git.sh" "${args[0]}"
+                    bash "git.sh" "${args[@]}"
                     ;;
                 2)
                     bash "bash.sh" "${args[@]}"

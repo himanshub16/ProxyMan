@@ -59,9 +59,9 @@ fix_new_line() {
 list_proxy() {
 	echo
 	echo -e "\e[1m Bash proxy settings \e[0m"
-	lines="$(cat $HOME/.bashrc | grep proxy | wc -l)"
+	lines="$(cat $HOME/.bashrc | grep proxy -i | wc -l)"
 	if [ "$lines" -gt 0 ]; then
-		cat $HOME/.bashrc | grep proxy | sed "s/\=/\ /g"
+		cat $HOME/.bashrc | grep proxy -i | sed "s/\=/\ /g"
 	else
 		echo -e "\e[36m None \e[0m"
 	fi
@@ -72,6 +72,7 @@ unset_proxy() {
 		return
 	fi
 	sed -i "/proxy\=/d" $HOME/.bashrc
+	sed -i "/PROXY\=/d" $HOME/.bashrc
 }
 
 set_proxy() {
@@ -90,6 +91,9 @@ set_proxy() {
 		echo "http_proxy=\"http$newvar\"" >> bash_config.tmp
 		echo "https_proxy=\"https$newvar\"" >> bash_config.tmp
 		echo "ftp_proxy=\"ftp$newvar\"" >> bash_config.tmp
+		echo "HTTP_PROXY=\"http$newvar\"" >> bash_config.tmp
+		echo "HTTPS_PROXY=\"https$newvar\"" >> bash_config.tmp
+		echo "FTP_PROXY=\"ftp$newvar\"" >> bash_config.tmp
 
     fix_new_line $HOME/.bashrc
 		cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
@@ -100,6 +104,9 @@ set_proxy() {
 		echo "http_proxy=\"http://$var$1:$2\"" >> bash_config.tmp
 		echo "https_proxy=\"https://$var$7:$8\"" >> bash_config.tmp
 		echo "ftp_proxy=\"ftp://$var$9:$10\"" >> bash_config.tmp
+		echo "HTTP_PROXY=\"http://$var$1:$2\"" >> bash_config.tmp
+		echo "HTTPS_PROXY=\"https://$var$7:$8\"" >> bash_config.tmp
+		echo "FTP_PROXY=\"ftp://$var$9:$10\"" >> bash_config.tmp
 
 		cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
 		rm bash_config.tmp

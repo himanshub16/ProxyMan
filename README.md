@@ -1,4 +1,4 @@
-## ProxyMan 
+## ProxyMan [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/proxyman-linux/Lobby)
 
 ### Configuring proxy made so simple on Linux ([releases](https://github.com/himanshub16/ProxyMan/releases/))
 

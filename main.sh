@@ -55,65 +55,76 @@ if [ "$1" = "list" ]; then
     exit
 fi
 
-use_same=""
-use_auth=""
-echo -e "
+http_host=""
+http_port=""
+use_same="n"
+https_host=""
+https_port=""
+ftp_host=""
+ftp_port=""
+use_auth="n"
+username=""
+password=""
+save_for_reuse=""
+profile_name=""
+
+if [ "$1" == "load" ]; then
+    choice="set"
+
+else
+    echo -e "
 \e[1m\e[33mProxyMan
 =========\e[0m
 Tool to set up system wide proxy settings on Linux.
 \e[2m\e[33m🌟\e[0m\e[3m Star it \e[0m : \e[4m\e[34m https://github.com/himanshub16/ProxyMan \e[0m
 
- \e[4mThe following options are available : \e[0m
+\e[4mThe following options are available : \e[0m
 \e[1m set \e[0m    : \e[2m Set proxy settings \e[0m
 \e[1m unset \e[0m  : \e[2m Unset proxy settings \e[0m
 \e[1m list \e[0m   : \e[2m List current settings \e[0m
-
+\e[1m load \e[0m   : \e[2m Load previously saved settings \e[0m
 "
 
-read -p " Enter your choice : " choice
+    read -p " Enter your choice : " choice
 
-if [[ (! "$choice" = "set") && (! "$choice" = "unset") && (! "$choice" = "list") ]]; then
-    echo "Invalid choice! Start again."
-fi
-
-if [ "$choice" = "set" ]; then
-
-    # default values
-    http_host=""
-    http_port=""
-    use_same="no"
-    https_host=""
-    https_port=""
-    ftp_host=""
-    ftp_port=""
-    username=""
-    password=""
-
-    echo
-    echo -e " \e[4mEnter details \e[0m : \e[2m\e[3m (leave blank if you don't to use any proxy settings) \e[0m"
-    echo
-    echo -ne "\e[36m HTTP Proxy host \e[0m"; read http_host
-    echo -ne "\e[32m HTTP Proxy port \e[0m"; read http_port
-    echo -ne "\e[0m Use same for HTTPS and FTP (y/n) ? \e[0m"; read use_same
-    echo -ne "\e[0m Use authentication (y/n) ? \e[0m        "; read use_auth
-
-    if [[ "$use_auth" = "y" || "$use_auth" = "Y" ]]; then
-        read -p " Enter username                 : " username
-        echo -n " Enter password (use %40 for @) : " ; read -s password
+    if [[ (! "$choice" = "set") && (! "$choice" = "unset") && (! "$choice" = "list") && (! "$choice" = "load") ]]; then
+        echo "Invalid choice! Will exit."
+        exit
     fi
 
-    if [[ "$use_same" = "y" || "$use_same" = "Y" ]]; then
-        https_host=$http_host
-        ftp_host=$http_host
-        https_port=$http_port
-        ftp_port=$http_port
-        rsync_host=$http_host
-        rsync_port=$https_port
-    else
-        echo -ne "\e[36m HTTPS Proxy host \e[0m " ; read https_host
-        echo -ne "\e[32m HTTPS Proxy port \e[0m " ; read https_port
-        echo -ne "\e[36m FTP   Proxy host \e[0m " ; read ftp_host
-        echo -ne "\e[32m FTP   Proxy port \e[0m " ; read ftp_port
+    if [ "$choice" = "set" ]; then
+
+        echo
+        echo -e " \e[4mEnter details \e[0m : \e[2m\e[3m (leave blank if you don't to use any proxy settings) \e[0m"
+        echo
+        echo -ne "\e[36m HTTP Proxy host \e[0m"; read http_host
+        echo -ne "\e[32m HTTP Proxy port \e[0m"; read http_port
+        echo -ne "\e[0m Use same for HTTPS and FTP (y/n)  ? \e[0m"; read use_same
+        echo -ne "\e[0m Use authentication (y/n)  ? \e[0m        "; read use_auth
+        echo -ne "\e[0m Save settings for later use (y/n) ? \e[0m"; read save_for_reuse
+
+        if [[ "$use_auth" = "y" || "$use_auth" = "Y" ]]; then
+            read -p " Enter username                 : " username
+            echo -n " Enter password (use %40 for @) : " ; read -s password
+        fi
+
+        if [[ "$save_for_reuse" = "y" || "$save_for_reuse" = "Y" ]]; then
+            read -p " Enter config name                 : " profile_name
+        fi
+
+        if [[ "$use_same" = "y" || "$use_same" = "Y" ]]; then
+            https_host=$http_host
+            ftp_host=$http_host
+            https_port=$http_port
+            ftp_port=$http_port
+            rsync_host=$http_host
+            rsync_port=$https_port
+        else
+            echo -ne "\e[36m HTTPS Proxy host \e[0m " ; read https_host
+            echo -ne "\e[32m HTTPS Proxy port \e[0m " ; read https_port
+            echo -ne "\e[36m FTP   Proxy host \e[0m " ; read ftp_host
+            echo -ne "\e[32m FTP   Proxy port \e[0m " ; read ftp_port
+        fi
     fi
 fi
 
@@ -132,11 +143,55 @@ echo
 echo -e " Enter your choices (\e[3m\e[2m separate multiple choices by a space \e[0m ) "
 echo -ne "\e[5m ? \e[0m" ; read -a targets
 
-echo
+echo 
 
 case $choice in
-    "set")
+    "set"|"load")
+
+        if [[ "$1" != "load"  && ( "$save_for_reuse" = "y" || "$save_for_reuse" = "Y" ) ]]; then
+            config_file="http_host=$http_host%s\nhttp_port=$http_port%s\nuse_same=$use_same\nuse_auth=$use_auth\nusername=$username\npassword=$password\nhttps_host=$https_host\nhttps_port=$https_host\nftp_host=$ftp_host\nftp_host=$ftp_host"
+            printf $config_file > "profiles/$profile_name".txt
+        fi
+
+        if [[ $choice == "load" || $1 == "load" ]]; then
+            
+            if [[ $choice == "load" ]]; then
+                echo -ne "\e[36m Config Name \e[0m " ; read config_name
+            fi 
+
+            if [ "$1" = "load" ]; then
+
+                if [ "$2" = "" ]; then
+                    echo -ne "\e[1m \e[31mPlease provide a config! \e[0m"
+                    echo
+                    exit 
+                fi
+
+                config_name=$2
+            fi
+    
+            if [ ! -e profiles/"$config_name".txt ]; then
+                echo -ne "\e[1m \e[31mFile does not exist! \e[0m"
+                echo
+                exit
+            fi
+
+            http_host=`grep http_host -i profiles/$config_name.txt  | cut -d= -f2`
+            http_port=`grep http_port -i profiles/$config_name.txt  | cut -d= -f2`
+            use_same=`grep use_same -i profiles/$config_name.txt  | cut -d= -f2`
+            use_auth=`grep use_auth -i profiles/$config_name.txt  | cut -d= -f2`
+            username=`grep username -i profiles/$config_name.txt  | cut -d= -f2`
+            password=`grep password -i profiles/$config_name.txt  | cut -d= -f2`
+            https_host=`grep https_host -i profiles/$config_name.txt  | cut -d= -f2`
+            https_port=`grep https_port -i profiles/$config_name.txt  | cut -d= -f2`
+            ftp_host=`grep ftp_host -i profiles/$config_name.txt  | cut -d= -f2`
+            ftp_port=`grep ftp_port -i profiles/$config_name.txt  | cut -d= -f2`
+
+            echo -e " Config \033[0;36m$config_name\033[0m successfully loaded"
+        fi
+
         args=("$http_host" "$http_port" "$use_same" "$use_auth" "$username" "$password" "$https_host" "$https_port" "$ftp_host" "$ftp_port" )
+
         for i in "${targets[@]}"
         do
             case $i in
@@ -246,7 +301,8 @@ case $choice in
 		    ;;
 
 	  *)
-        echo "Invalid choice. Start again!"
+        echo "Invalid choice! Will exit now"
+        exit
 		    ;;
 esac
 

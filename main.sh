@@ -101,12 +101,13 @@ Tool to set up system wide proxy settings on Linux.
         echo -ne "\e[32m HTTP Proxy port \e[0m"; read http_port
         echo -ne "\e[0m Use same for HTTPS and FTP (y/n)  ? \e[0m"; read use_same
         echo -ne "\e[0m Use authentication (y/n)  ? \e[0m        "; read use_auth
-        echo -ne "\e[0m Save settings for later use (y/n) ? \e[0m"; read save_for_reuse
 
         if [[ "$use_auth" = "y" || "$use_auth" = "Y" ]]; then
             read -p " Enter username                 : " username
             echo -n " Enter password (use %40 for @) : " ; read -s password
         fi
+
+        echo -ne "\e[0m Save settings for later use (y/n) ? \e[0m"; read save_for_reuse
 
         if [[ "$save_for_reuse" = "y" || "$save_for_reuse" = "Y" ]]; then
             read -p " Enter config name                 : " profile_name
@@ -149,7 +150,7 @@ case $choice in
     "set"|"load")
 
         if [[ "$1" != "load"  && ( "$save_for_reuse" = "y" || "$save_for_reuse" = "Y" ) ]]; then
-            config_file="http_host=$http_host%s\nhttp_port=$http_port%s\nuse_same=$use_same\nuse_auth=$use_auth\nusername=$username\npassword=$password\nhttps_host=$https_host\nhttps_port=$https_host\nftp_host=$ftp_host\nftp_host=$ftp_host"
+            config_file="http_host=$http_host%s\nhttp_port=$http_port%s\nuse_same=$use_same\nuse_auth=$use_auth\nusername=$username\npassword=$password\nhttps_host=$https_host\nhttps_port=$https_port\nftp_host=$ftp_host\nftp_port=$ftp_port"
             printf $config_file > "profiles/$profile_name".txt
         fi
 

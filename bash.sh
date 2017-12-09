@@ -87,13 +87,19 @@ set_proxy() {
 
 	echo -n "" > bash_config.tmp
 	if [ "$3" = "y" ]; then
-		newvar="://$var$1:$2"
-		echo "http_proxy=\"http$newvar\"" >> bash_config.tmp
-		echo "https_proxy=\"https$newvar\"" >> bash_config.tmp
-		echo "ftp_proxy=\"ftp$newvar\"" >> bash_config.tmp
-		echo "HTTP_PROXY=\"http$newvar\"" >> bash_config.tmp
-		echo "HTTPS_PROXY=\"https$newvar\"" >> bash_config.tmp
-		echo "FTP_PROXY=\"ftp$newvar\"" >> bash_config.tmp
+		newvar="http://$var$1:$2"
+		echo "export http_proxy=\"$newvar\"" >> bash_config.tmp
+		echo "export https_proxy=\"$newvar\"" >> bash_config.tmp
+		echo "export ftp_proxy=\"$newvar\"" >> bash_config.tmp
+		echo "export rsync_proxy=\"$newvar\"" >> bash_config.tmp
+		echo "export all_proxy=\"$newvar\"" >> bash_config.tmp
+		echo "export HTTP_PROXY=\"$newvar\"" >> bash_config.tmp
+		echo "export HTTPS_PROXY=\"$newvar\"" >> bash_config.tmp
+		echo "export FTP_PROXY=\"$newvar\"" >> bash_config.tmp
+		echo "export RSYNC_PROXY=\"$newvar\"" >> bash_config.tmp
+		echo "export ALL_PROXY=\"$newvar\"" >> bash_config.tmp
+
+		
 
     fix_new_line $HOME/.bashrc
 		cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
@@ -101,12 +107,14 @@ set_proxy() {
 		return
 
 	elif [ "$3" = "n" ]; then
-		echo "http_proxy=\"http://$var$1:$2\"" >> bash_config.tmp
-		echo "https_proxy=\"https://$var$7:$8\"" >> bash_config.tmp
-		echo "ftp_proxy=\"ftp://$var$9:$10\"" >> bash_config.tmp
-		echo "HTTP_PROXY=\"http://$var$1:$2\"" >> bash_config.tmp
-		echo "HTTPS_PROXY=\"https://$var$7:$8\"" >> bash_config.tmp
-		echo "FTP_PROXY=\"ftp://$var$9:$10\"" >> bash_config.tmp
+		echo "export http_proxy=\"http://$var$1:$2\"" >> bash_config.tmp
+		echo "export https_proxy=\"https://$var$7:$8\"" >> bash_config.tmp
+		echo "export ftp_proxy=\"ftp://$var$9:$10\"" >> bash_config.tmp
+		echo "export rsync_proxy=\"rsync://$var$11:$12\"" >> bash_config.tmp
+		echo "export HTTP_PROXY=\"http://$var$1:$2\"" >> bash_config.tmp
+		echo "export HTTPS_PROXY=\"https://$var$7:$8\"" >> bash_config.tmp
+		echo "export FTP_PROXY=\"ftp://$var$9:$10\"" >> bash_config.tmp
+		echo "export RSYNC_PROXY=\"rsync://$var$11:$12\"" >> bash_config.tmp
 
 		cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
 		rm bash_config.tmp
@@ -121,7 +129,10 @@ fi
 if [ "$1" = "unset" ]; then
 	# that's what is needed
 	unset_proxy
-	source "$HOME/.bashrc"
+# doesn't need source here, actually soure effect nothing.
+#	source "$HOME/.bashrc"
+# sadly, unset doesn't take effect on current shell too. Just don't know why.
+unset -v http_proxy https_proxy ftp_proxy rsync_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY RSYNC_PROXY ALL_PROXY
 	exit
 # elif [ "$1" = "toggle" ]; then
 # 	toggle_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11 $12
@@ -133,5 +144,8 @@ fi
 
 
 unset_proxy
-set_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10
-source "$HOME/.bashrc"
+unset -v http_proxy https_proxy ftp_proxy rsync_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY RSYNC_PROXY ALL_PROXY
+set_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11 $12
+# actually, source won't take effect on current shell. still must open another shell to let work.
+#source "$HOME/.bashrc"
+

@@ -79,7 +79,7 @@ set_proxy() {
 	if [ "$3" = "y" ]; then
 		newvar="://$var$1:$2"
 		echo "Acquire::Http::Proxy \"http$newvar\";" >> apt_config.tmp
-		echo "Acquire::Https::Proxy \"https$newvar\";" >> apt_config.tmp
+		echo "Acquire::Https::Proxy \"http$newvar\";" >> apt_config.tmp
 		echo "Acquire::Ftp::Proxy \"ftp$newvar\";" >> apt_config.tmp
 
     fix_new_line "/etc/apt/apt.conf"
@@ -89,7 +89,7 @@ set_proxy() {
 
 	elif [ "$3" = "n" ]; then
 		echo "Acquire::Http::Proxy \"http://$var$1:$2\";" >> apt_config.tmp
-		echo "Acquire::Https::Proxy \"https://$var$7:$8\";" >> apt_config.tmp
+		echo "Acquire::Https::Proxy \"http://$var$7:$8\";" >> apt_config.tmp
 		echo "Acquire::Ftp::Proxy \"ftp://$var$9:$10\";" >> apt_config.tmp
 
 		cat apt_config.tmp | tee -a /etc/apt/apt.conf > /dev/null

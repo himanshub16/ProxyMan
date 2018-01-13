@@ -68,6 +68,13 @@ password=""
 save_for_reuse=""
 profile_name=""
 
+
+if [[ "$1" == "load" && "$2" == "" ]]; then
+    echo -ne "\e[1m \e[31mPlease provide a config! \e[0m"
+    echo
+    exit
+fi 
+
 if [ "$1" == "load" ]; then
     choice="set"
 
@@ -128,12 +135,6 @@ Tool to set up system wide proxy settings on Linux.
         fi
     fi
 fi
-
-if [[ "$1" == "load" && "$2" == "" ]]; then
-    echo -ne "\e[1m \e[31mPlease provide a config! \e[0m"
-    echo
-    exit
-fi 
 
 echo
 echo -e " \e[0m\e[4m\e[33mEnter targets where you want to modify settings : \e[0m"

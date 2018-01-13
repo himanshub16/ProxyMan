@@ -53,16 +53,17 @@ unset_proxy() {
 }
 
 set_proxy() {
+	# notice http (without `s`) in `https`, issue #41
 	if [ "$4" = "y" ]; then
 		var="$5:$6@"
 	fi
 	if [ "$3" = "y" ]; then
 		newvar="://$var$1:$2"
 		npm config set proxy "http$newvar"
-		npm config set https-proxy "https$newvar"
+		npm config set https-proxy "http$newvar"
 	elif [ "$3" = "n" ]; then
 		npm config set proxy "http://$var$1:$2"
-		npm config set https-proxy "https://$var$7:$8"
+		npm config set https-proxy "http://$var$7:$8"
 	fi
 }
 

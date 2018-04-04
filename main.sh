@@ -73,7 +73,7 @@ if [[ "$1" == "load" && "$2" == "" ]]; then
     echo -ne "\e[1m \e[31mPlease provide a config! \e[0m"
     echo
     exit
-fi 
+fi
 
 if [ "$1" == "load" ]; then
     choice="set"
@@ -151,7 +151,7 @@ echo
 echo -e " Enter your choices (\e[3m\e[2m separate multiple choices by a space \e[0m ) "
 echo -ne "\e[5m ? \e[0m" ; read -a targets
 
-echo 
+echo
 
 case $choice in
     "set"|"load")
@@ -162,22 +162,22 @@ case $choice in
         fi
 
         if [[ $choice == "load" || $1 == "load" ]]; then
-            
+
             if [[ $choice == "load" ]]; then
                 echo -ne "\e[36m Config Name \e[0m " ; read config_name
-            fi 
+            fi
 
             if [ "$1" = "load" ]; then
 
                 if [ "$2" = "" ]; then
                     echo -ne "\e[1m \e[31mPlease provide a config! \e[0m"
                     echo
-                    exit 
+                    exit
                 fi
 
                 config_name=$2
             fi
-    
+
             if [ ! -e profiles/"$config_name".txt ]; then
                 echo -ne "\e[1m \e[31mFile does not exist! \e[0m"
                 echo

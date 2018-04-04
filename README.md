@@ -17,4 +17,4 @@ Most of the tools/targets which proxyman sets proxy for work well with `http_pro
 
 Also, there can be a use-case where the user wants granular control like different proxy for different application. However, such use-case is very small.
 
-Open for discussions at #49 .
+Open for discussions at [#49](https://github.com/himanshub16/ProxyMan/issues/49) .

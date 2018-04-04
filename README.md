@@ -8,9 +8,18 @@
 * Download the [zip from here](https://github.com/himanshub16/ProxyMan/releases/latest).
 * Extract the zip, open the folder in terminal.
 * Enter the following command
-`
-bash main.sh
-`
+
+```bash
+./main.sh
+```
+
+#### Save and load configs for later use
+* Save your config to avoid entering values.
+* Load those configs to save time
+
+```bash
+./main.sh load home
+```
 
 ![Screenshot](https://raw.githubusercontent.com/himanshub16/ProxyMan/master/screenshot.png)
 

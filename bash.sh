@@ -37,6 +37,10 @@
 # $8  : https_port
 # $9  : ftp_host
 # $10 : ftp_port
+#
+# but if only one argument follows
+#
+# $11 : no_proxy ; send empty string if not available
 
 # here your code starts
 
@@ -85,6 +89,13 @@ set_proxy() {
 		var="$5:$6@"
 	fi
 
+	exc=
+	if [ "$#" -eq 8 ]; then
+		exc="$7"
+	elif [ "$#" -eq 12 ]; then
+		exc="$11"
+	fi
+
 	echo -n "" > bash_config.tmp
 	if [ "$3" = "y" ]; then
 		newvar="://$var$1:$2"
@@ -94,6 +105,11 @@ set_proxy() {
 		echo "HTTP_PROXY=\"http$newvar\"" >> bash_config.tmp
 		echo "HTTPS_PROXY=\"https$newvar\"" >> bash_config.tmp
 		echo "FTP_PROXY=\"ftp$newvar\"" >> bash_config.tmp
+
+		if [ -n "$exc" ]; then
+			echo "no_proxy=\"$exc\"" >> bash_config.tmp
+			echo "NO_PROXY=\"$exc\"" >> bash_config.tmp
+		fi
 
     fix_new_line $HOME/.bashrc
 		cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
@@ -107,6 +123,11 @@ set_proxy() {
 		echo "HTTP_PROXY=\"http://$var$1:$2\"" >> bash_config.tmp
 		echo "HTTPS_PROXY=\"https://$var$7:$8\"" >> bash_config.tmp
 		echo "FTP_PROXY=\"ftp://$var$9:$10\"" >> bash_config.tmp
+
+		if [ -n "$exc" ]; then
+			echo "no_proxy=\"$exc\"" >> bash_config.tmp
+			echo "NO_PROXY=\"$exc\"" >> bash_config.tmp
+		fi
 
 		cat bash_config.tmp | tee -a $HOME/.bashrc > /dev/null
 		rm bash_config.tmp
@@ -133,5 +154,5 @@ fi
 
 
 unset_proxy
-set_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10
+set_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11
 source "$HOME/.bashrc"

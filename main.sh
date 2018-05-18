@@ -164,13 +164,13 @@ case $choice in
         if [[ $choice == "load" || $1 == "load" ]]; then
 
             if [[ $choice == "load" ]]; then
-            echo -e "\e[0m Available configs: \e[0m"
-            for entry in "profiles"/*.txt
-            do
-                if [ -f "$entry" ];then
-                    echo -e "\e[36m   $(basename $entry | cut -d\. -f1) \e[0m"
-                fi
-            done
+                echo -e "\e[0m Available configs: \e[0m"
+                for entry in "profiles"/*.txt
+                do
+                    if [ -f "$entry" ];then
+                        echo -e "\e[36m   $(basename $entry | cut -d\. -f1) \e[0m"
+                    fi
+                done
                 echo -ne "\e[36m Config Name \e[0m " ; read config_name
             fi
 

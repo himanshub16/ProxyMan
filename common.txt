@@ -1,0 +1,49 @@
+# expected command line arguments 
+#
+# Created by "yourgoodname"
+# For ProxyMan "https://github.com/himanshub16/ProxyMan/"
+#
+# convention to be followed across extension made / to be made
+# include this comment section in all plugins to avoid confusions while coding 
+#
+# plugin to set "TARGET ENVIRON" proxy settings for ProxyMan
+#
+# The arguments are given in bash syntax to maintain universality and ease
+# across all UNIX systems. 
+# Your language can use it's respective syntax for 
+# arguments and comments.
+# If you don't need any particular proxy settings, ignore the variables.
+
+# $#  : number of arguments 
+# $1  : http_host 
+# if this argument is "unset", proxy settings should be unset.
+# if this is "toggle", simply toggle current settings.
+
+# $2  : http_port 
+# $3  : use_same ; "yes" or "no"
+# $4  : use_auth 
+# $5  : username ; send empty string if not available 
+# $6  : password ; send empty string if not available 
+# 
+# if use same is yes, then no further arguments are considered
+# 
+# $7  : https_host 
+# $8  : https_port 
+# $9  : ftp_host 
+# $10 : ftp_port 
+
+# below settings are removed as of now
+# reason : they are generally not required in daily use
+# and some applications (like whatsapp web) are not comfortable
+# with them.
+# also, handling them requires rework on certain areas.
+#
+# most applications do follow http proxy
+## $11 : socks_host 
+## $12 : socks_port 
+## $13 : rsync_host 
+## $14 : rsync_port
+###########
+ 
+# here your code starts
+

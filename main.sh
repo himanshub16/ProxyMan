@@ -3,10 +3,14 @@
 # If you have found some issues, or some feature request :
 # Raise them here : https://github.com/himanshub16/ProxyMan/issues
 # Author : Himanshu Shekhar (@himanshub16)
-# here your code starts
+#
 
 # This is the main script which calls other respective scripts.
 # In case of doubts regarding how to use, refer the README.md file.
+
+source "./variables.sh"
+source "./configs.sh"
+
 
 function _do_it_for_all() {
     # Argument
@@ -128,9 +132,6 @@ function prompt_for_proxy_targets() {
 }
 
 function main() {
-    source "./variables.sh"
-    source "./configs.sh"
-
     case "$1" in
         "configs"  ) list_configs
                      ;;

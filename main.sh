@@ -14,12 +14,12 @@ source "./configs.sh"
 
 function _do_it_for_all() {
     # Argument
-    # $1 : what to do
+    # $1 : what to do (set/unset/list)
 
     local what_to_do="$1"
     if [ -z "$target" ]; then
-        bash "bash.sh" "$what_to_do"
-        sudo -E bash "environment.sh" "$what_to_do"
+        bash "bash-zsh.sh" "$what_to_do"
+        # sudo -E bash "environment.sh" "$what_to_do"
         sudo -E bash "apt.sh" "$what_to_do"
         sudo -E bash "dnf.sh" "$what_to_do"
         bash "gsettings.sh" "$what_to_do"
@@ -32,7 +32,7 @@ function _do_it_for_all() {
             case "$t" in
                 1) _do_it_for_all "$what_to_do"
                    ;;
-                2) bash "bash.sh" "$what_to_do"
+                2) bash "bash-zsh.sh" "$what_to_do"
                    ;;
                 3) sudo -E bash "environment.sh" "$what_to_do"
                    ;;
@@ -58,6 +58,7 @@ function _dump_it_all() {
     echo "HTTP  > $http_host $http_port"
     echo "HTTPS > $https_host $https_port"
     echo "FTP   > $ftp_host $ftp_port"
+    echo "no_proxy > $no_proxy"
     echo "Use auth > $use_auth $username $password"
     echo "Use same > $use_same"
     echo "Config > $config_name $action"
@@ -84,7 +85,6 @@ function prompt_for_proxy_values() {
 
     echo -n " HTTP Proxy ${bold} Host ${normal}"; read http_host
     echo -n " HTTP Proxy ${bold} Port ${normal}"; read http_port
-    echo -n " Use same for HTTPS and FTP (y/n)? "; read use_same
     echo -n " Use auth - userid/password (y/n)? "; read use_auth
 
     if [[ "$use_auth" = "y" || "$use_auth" = "Y" ]]; then
@@ -93,18 +93,26 @@ function prompt_for_proxy_values() {
         echo
     fi
 
+    echo -n " Use same for HTTPS and FTP (y/n)? "; read use_same
     if [[ "$use_same" = "y" || "$use_same" = "Y" ]]; then
         https_host=$http_host
         ftp_host=$http_host
         https_port=$http_port
         ftp_port=$http_port
-        rsync_host=$http_host
-        rsync_port=$https_port
     else
         echo -n " HTTPS Proxy ${bold} Host ${normal}"; read https_host
         echo -n " HTTPS Proxy ${bold} Port ${normal}"; read https_port
         echo -n " FTP Proxy ${bold} Host ${normal}"; read ftp_host
         echo -n " FTP Proxy ${bold} Port ${normal}"; read ftp_port
+    fi
+    # socks_proxy is omitted, as is usually not required
+    # rsync is kept same as http to reduce number of inputs in interactive mode
+    rsync_host=$http_host
+    rsync_port=$http_port
+
+    echo -n " No Proxy ${green} (default $no_proxy) ${normal}"; read _no_proxy
+    if [[ $_no_proxy != "" ]]; then
+        no_proxy=_no_proxy
     fi
 
     echo -n "Save profile for later use (y/n)? "; read save_for_reuse
@@ -119,7 +127,7 @@ function prompt_for_proxy_targets() {
     echo "${bold}${blue} Select targets to modify ${normal}"
 
     echo "|${bold}${red} 1 ${normal}| All of them ... Don't bother me"
-    echo "|${bold}${red} 2 ${normal}| Terminal / Bash (current user) "
+    echo "|${bold}${red} 2 ${normal}| Terminal / bash / zsh (current user) "
     echo "|${bold}${red} 3 ${normal}| /etc/environment"
     echo "|${bold}${red} 4 ${normal}| apt/dnf (Package manager)"
     echo "|${bold}${red} 5 ${normal}| Desktop settings (GNOME/Ubuntu)"
@@ -162,3 +170,5 @@ function main() {
 
 main "$@"
 _dump_it_all
+
+bash shellrc.sh $1

@@ -170,5 +170,3 @@ function main() {
 
 main "$@"
 _dump_it_all
-
-bash npm.sh $1

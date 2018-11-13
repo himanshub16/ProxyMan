@@ -35,18 +35,18 @@ unset_proxy() {
 
 set_proxy() {
     gsettings set org.gnome.system.proxy mode manual
-    gsettings set org.gnome.system.proxy.http host $http_proxy
-    gsettings set org.gnome.system.proxy.http port $http_proxy
+    gsettings set org.gnome.system.proxy.http host $http_host
+    gsettings set org.gnome.system.proxy.http port $http_port
     gsettings set org.gnome.system.proxy.http authentication-user $username
     gsettings set org.gnome.system.proxy.http authentication-password $password
-    gsettings set org.gnome.system.proxy.https host $https_proxy
-    gsettings set org.gnome.system.proxy.https port $https_proxy
-    gsettings set org.gnome.system.proxy.ftp host $ftp_proxy
-    gsettings set org.gnome.system.proxy.ftp port $ftp_proxy
+    gsettings set org.gnome.system.proxy.https host $https_host
+    gsettings set org.gnome.system.proxy.https port $https_port
+    gsettings set org.gnome.system.proxy.ftp host $ftp_host
+    gsettings set org.gnome.system.proxy.ftp port $ftp_port
 }
 
 
-which $gsettings &> /dev/null
+which gsettings &> /dev/null
 if [ "$?" != 0 ]; then
     exit
 fi

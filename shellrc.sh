@@ -12,7 +12,7 @@ list_proxy() {
     echo "${bold}Shell proxy settings : $SHELLRC ${normal}"
     lines="$(cat $SHELLRC | grep proxy -i | wc -l)"
     if [ "$lines" -gt 0 ]; then
-        cat $SHELLRC | grep proxy -i | sed "s/\=/\ /g"
+        cat $SHELLRC | grep proxy -i
     else
         echo "${red}None${normal}"
     fi
@@ -44,20 +44,20 @@ set_proxy() {
     fi
 
     # caution: do not use / after stmt
-    echo "export http_proxy=http://${stmt}${http_host}:${http_port}/"     >> "$SHELLRC"
-    echo "export https_proxy=https://${stmt}${https_host}:${https_port}/" >> "$SHELLRC"
-    echo "export ftp_proxy=ftp://${stmt}${ftp_host}:${ftp_port}/"         >> "$SHELLRC"
-    echo "export rsync_proxy=rsync://${stmt}${rsync_host}:${rsync_port}/" >> "$SHELLRC"
-    echo "export no_proxy=${no_proxy}"                                    >> "$SHELLRC"
-    echo "export HTTP_PROXY=http://${stmt}${http_host}:${http_port}/"     >> "$SHELLRC"
-    echo "export HTTPS_PROXY=https://${stmt}${https_host}:${https_port}/" >> "$SHELLRC"
-    echo "export FTP_PROXY=ftp://${stmt}${ftp_host}:${ftp_port}/"         >> "$SHELLRC"
-    echo "export RSYNC_PROXY=rsync://${stmt}${rsync_host}:${rsync_port}/" >> "$SHELLRC"
-    echo "export NO_PROXY=${no_proxy}"                                    >> "$SHELLRC"
+    echo "export http_proxy=\"http://${stmt}${http_host}:${http_port}/\""     >> "$SHELLRC"
+    echo "export https_proxy=\"https://${stmt}${https_host}:${https_port}/\"" >> "$SHELLRC"
+    echo "export ftp_proxy=\"ftp://${stmt}${ftp_host}:${ftp_port}/\""         >> "$SHELLRC"
+    echo "export rsync_proxy=\"rsync://${stmt}${rsync_host}:${rsync_port}/\"" >> "$SHELLRC"
+    echo "export no_proxy=\"${no_proxy}"\"                                    >> "$SHELLRC"
+    echo "export HTTP_PROXY=\"http://${stmt}${http_host}:${http_port}/\""     >> "$SHELLRC"
+    echo "export HTTPS_PROXY=\"https://${stmt}${https_host}:${https_port}/\"" >> "$SHELLRC"
+    echo "export FTP_PROXY=\"ftp://${stmt}${ftp_host}:${ftp_port}/\""         >> "$SHELLRC"
+    echo "export RSYNC_PROXY=\"rsync://${stmt}${rsync_host}:${rsync_port}/\"" >> "$SHELLRC"
+    echo "export NO_PROXY=\"${no_proxy}"\"                                    >> "$SHELLRC"
 }
 
 
-SHELLRC=$2
+export SHELLRC=$2
 
 what_to_do=$1
 case $what_to_do in

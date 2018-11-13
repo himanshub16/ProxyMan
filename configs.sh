@@ -31,16 +31,17 @@ function load_config() {
         exit
     fi
 
-    export http_host=`grep http_host   -i $profile_path | cut -d= -f2`
-    export http_port=`grep http_port   -i $profile_path | cut -d= -f2`
-    export https_host=`grep https_host -i $profile_path | cut -d= -f2`
-    export https_port=`grep https_port -i $profile_path | cut -d= -f2`
-    export ftp_host=`grep ftp_host     -i $profile_path | cut -d= -f2`
-    export ftp_port=`grep ftp_port     -i $profile_path | cut -d= -f2`
-    export use_same=`grep use_same     -i $profile_path | cut -d= -f2`
-    export use_auth=`grep use_auth     -i $profile_path | cut -d= -f2`
-    export username=`grep username     -i $profile_path | cut -d= -f2`
-    export password=`grep password     -i $profile_path | cut -d= -f2`
+    export http_host=`grep http_host\=   -i $profile_path | cut -d= -f2`
+    export http_port=`grep http_port\=   -i $profile_path | cut -d= -f2`
+    export https_host=`grep https_host\= -i $profile_path | cut -d= -f2`
+    export https_port=`grep https_port\= -i $profile_path | cut -d= -f2`
+    export ftp_host=`grep ftp_host\=     -i $profile_path | cut -d= -f2`
+    export ftp_port=`grep ftp_port\=     -i $profile_path | cut -d= -f2`
+    export rsync_host=$http_host rsync_port=$http_port
+    export use_same=`grep use_same\=     -i $profile_path | cut -d= -f2`
+    export use_auth=`grep use_auth\=     -i $profile_path | cut -d= -f2`
+    export username=`grep username\=     -i $profile_path | cut -d= -f2`
+    export password=`grep password\=     -i $profile_path | cut -d= -f2`
 }
 
 function load_default_config() {

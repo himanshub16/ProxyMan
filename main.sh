@@ -20,12 +20,16 @@ function _do_it_for_all() {
     if [ -z "$target" ]; then
         bash "bash-zsh.sh" "$what_to_do"
         # sudo -E bash "environment.sh" "$what_to_do"
-        sudo -E bash "apt.sh" "$what_to_do"
-        sudo -E bash "dnf.sh" "$what_to_do"
         bash "gsettings.sh" "$what_to_do"
         bash "npm.sh" "$what_to_do"
         bash "dropbox.sh" "$what_to_do"
         bash "git.sh" "$what_to_do"
+
+        # isn't required, but still checked to avoid sudo in main all the time
+        if [[ $(which apt &> /dev/null) || $(which dnf &> /dev/null) ]]; then
+            sudo -E bash "apt.sh" "$what_to_do"
+            sudo -E bash "dnf.sh" "$what_to_do"
+        fi
     else
         for t in "${targets[@]}"
         do
@@ -66,7 +70,7 @@ function _dump_it_all() {
 }
 
 function show_current_settings() {
-    echo "Someone wants to list all"
+    echo "Hmm... listing it all"
     _do_it_for_all "list"
 }
 
@@ -107,6 +111,7 @@ function prompt_for_proxy_values() {
     fi
     # socks_proxy is omitted, as is usually not required
     # rsync is kept same as http to reduce number of inputs in interactive mode
+    # and used only in shellrc
     rsync_host=$http_host
     rsync_port=$http_port
 
@@ -118,6 +123,7 @@ function prompt_for_proxy_values() {
     echo -n "Save profile for later use (y/n)? "; read save_for_reuse
     if [[ "$save_for_reuse" = "y" || "$save_for_reuse" = "Y" ]]; then
         read -p " Enter profile name  : " config_name
+        save_config $config_name
     fi
 
     echo
@@ -145,6 +151,7 @@ function main() {
                      ;;
         "load"     ) echo "Loading profile : ${blue} $2 ${normal}"
                      load_config "$2"
+                     _dump_it_all
                      prompt_for_proxy_targets
                      set_all_proxy
                      ;;
@@ -169,4 +176,4 @@ function main() {
 
 
 main "$@"
-_dump_it_all
+# _dump_it_all

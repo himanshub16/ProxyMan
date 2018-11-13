@@ -12,8 +12,8 @@ fix_new_line() {
 }
 
 list_proxy() {
-	# inefficient way as the file is read twice.. think of some better way
-	  echo
+    # inefficient way as the file is read twice.. think of some better way
+    echo
     echo "${bold}APT proxy settings : ${normal}"
     lines="$(cat $CONF_FILE | grep proxy -i | wc -l)"
     if [ "$lines" -gt 0 ]; then
@@ -24,12 +24,12 @@ list_proxy() {
 }
 
 unset_proxy() {
-	if [ ! -e "$CONF_FILE" ]; then
-		return
-	fi
-	if [ "$(cat $CONF_FILE | grep proxy -i | wc -l)" -gt 0 ]; then
-      sed -E "/^Acquire::(.)*::Proxy/d" $CONF_FILE -i
-	fi
+    if [ ! -e "$CONF_FILE" ]; then
+        return
+    fi
+    if [ "$(cat $CONF_FILE | grep proxy -i | wc -l)" -gt 0 ]; then
+        sed -E "/^Acquire::(.)*::Proxy/d" $CONF_FILE -i
+    fi
 }
 
 set_proxy() {
@@ -46,7 +46,7 @@ set_proxy() {
     # caution: do not use / after stmt
     echo "Acquire::Http::Proxy \"http://${stmt}${http_host}:${http_port}\"" \
          >> "$CONF_FILE"
-    echo "Acquire::Https::Proxy \"https_proxy=https://${stmt}${https_host}:${https_port}\"" \
+    echo "Acquire::Https::Proxy \"https://${stmt}${https_host}:${https_port}\"" \
          >> "$CONF_FILE"
     echo "Acquire::Ftp::Proxy \"ftp://${stmt}${ftp_host}:${ftp_port}\"" \
          >> "$CONF_FILE"

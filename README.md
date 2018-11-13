@@ -4,6 +4,20 @@
 
 (Download [here](https://github.com/himanshub16/ProxyMan/releases/latest/))
 
+### Usage
+
+* Set
+  `./main.sh set`
+
+* Unset
+  `./main.sh unset`
+  
+* List available configs
+  `./main.sh configs`
+  
+* Load config (say proxy4)
+  `./main.sh load proxy4`
+
 
 ### How this is going to be different from **v2**?
 * Saves your settings in a `config_file/rc_file` (same as profiles).

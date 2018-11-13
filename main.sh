@@ -171,4 +171,4 @@ function main() {
 main "$@"
 _dump_it_all
 
-bash shellrc.sh $1
+bash npm.sh $1

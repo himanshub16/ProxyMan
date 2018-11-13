@@ -8,7 +8,7 @@ list_proxy() {
     echo "http $(npm config get proxy)"
     echo "https $(npm config get https-proxy)"
 
-    if [ $(npm config get strict-ssl) = "true" ]; then
+    if [[ $(npm config get strict-ssl) = "true" && $(npm config get proxy) != "null" ]]; then
         echo "${bold}${red} strict-ssl is true. Would recommend to set it false"
         echo "> ${white} npm config set strict-ssl false ${normal}"
     fi

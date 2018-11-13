@@ -7,7 +7,7 @@ DROPBOX_PY="dropbox"
 
 list_proxy() {
     echo
-    echo "${bold}${red} Dropboxy doesn't show proxy settings ${normal}"
+    echo "${blue} Dropbox doesn't show proxy settings. No worries! ${normal}"
 }
 
 unset_proxy() {

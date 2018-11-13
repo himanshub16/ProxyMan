@@ -3,7 +3,7 @@
 which bash &> /dev/null
 first="$?"
 
-which azsh &> /dev/null
+which zsh &> /dev/null
 second="$?"
 
 if [ "$#" = 0 ]; then

@@ -47,7 +47,11 @@ set_proxy() {
 
 
 which $gsettings &> /dev/null
-if [ "$#" != 0 ]; then
+if [ "$?" != 0 ]; then
+    exit
+fi
+
+if [ "$#" = 0 ]; then
     exit
 fi
 

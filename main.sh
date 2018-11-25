@@ -17,7 +17,7 @@ function _do_it_for_all() {
     # $1 : what to do (set/unset/list)
 
     local what_to_do="$1"
-    if [ -z "$target" ]; then
+    if [[ -z "$targets" || "$targets" = "1" ]]; then
         bash "bash-zsh.sh" "$what_to_do"
         # sudo -E bash "environment.sh" "$what_to_do"
         bash "gsettings.sh" "$what_to_do"
@@ -34,8 +34,10 @@ function _do_it_for_all() {
         for t in "${targets[@]}"
         do
             case "$t" in
-                1) _do_it_for_all "$what_to_do"
-                   ;;
+                # THIS stmt WILL CAUSE INFINITE RECURSION. DO NOT USE THIS.
+                # COMMENTED FOR WARNING
+                # 1) _do_it_for_all "$what_to_do"
+                #    ;;
                 2) bash "bash-zsh.sh" "$what_to_do"
                    ;;
                 3) sudo -E bash "environment.sh" "$what_to_do"
@@ -43,9 +45,9 @@ function _do_it_for_all() {
                 4) sudo -E bash "apt.sh" "$what_to_do"
                    sudo -E bash "dnf.sh" "$what_to_do"
                    ;;
-                5) bash "Desktop/gsettings" "$what_to_do"
+                5) bash "gsettings.sh" "$what_to_do"
                    ;;
-                6) bash "npm & yarn" "$what_to_do"
+                6) bash "npm.sh" "$what_to_do"
                    ;;
                 7) bash "dropbox.sh" "$what_to_do"
                    ;;
@@ -142,7 +144,7 @@ function prompt_for_proxy_targets() {
     echo "|${bold}${red} 8 ${normal}| Git"
     echo
     echo "Separate multiple choices with space"
-    echo -ne "\e[5m ? \e[0m" ; read -a targets
+    echo -ne "\e[5m ? \e[0m" ; read targets
 }
 
 function main() {

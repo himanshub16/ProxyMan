@@ -7,7 +7,7 @@ list_proxy() {
     echo
     echo "${bold}Desktop proxy settings (GNOME) ${normal}"
     mode=$(gsettings get org.gnome.system.proxy | tr -d "'")
-    if [ "$mode" = "none"]; then
+    if [ "$mode" = "none" ]; then
         echo "${red}None${normal}"
         return
     fi
@@ -34,15 +34,16 @@ unset_proxy() {
 }
 
 set_proxy() {
-    gsettings set org.gnome.system.proxy mode manual
-    gsettings set org.gnome.system.proxy.http host $http_host
-    gsettings set org.gnome.system.proxy.http port $http_port
-    gsettings set org.gnome.system.proxy.http authentication-user $username
-    gsettings set org.gnome.system.proxy.http authentication-password $password
-    gsettings set org.gnome.system.proxy.https host $https_host
-    gsettings set org.gnome.system.proxy.https port $https_port
-    gsettings set org.gnome.system.proxy.ftp host $ftp_host
-    gsettings set org.gnome.system.proxy.ftp port $ftp_port
+    # do quote the variables as blank variables mean nothing when not quoted and show errors
+    gsettings set org.gnome.system.proxy mode "manual"
+    gsettings set org.gnome.system.proxy.http host "$http_host"
+    gsettings set org.gnome.system.proxy.http port "$http_port"
+    gsettings set org.gnome.system.proxy.http authentication-password "$password"
+    gsettings set org.gnome.system.proxy.http authentication-user "$username"
+    gsettings set org.gnome.system.proxy.https host "$https_host"
+    gsettings set org.gnome.system.proxy.https port "$https_port"
+    gsettings set org.gnome.system.proxy.ftp host "$ftp_host"
+    gsettings set org.gnome.system.proxy.ftp port "$ftp_port"
 }
 
 

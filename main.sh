@@ -145,6 +145,7 @@ function prompt_for_proxy_targets() {
     echo
     echo "Separate multiple choices with space"
     echo -ne "\e[5m ? \e[0m" ; read targets
+    export targets=(`echo ${targets}`)
 }
 
 function main() {
@@ -179,3 +180,4 @@ function main() {
 
 main "$@"
 # _dump_it_all
+echo "Done"

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd $HOME/.proxyman
+./main.sh $@
+cd $OLDPWD

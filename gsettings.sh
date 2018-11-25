@@ -6,7 +6,7 @@
 list_proxy() {
     echo
     echo "${bold}Desktop proxy settings (GNOME) ${normal}"
-    mode=$(gsettings get org.gnome.system.proxy | tr -d "'")
+    mode=$(gsettings get org.gnome.system.proxy mode | tr -d "'")
     if [ "$mode" = "none" ]; then
         echo "${red}None${normal}"
         return

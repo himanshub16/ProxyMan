@@ -67,7 +67,7 @@ username=""
 password=""
 save_for_reuse=""
 profile_name=""
-
+no_proxy=""
 
 if [[ "$1" == "load" && "$2" == "" ]]; then
     echo -ne "\e[1m \e[31mPlease provide a config! \e[0m"
@@ -133,6 +133,10 @@ Tool to set up system wide proxy settings on Linux.
             echo -ne "\e[36m FTP   Proxy host \e[0m " ; read ftp_host
             echo -ne "\e[32m FTP   Proxy port \e[0m " ; read ftp_port
         fi
+        echo -ne "\e[0m Add no_proxy hosts (y/n)  ? \e[0m        "; read use_no_proxy
+        if [[ "$use_no_proxy" = "y" || "$use_no_proxy" = "Y" ]]; then
+            read -p " Enter no_proxy values (e.g: localhost,127.0.0.1,*.local) : " no_proxy
+        fi
     fi
 fi
 
@@ -157,7 +161,7 @@ case $choice in
     "set"|"load")
 
         if [[ "$1" != "load"  && ( "$save_for_reuse" = "y" || "$save_for_reuse" = "Y" ) ]]; then
-            config_file="http_host=$http_host%s\nhttp_port=$http_port%s\nuse_same=$use_same\nuse_auth=$use_auth\nusername=$username\npassword=$password\nhttps_host=$https_host\nhttps_port=$https_port\nftp_host=$ftp_host\nftp_port=$ftp_port"
+            config_file="http_host=$http_host%s\nhttp_port=$http_port%s\nuse_same=$use_same\nuse_auth=$use_auth\nusername=$username\npassword=$password\nhttps_host=$https_host\nhttps_port=$https_port\nftp_host=$ftp_host\nftp_port=$ftp_port\nno_proxy=$no_proxy"
             printf $config_file > "profiles/$profile_name".txt
         fi
 
@@ -201,11 +205,12 @@ case $choice in
             https_port=`grep https_port -i profiles/$config_name.txt  | cut -d= -f2`
             ftp_host=`grep ftp_host -i profiles/$config_name.txt  | cut -d= -f2`
             ftp_port=`grep ftp_port -i profiles/$config_name.txt  | cut -d= -f2`
+            no_proxy=`grep no_proxy -i profiles/$config_name.txt  | cut -d= -f2`
 
             echo -e " Config \033[0;36m$config_name\033[0m successfully loaded"
         fi
 
-        args=("$http_host" "$http_port" "$use_same" "$use_auth" "$username" "$password" "$https_host" "$https_port" "$ftp_host" "$ftp_port" )
+        args=("$http_host" "$http_port" "$use_same" "$use_auth" "$username" "$password" "$https_host" "$https_port" "$ftp_host" "$ftp_port" "$no_proxy" )
 
         for i in "${targets[@]}"
         do

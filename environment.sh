@@ -37,11 +37,11 @@
 # $7  : https_host
 # $8  : https_port
 # $9  : ftp_host
-# $10 : ftp_port
+# ${10} : ftp_port
 #
 # but if only one argument follows
 #
-# $11 : no_proxy ; send empty string if not available
+# ${11} : no_proxy ; send empty string if not available
 
 # here your code starts
 
@@ -89,12 +89,12 @@ set_proxy() {
 	if [ "$4" = "y" ]; then
 		var="$5:$6@"
 	fi
-
+	
 	exc=
-	if [ "$#" -eq 8 ]; then
+	if [ "$#" -eq 7 ]; then
 		exc="$7"
-	elif [ "$#" -eq 12 ]; then
-		exc="$11"
+	elif [ "$#" -eq 11 ]; then
+		exc="${11}"
 	fi
 
 	echo -n "" > bash_config.tmp
@@ -119,10 +119,10 @@ set_proxy() {
 	elif [ "$3" = "n" ]; then
 		echo "http_proxy=\"http://$var$1:$2\"" >> bash_config.tmp
 		echo "https_proxy=\"http://$var$7:$8\"" >> bash_config.tmp
-		echo "ftp_proxy=\"ftp://$var$9:$10\"" >> bash_config.tmp
+		echo "ftp_proxy=\"ftp://$var$9:${10}\"" >> bash_config.tmp
 		echo "HTTP_PROXY=\"http://$var$1:$2\"" >> bash_config.tmp
 		echo "HTTPS_PROXY=\"http://$var$7:$8\"" >> bash_config.tmp
-		echo "FTP_PROXY=\"ftp://$var$9:$10\"" >> bash_config.tmp
+		echo "FTP_PROXY=\"ftp://$var$9:${10}\"" >> bash_config.tmp
 
 		if [ -n "$exc" ]; then
 			echo "no_proxy=\"$exc\"" >> bash_config.tmp
@@ -146,7 +146,7 @@ if [ "$1" = "unset" ]; then
 	unset_proxy
 	exit
 # elif [ "$1" = "toggle" ]; then
-# 	toggle_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11 $12
+# 	toggle_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} $12
 	# exit
 elif [ "$1" = "list" ]; then
 	list_proxy
@@ -155,4 +155,4 @@ fi
 
 
 unset_proxy
-set_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11
+set_proxy "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "${10}" "${11}"

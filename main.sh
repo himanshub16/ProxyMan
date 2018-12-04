@@ -94,6 +94,7 @@ function prompt_for_proxy_values() {
     echo -n " Use auth - userid/password (y/n)? "; read use_auth
 
     if [[ "$use_auth" = "y" || "$use_auth" = "Y" ]]; then
+        echo "${bold}${red} Please don't save your passwords on shared computers.${normal}"
         read -p " Enter username                 : " username
         echo -n " Enter password (use %40 for @) : " ; read -s password
         echo

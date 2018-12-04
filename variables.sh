@@ -62,6 +62,16 @@ export targets=""
 export USE_HTTP_PROXY_FOR_HTTPS="true"
 
 
+# Adding a custom wrapper for sudo helps it run on systems without sudo.
+# Mentioned in issue #27 - Github
+which sudo &> /dev/null
+if [ "$?" = 0 ]; then
+    alias sudo="sudo -E"
+else
+    echo "${red} sudo is not available. Root scripts will run as user. ${normal}"
+    alias sudo=""
+fi
+
 
 # This help text contains examples for each command
 HELP_TEXT="ProxyMan lets you set system-wide proxy settings.

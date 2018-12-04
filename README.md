@@ -2,31 +2,37 @@
 
 ### Configuring proxy made so simple on Linux ([releases](https://github.com/himanshub16/ProxyMan/releases/))
 
-(Download [here](https://github.com/himanshub16/ProxyMan/releases/latest/))
 
-### Usage
+v3 is ready with new features, necessary improvements, updates, restructured code and much better experience. :tada: 
 
-* Install
-  `./install`
+## How to use it now
+* Download and install with single-step process.
+```./install```
 
-* Set
-  `proxyman set`
+Proxyman is now available in your path. 
+Open a new terminal window and start playing.
 
-* Unset
-  `proxyman unset`
-  
-* List available configs
-  `proxyman configs`
-  
-* Load config (say proxy4)
-  `proxyman load proxy4`
+* Set proxy
+```proxyman set```
+
+* Save your settings for later use.
+* View your saved configs
+```proxyman configs```
+* Load your previously saved config - say you saved it by the name *point4*. 
+```proxyman load point4```
+
+## What's new?
+* Saved configs made more organized and works flawlessly.
+* Installation script makes it available in your path. Just call the command `proxyman`, no `cd` to your downloads.
+* Lots of issues got closed.
+* Restructured codebase with better code quality than before - easier to maintain.
 
 
-### How this is going to be different from **v2**?
-* Saves your settings in a `config_file/rc_file` (same as profiles).
-* Simple install script lets you use proxyman from anywhere.
+## Why still a release candidate?
+Just letting it be for about a month from now to let me use it and find more bugs and edge cases (if any). :see_no_evil: 
+If you find one, feel free to open an [issue](https://github.com/ProxyMan/issues).
+Would release during the first week of 2019. :smiley:
 
-### How did v1 and v2 work?
-Both versions modified the config files or called the appropriate command of respective tools to configure their internal proxy settings.
 
-Open for discussions at [#49](https://github.com/himanshub16/ProxyMan/issues/49) .
+### DISCLAIMER
+Please don't save your passwords on public machines. Instead use proxyman without providing password and log-in from the browser.

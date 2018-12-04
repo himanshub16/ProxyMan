@@ -28,7 +28,8 @@ if test -t 1; then
         export magenta="$(tput setaf 5)"
         export cyan="$(tput setaf 6)"
         export white="$(tput setaf 7)"
-        export star="🌟"
+        # export star="🌟"
+        export star=""
     fi
 fi
 

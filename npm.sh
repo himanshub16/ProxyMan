@@ -27,7 +27,12 @@ set_proxy() {
 
     # caution: do not use / after stmt
     npm config set proxy "http://${stmt}${http_host}:${http_port}/"
-    npm config set https-proxy "https://${stmt}${https_host}:${https_port}/"
+
+    if [ "$USE_HTTP_PROXY_FOR_HTTPS" = "true" ]; then
+        npm config set https-proxy "http://${stmt}${http_host}:${http_port}/"
+    else
+        npm config set https-proxy "https://${stmt}${https_host}:${https_port}/"
+    fi
 }
 
 which npm &> /dev/null

@@ -55,6 +55,13 @@ export config_name=""
 export action=""
 export targets=""
 
+# Some proxies cause problem when using https_proxy for https (#43 and #42)
+# Instead, they work with http_proxy. Also, found many scripts on stackoverflow
+# using http_proxy for https_proxy
+# This affects bash/zsh/shellrc and npm
+export USE_HTTP_PROXY_FOR_HTTPS="true"
+
+
 
 # This help text contains examples for each command
 HELP_TEXT="ProxyMan lets you set system-wide proxy settings.

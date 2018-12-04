@@ -45,15 +45,23 @@ set_proxy() {
 
     # caution: do not use / after stmt
     echo "export http_proxy=\"http://${stmt}${http_host}:${http_port}/\""     >> "$SHELLRC"
-    echo "export https_proxy=\"https://${stmt}${https_host}:${https_port}/\"" >> "$SHELLRC"
+    # $https_proxy at the end
     echo "export ftp_proxy=\"ftp://${stmt}${ftp_host}:${ftp_port}/\""         >> "$SHELLRC"
     echo "export rsync_proxy=\"rsync://${stmt}${rsync_host}:${rsync_port}/\"" >> "$SHELLRC"
     echo "export no_proxy=\"${no_proxy}"\"                                    >> "$SHELLRC"
     echo "export HTTP_PROXY=\"http://${stmt}${http_host}:${http_port}/\""     >> "$SHELLRC"
-    echo "export HTTPS_PROXY=\"https://${stmt}${https_host}:${https_port}/\"" >> "$SHELLRC"
+    # $HTTPS_PROXY at the end
     echo "export FTP_PROXY=\"ftp://${stmt}${ftp_host}:${ftp_port}/\""         >> "$SHELLRC"
     echo "export RSYNC_PROXY=\"rsync://${stmt}${rsync_host}:${rsync_port}/\"" >> "$SHELLRC"
     echo "export NO_PROXY=\"${no_proxy}"\"                                    >> "$SHELLRC"
+
+    if [ "$USE_HTTP_PROXY_FOR_HTTPS" = "true" ]; then
+        echo "export https_proxy=$http_proxy" >> "$SHELLRC"
+        echo "export HTTPS_PROXY=$HTTP_PROXY" >> "$SHELLRC"
+    else
+        echo "export https_proxy=\"https://${stmt}${https_host}:${https_port}/\"" >> "$SHELLRC"
+        echo "export HTTPS_PROXY=\"https://${stmt}${https_host}:${https_port}/\"" >> "$SHELLRC"
+    fi
 }
 
 

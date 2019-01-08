@@ -175,7 +175,7 @@ case $choice in
 
             if [[ $choice == "load" ]]; then
                 echo -e "\e[0m Available configs: \e[0m"
-                for entry in "profiles"/*.txt
+                for entry in "$DIR/profiles"/*.txt
                 do
                     if [ -f "$entry" ];then
                         echo -e "\e[36m   $(basename $entry | cut -d\. -f1) \e[0m"
@@ -195,23 +195,23 @@ case $choice in
                 config_name=$2
             fi
 
-            if [ ! -e profiles/"$config_name".txt ]; then
+            if [ ! -e "$DIR"/profiles/"$config_name".txt ]; then
                 echo -ne "\e[1m \e[31mFile does not exist! \e[0m"
                 echo
                 exit
             fi
 
-            http_host=`grep http_host -i profiles/$config_name.txt  | cut -d= -f2`
-            http_port=`grep http_port -i profiles/$config_name.txt  | cut -d= -f2`
-            use_same=`grep use_same -i profiles/$config_name.txt  | cut -d= -f2`
-            use_auth=`grep use_auth -i profiles/$config_name.txt  | cut -d= -f2`
-            username=`grep username -i profiles/$config_name.txt  | cut -d= -f2`
-            password=`grep password -i profiles/$config_name.txt  | cut -d= -f2`
-            https_host=`grep https_host -i profiles/$config_name.txt  | cut -d= -f2`
-            https_port=`grep https_port -i profiles/$config_name.txt  | cut -d= -f2`
-            ftp_host=`grep ftp_host -i profiles/$config_name.txt  | cut -d= -f2`
-            ftp_port=`grep ftp_port -i profiles/$config_name.txt  | cut -d= -f2`
-            no_proxy=`grep no_proxy -i profiles/$config_name.txt  | cut -d= -f2`
+            http_host=`grep http_host -i $DIR/profiles/$config_name.txt  | cut -d= -f2`
+            http_port=`grep http_port -i $DIR/profiles/$config_name.txt  | cut -d= -f2`
+            use_same=`grep use_same -i $DIR/profiles/$config_name.txt  | cut -d= -f2`
+            use_auth=`grep use_auth -i $DIR/profiles/$config_name.txt  | cut -d= -f2`
+            username=`grep username -i $DIR/profiles/$config_name.txt  | cut -d= -f2`
+            password=`grep password -i $DIR/profiles/$config_name.txt  | cut -d= -f2`
+            https_host=`grep https_host -i $DIR/profiles/$config_name.txt  | cut -d= -f2`
+            https_port=`grep https_port -i $DIR/profiles/$config_name.txt  | cut -d= -f2`
+            ftp_host=`grep ftp_host -i $DIR/profiles/$config_name.txt  | cut -d= -f2`
+            ftp_port=`grep ftp_port -i $DIR/profiles/$config_name.txt  | cut -d= -f2`
+            no_proxy=`grep no_proxy -i $DIR/profiles/$config_name.txt  | cut -d= -f2`
 
             echo -e " Config \033[0;36m$config_name\033[0m successfully loaded"
         fi
@@ -227,7 +227,7 @@ case $choice in
                     sudo bash "$DIR/apt.sh" "${args[@]}"
                     sudo bash "$DIR/dnf.sh" "${args[@]}"
                     bash "$DIR/gsettings.sh" "${args[@]}"
-                    bash "vnpm.sh" "${args[@]}"
+                    bash "$DIR/vnpm.sh" "${args[@]}"
                     bash "$DIR/dropbox.sh" "${args[@]}"
                     bash "$DIR/git.sh" "${args[@]}"
                     bash "$DIR/docker.sh" "${args[@]}"

@@ -41,18 +41,22 @@
 
 # This is the main script which calls other respective scripts.
 # In case of doubts regarding how to use, refer the README.md file.
+
+# location of subscripts
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
 clear
 if [ "$1" = "list" ]; then
     echo "Someone wants to list all"
-    bash "bash.sh" "list"
-    sudo bash "environment.sh" "list"
-    sudo bash "apt.sh" "list"
-    sudo bash "dnf.sh" "list"
-    bash "gsettings.sh" "list"
-    bash "npm.sh" "list"
-    bash "dropbox.sh" "list"
-    bash "git.sh" "list"
-    bash "docker.sh" "list"
+    bash "$DIR/bash.sh" "list"
+    sudo bash "$DIR/environment.sh" "list"
+    sudo bash "$DIR/apt.sh" "list"
+    sudo bash "$DIR/dnf.sh" "list"
+    bash "$DIR/gsettings.sh" "list"
+    bash "$DIR/npm.sh" "list"
+    bash "$DIR/dropbox.sh" "list"
+    bash "$DIR/git.sh" "list"
+    bash "$DIR/docker.sh" "list"
     exit
 fi
 
@@ -218,33 +222,33 @@ case $choice in
         do
             case $i in
                 1)
-                    bash "bash.sh" "${args[@]}"
-                    sudo bash "environment.sh" "${args[@]}"
-                    sudo bash "apt.sh" "${args[@]}"
-                    sudo bash "dnf.sh" "${args[@]}"
-                    bash "gsettings.sh" "${args[@]}"
-                    bash "npm.sh" "${args[@]}"
-                    bash "dropbox.sh" "${args[@]}"
-                    bash "git.sh" "${args[@]}"
-                    bash "docker.sh" "${args[@]}"
+                    bash "$DIR/bash.sh" "${args[@]}"
+                    sudo bash "$DIR/environment.sh" "${args[@]}"
+                    sudo bash "$DIR/apt.sh" "${args[@]}"
+                    sudo bash "$DIR/dnf.sh" "${args[@]}"
+                    bash "$DIR/gsettings.sh" "${args[@]}"
+                    bash "vnpm.sh" "${args[@]}"
+                    bash "$DIR/dropbox.sh" "${args[@]}"
+                    bash "$DIR/git.sh" "${args[@]}"
+                    bash "$DIR/docker.sh" "${args[@]}"
                     ;;
                 2)
-                    bash "bash.sh" "${args[@]}"
+                    bash "$DIR/bash.sh" "${args[@]}"
                     ;;
-                3)	sudo bash "environment.sh" "${args[@]}"
+                3)	sudo bash "$DIR/environment.sh" "${args[@]}"
                     ;;
-                4)	sudo bash "apt.sh" "${args[@]}"
-                    sudo bash "dnf.sh" "${args[@]}"
+                4)	sudo bash "$DIR/apt.sh" "${args[@]}"
+                    sudo bash "$DIR/dnf.sh" "${args[@]}"
                     ;;
-                5)	bash "gsettings.sh" "${args[@]}"
+                5)	bash "$DIR/gsettings.sh" "${args[@]}"
                     ;;
-                6)	bash "npm.sh" "${args[@]}"
+                6)	bash "$DIR/npm.sh" "${args[@]}"
                     ;;
-                7)	bash "dropbox.sh" "${args[@]}"
+                7)	bash "$DIR/dropbox.sh" "${args[@]}"
                     ;;
-                8)	bash "git.sh" "${args[@]}"
+                8)	bash "$DIR/git.sh" "${args[@]}"
                     ;;
-                9)	bash "docker.sh" "${args[@]}"
+                9)	bash "$DIR/docker.sh" "${args[@]}"
                     ;;
                 *)	;;
             esac
@@ -256,33 +260,33 @@ case $choice in
         do
             case $i in
                 1)	echo "Someone wants to unset all"
-                    bash "bash.sh" "unset"
-                    sudo bash "environment.sh" "unset"
-                    sudo bash "apt.sh" "unset"
-                    sudo bash "dnf.sh" "unset"
-                    bash "gsettings.sh" "unset"
-                    bash "npm.sh" "unset"
-                    bash "dropbox.sh" "unset"
-                    bash "git.sh" "unset"
-                    bash "docker.sh" "unset"
+                    bash "$DIR/bash.sh" "unset"
+                    sudo bash "$DIR/environment.sh" "unset"
+                    sudo bash "$DIR/apt.sh" "unset"
+                    sudo bash "$DIR/dnf.sh" "unset"
+                    bash "$DIR/gsettings.sh" "unset"
+                    bash "$DIR/npm.sh" "unset"
+                    bash "$DIR/dropbox.sh" "unset"
+                    bash "$DIR/git.sh" "unset"
+                    bash "$DIR/docker.sh" "unset"
                     ;;
                 2)
-                    bash "bash.sh" "unset"
+                    bash "$DIR/bash.sh" "unset"
                     ;;
-                3)	sudo bash "environment.sh" "unset"
+                3)	sudo bash "$DIR/environment.sh" "unset"
                     ;;
-                4)	sudo bash "apt.sh" "unset"
-                    sudo bash "dnf.sh" "unset"
+                4)	sudo bash "$DIR/apt.sh" "unset"
+                    sudo bash "$DIR/dnf.sh" "unset"
                     ;;
-                5)	bash "gsettings.sh" "unset"
+                5)	bash "$DIR/gsettings.sh" "unset"
                     ;;
-                6)	bash "npm.sh" "unset"
+                6)	bash "$DIR/npm.sh" "unset"
                     ;;
-                7)	bash "dropbox.sh" "unset"
+                7)	bash "$DIR/dropbox.sh" "unset"
                     ;;
-                8) 	bash "git.sh" "unset"
+                8) 	bash "$DIR/git.sh" "unset"
                     ;;
-                9) 	bash "docker.sh" "unset"
+                9) 	bash "$DIR/docker.sh" "unset"
                     ;;
                 *)	;;
             esac
@@ -296,33 +300,33 @@ case $choice in
             do
                 case $i in
                     1)	echo "Someone wants to list all"
-                        bash "bash.sh" "list"
-						            sudo bash "environment.sh" "list"
-						            sudo bash "apt.sh" "list"
-						            sudo bash "dnf.sh" "list"
-						            bash "gsettings.sh" "list"
-						            bash "npm.sh" "list"
-						            bash "dropbox.sh" "list"
-                                    bash "git.sh" "list"
-                                    bash "docker.sh" "list"
+                        bash "$DIR/bash.sh" "list"
+						            sudo bash "$DIR/environment.sh" "list"
+						            sudo bash "$DIR/apt.sh" "list"
+						            sudo bash "$DIR/dnf.sh" "list"
+						            bash "$DIR/gsettings.sh" "list"
+						            bash "$DIR/npm.sh" "list"
+						            bash "$DIR/dropbox.sh" "list"
+                                    bash "$DIR/git.sh" "list"
+                                    bash "$DIR/docker.sh" "list"
 						            ;;
 					          2)
-						            bash "bash.sh" "list"
+						            bash "$DIR/bash.sh" "list"
 						            ;;
-					          3)	sudo bash "environment.sh" "list"
+					          3)	sudo bash "$DIR/environment.sh" "list"
 						            ;;
-					          4)	sudo bash "apt.sh" "list"
-						            sudo bash "dnf.sh" "list"
+					          4)	sudo bash "$DIR/apt.sh" "list"
+						            sudo bash "$DIR/dnf.sh" "list"
 						            ;;
-					          5)	bash "gsettings.sh" "list"
+					          5)	bash "$DIR/gsettings.sh" "list"
 						            ;;
-					          6)	bash "npm.sh" "list"
+					          6)	bash "$DIR/npm.sh" "list"
 						            ;;
-					          7) 	bash "dropbox.sh" "list"
+					          7) 	bash "$DIR/dropbox.sh" "list"
 						            ;;
-					          8) 	bash "git.sh" "list"
+					          8) 	bash "$DIR/git.sh" "list"
                                     ;;
-                              9) 	bash "docker.sh" "list"
+                              9) 	bash "$DIR/docker.sh" "list"
 						            ;;
 					          *)	;;
 				        esac

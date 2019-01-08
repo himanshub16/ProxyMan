@@ -52,6 +52,7 @@ if [ "$1" = "list" ]; then
     bash "npm.sh" "list"
     bash "dropbox.sh" "list"
     bash "git.sh" "list"
+    bash "docker.sh" "list"
     exit
 fi
 
@@ -150,6 +151,7 @@ echo -e " |\e[36m 5 \e[0m| Desktop settings (GNOME/Ubuntu)"
 echo -e " |\e[36m 6 \e[0m| npm"
 echo -e " |\e[36m 7 \e[0m| Dropbox"
 echo -e " |\e[36m 8 \e[0m| Git"
+echo -e " |\e[36m 9 \e[0m| Docker"
 echo
 
 echo -e " Enter your choices (\e[3m\e[2m separate multiple choices by a space \e[0m ) "
@@ -224,6 +226,7 @@ case $choice in
                     bash "npm.sh" "${args[@]}"
                     bash "dropbox.sh" "${args[@]}"
                     bash "git.sh" "${args[@]}"
+                    bash "docker.sh" "${args[@]}"
                     ;;
                 2)
                     bash "bash.sh" "${args[@]}"
@@ -240,6 +243,8 @@ case $choice in
                 7)	bash "dropbox.sh" "${args[@]}"
                     ;;
                 8)	bash "git.sh" "${args[@]}"
+                    ;;
+                9)	bash "docker.sh" "${args[@]}"
                     ;;
                 *)	;;
             esac
@@ -259,6 +264,7 @@ case $choice in
                     bash "npm.sh" "unset"
                     bash "dropbox.sh" "unset"
                     bash "git.sh" "unset"
+                    bash "docker.sh" "unset"
                     ;;
                 2)
                     bash "bash.sh" "unset"
@@ -275,6 +281,8 @@ case $choice in
                 7)	bash "dropbox.sh" "unset"
                     ;;
                 8) 	bash "git.sh" "unset"
+                    ;;
+                9) 	bash "docker.sh" "unset"
                     ;;
                 *)	;;
             esac
@@ -295,7 +303,8 @@ case $choice in
 						            bash "gsettings.sh" "list"
 						            bash "npm.sh" "list"
 						            bash "dropbox.sh" "list"
-                        bash "git.sh" "list"
+                                    bash "git.sh" "list"
+                                    bash "docker.sh" "list"
 						            ;;
 					          2)
 						            bash "bash.sh" "list"
@@ -312,6 +321,8 @@ case $choice in
 					          7) 	bash "dropbox.sh" "list"
 						            ;;
 					          8) 	bash "git.sh" "list"
+                                    ;;
+                              9) 	bash "docker.sh" "list"
 						            ;;
 					          *)	;;
 				        esac

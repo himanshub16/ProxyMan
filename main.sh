@@ -168,7 +168,7 @@ case $choice in
 
         if [[ "$1" != "load"  && ( "$save_for_reuse" = "y" || "$save_for_reuse" = "Y" ) ]]; then
             config_file="http_host=$http_host%s\nhttp_port=$http_port%s\nuse_same=$use_same\nuse_auth=$use_auth\nusername=$username\npassword=$password\nhttps_host=$https_host\nhttps_port=$https_port\nftp_host=$ftp_host\nftp_port=$ftp_port\nno_proxy=$no_proxy"
-            printf $config_file > "profiles/$profile_name".txt
+            printf $config_file > "$DIR/profiles/$profile_name".txt
         fi
 
         if [[ $choice == "load" || $1 == "load" ]]; then

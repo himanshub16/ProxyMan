@@ -227,7 +227,7 @@ case $choice in
                     sudo bash "$DIR/apt.sh" "${args[@]}"
                     sudo bash "$DIR/dnf.sh" "${args[@]}"
                     bash "$DIR/gsettings.sh" "${args[@]}"
-                    bash "$DIR/vnpm.sh" "${args[@]}"
+                    bash "$DIR/npm.sh" "${args[@]}"
                     bash "$DIR/dropbox.sh" "${args[@]}"
                     bash "$DIR/git.sh" "${args[@]}"
                     bash "$DIR/docker.sh" "${args[@]}"

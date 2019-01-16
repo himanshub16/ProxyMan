@@ -24,6 +24,7 @@ function _do_it_for_all() {
         bash "npm.sh" "$what_to_do"
         bash "dropbox.sh" "$what_to_do"
         bash "git.sh" "$what_to_do"
+        bash "docker.sh" "$what_to_do"
 
         # isn't required, but still checked to avoid sudo in main all the time
         if [[ $(which apt &> /dev/null) || $(which dnf &> /dev/null) ]]; then
@@ -52,6 +53,8 @@ function _do_it_for_all() {
                 7) bash "dropbox.sh" "$what_to_do"
                    ;;
                 8) bash "git.sh" "$what_to_do"
+                   ;;
+                9) bash "docker.sh" "$what_to_do"
                    ;;
                 *) ;;
             esac
@@ -143,6 +146,7 @@ function prompt_for_proxy_targets() {
     echo "|${bold}${red} 6 ${normal}| npm & yarn"
     echo "|${bold}${red} 7 ${normal}| Dropbox"
     echo "|${bold}${red} 8 ${normal}| Git"
+    echo "|${bold}${red} 9 ${normal}| Docker"
     echo
     echo "Separate multiple choices with space"
     echo -ne "\e[5m ? \e[0m" ; read targets

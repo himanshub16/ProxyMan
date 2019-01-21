@@ -6,7 +6,7 @@
 v3 is ready with new features, necessary improvements, updates, restructured code and much better experience. :tada: 
 
 ## How to use it
-[![asciicast](https://asciinema.org/a/53PYofBkTUz26FmuhWaSeqF15.png)](https://asciinema.org/a/53PYofBkTUz26FmuhWaSeqF15)
+[![asciicast](https://asciinema.org/a/CVha4PPMdjkU7a1XihD9PItrz.png)](https://asciinema.org/a/CVha4PPMdjkU7a1XihD9PItrz)
 
 * Download and install with single-step process.
 ```./install```

@@ -33,6 +33,7 @@ unset_proxy() {
 
 set_proxy() {
     unset_proxy
+    mkdir -p /etc/systemd/system/docker.service.d
     if [ ! -e "$CONF_FILE" ]; then
         touch "$CONF_FILE"
     fi

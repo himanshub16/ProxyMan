@@ -26,15 +26,15 @@ unset_proxy() {
         return
     fi
     if [ "$(cat $CONF_FILE | grep proxy -i | wc -l)" -gt 0 ]; then
-        sudo rm $CONF_FILE
-        sudo service docker restart
+        rm $CONF_FILE
+        service docker restart
     fi
 }
 
 set_proxy() {
     unset_proxy
     if [ ! -e "$CONF_FILE" ]; then
-        sudo touch "$CONF_FILE"
+        touch "$CONF_FILE"
     fi
 
     local stmt=""
@@ -49,9 +49,9 @@ set_proxy() {
     echo "Environment=\"HTTP_PROXY=http://${stmt}${http_host}:${http_port}\";" \
          >> docker_config.tmp
 
-    cat docker_config.tmp | sudo tee -a $CONF_FILE > /dev/null
+    cat docker_config.tmp |  tee -a $CONF_FILE > /dev/null
     rm docker_config.tmp
-    sudo service docker restart
+    service docker restart
     return
 }
 

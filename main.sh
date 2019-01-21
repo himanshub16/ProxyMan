@@ -24,12 +24,12 @@ function _do_it_for_all() {
         bash "npm.sh" "$what_to_do"
         bash "dropbox.sh" "$what_to_do"
         bash "git.sh" "$what_to_do"
-        bash "docker.sh" "$what_to_do"
 
         # isn't required, but still checked to avoid sudo in main all the time
-        if [[ $(which apt &> /dev/null) || $(which dnf &> /dev/null) ]]; then
+        if [[ $(which apt &> /dev/null) || $(which dnf &> /dev/null) || $(which docker &> /dev/null) ]]; then
             sudo bash "apt.sh" "$what_to_do"
             sudo bash "dnf.sh" "$what_to_do"
+            sudo bash "docker.sh" "$what_to_do"
         fi
     else
         for t in "${targets[@]}"
@@ -54,7 +54,7 @@ function _do_it_for_all() {
                    ;;
                 8) bash "git.sh" "$what_to_do"
                    ;;
-                9) bash "docker.sh" "$what_to_do"
+                9) sudo bash "docker.sh" "$what_to_do"
                    ;;
                 *) ;;
             esac

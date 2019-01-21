@@ -27,9 +27,9 @@ function _do_it_for_all() {
 
         # isn't required, but still checked to avoid sudo in main all the time
         if [[ $(which apt &> /dev/null) || $(which dnf &> /dev/null) || $(which docker &> /dev/null) ]]; then
-            sudo bash "apt.sh" "$what_to_do"
-            sudo bash "dnf.sh" "$what_to_do"
-            sudo bash "docker.sh" "$what_to_do"
+            sudo -E bash "apt.sh" "$what_to_do"
+            sudo -E bash "dnf.sh" "$what_to_do"
+            sudo -E bash "docker.sh" "$what_to_do"
         fi
     else
         for t in "${targets[@]}"
@@ -41,10 +41,10 @@ function _do_it_for_all() {
                 #    ;;
                 2) bash "bash-zsh.sh" "$what_to_do"
                    ;;
-                3) sudo bash "environment.sh" "$what_to_do"
+                3) sudo -E bash "environment.sh" "$what_to_do"
                    ;;
-                4) sudo bash "apt.sh" "$what_to_do"
-                   sudo bash "dnf.sh" "$what_to_do"
+                4) sudo -E bash "apt.sh" "$what_to_do"
+                   sudo -E bash "dnf.sh" "$what_to_do"
                    ;;
                 5) bash "gsettings.sh" "$what_to_do"
                    ;;
@@ -54,7 +54,7 @@ function _do_it_for_all() {
                    ;;
                 8) bash "git.sh" "$what_to_do"
                    ;;
-                9) sudo bash "docker.sh" "$what_to_do"
+                9) sudo -E bash "docker.sh" "$what_to_do"
                    ;;
                 *) ;;
             esac

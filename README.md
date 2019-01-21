@@ -31,9 +31,8 @@ Open a new terminal window and start playing.
 
 
 ## Why still a release candidate?
-Just letting it be for about a month from now to let me use it and find more bugs and edge cases (if any). :see_no_evil: 
-If you find one, feel free to open an [issue](https://github.com/ProxyMan/issues).
-Would release during the first week of 2019. :smiley:
+If you find any bugs/edge-cases not taken care of :see_no_evil:, feel free to open an [issue](https://github.com/ProxyMan/issues).
+:smiley:
 
 
 ### DISCLAIMER

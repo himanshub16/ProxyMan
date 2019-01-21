@@ -15,7 +15,7 @@ unset_proxy() {
 }
 
 set_proxy() {
-    $DROPBOX_PY proxy manual $http_host $http_port $username $password &> /dev/null
+    eval "$DROPBOX_PY proxy manual http $http_host $http_port $username $password &> /dev/null"
 }
 
 

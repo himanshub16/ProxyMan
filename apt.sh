@@ -44,11 +44,11 @@ set_proxy() {
     fi
 
     # caution: do not use / after stmt
-    echo "Acquire::Http::Proxy \"http://${stmt}${http_host}:${http_port}\"" \
+    echo "Acquire::Http::Proxy \"http://${stmt}${http_host}:${http_port}\";" \
          >> "$CONF_FILE"
-    echo "Acquire::Https::Proxy \"https://${stmt}${https_host}:${https_port}\"" \
+    echo "Acquire::Https::Proxy \"https://${stmt}${https_host}:${https_port}\";" \
          >> "$CONF_FILE"
-    echo "Acquire::Ftp::Proxy \"ftp://${stmt}${ftp_host}:${ftp_port}\"" \
+    echo "Acquire::Ftp::Proxy \"ftp://${stmt}${ftp_host}:${ftp_port}\";" \
          >> "$CONF_FILE"
 }
 

@@ -47,7 +47,7 @@ set_proxy() {
 }
 
 
-which apt &> /dev/null
+which dnf &> /dev/null
 if [ "$?" != 0 ]; then
     exit
 fi

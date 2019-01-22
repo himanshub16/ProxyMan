@@ -115,4 +115,5 @@ ${bold} delete  ${normal} \t  delete a profile
 ${bold} help    ${normal} \t  show this help
 
 Allowed options: set, unset, list, configs, load, delete, help
+> ./main.sh set
 "

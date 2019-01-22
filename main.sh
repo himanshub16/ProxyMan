@@ -123,7 +123,7 @@ function prompt_for_proxy_values() {
 
     echo -n " No Proxy ${green} (default $no_proxy) ${normal}"; read _no_proxy
     if [[ $_no_proxy != "" ]]; then
-        no_proxy=_no_proxy
+        no_proxy=$_no_proxy
     fi
 
     echo -n "Save profile for later use (y/n)? "; read save_for_reuse

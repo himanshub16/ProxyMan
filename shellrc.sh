@@ -56,8 +56,8 @@ set_proxy() {
     echo "export NO_PROXY=\"${no_proxy}"\"                                    >> "$SHELLRC"
 
     if [ "$USE_HTTP_PROXY_FOR_HTTPS" = "true" ]; then
-        echo "export https_proxy=\"${http_proxy}/\"" >> "$SHELLRC"
-        echo "export HTTPS_PROXY=\"${HTTP_PROXY}/\"" >> "$SHELLRC"
+        echo "export https_proxy=\"http://${stmt}${https_host}:${https_port}/\"" >> "$SHELLRC"
+        echo "export HTTPS_PROXY=\"http://${stmt}${https_host}:${https_port}/\"" >> "$SHELLRC"
     else
         echo "export https_proxy=\"https://${stmt}${https_host}:${https_port}/\"" >> "$SHELLRC"
         echo "export HTTPS_PROXY=\"https://${stmt}${https_host}:${https_port}/\"" >> "$SHELLRC"

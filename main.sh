@@ -26,11 +26,10 @@ function _do_it_for_all() {
         bash "git.sh" "$what_to_do"
 
         # isn't required, but still checked to avoid sudo in main all the time
-        if [[ $(which apt &> /dev/null) || $(which dnf &> /dev/null) || $(which docker &> /dev/null) ]]; then
-            sudo -E bash "apt.sh" "$what_to_do"
-            sudo -E bash "dnf.sh" "$what_to_do"
-            sudo -E bash "docker.sh" "$what_to_do"
-        fi
+        SUDO_CMDS="apt dnf docker"
+        for cmd in $SUDO_CMDS; do
+            command -v $cmd > /dev/null && sudo -E bash "${cmd}.sh" "$what_to_do" || :
+        done
     else
         for t in "${targets[@]}"
         do

@@ -42,6 +42,7 @@ function load_config() {
     export use_auth=`grep use_auth\=     -i $profile_path | cut -d= -f2`
     export username=`grep username\=     -i $profile_path | cut -d= -f2`
     export password=`grep password\=     -i $profile_path | cut -d= -f2`
+    export no_proxy=`grep no_proxy\=     -i $profile_path | cut -d= -f2`
 }
 
 function load_default_config() {
@@ -80,6 +81,9 @@ https_host=$https_host
 https_port=$https_port
 ftp_host=$ftp_host
 ftp_port=$ftp_port
+
+# URLs that should be excluded from proxying
+no_proxy=$no_proxy
 " > $profile_path
 
     echo "${green}Saved to $profile_path.${normal}"

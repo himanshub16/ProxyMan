@@ -45,6 +45,8 @@ set_proxy() {
     gsettings set org.gnome.system.proxy.https port "$https_port"
     gsettings set org.gnome.system.proxy.ftp host "$ftp_host"
     gsettings set org.gnome.system.proxy.ftp port "$ftp_port"
+    gsettings set org.gnome.system.proxy.http authentication-password "$password"
+    gsettings set org.gnome.system.proxy.http authentication-user "$username"
 
     if [ "$use_auth" = "y" ]; then
         gsettings set org.gnome.system.proxy.http use-authentication true

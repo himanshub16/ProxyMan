@@ -16,6 +16,7 @@ list_proxy() {
          "$(gsettings get org.gnome.system.proxy.http host) "\
          "$(gsettings get org.gnome.system.proxy.http port)"
     echo "${bold} Auth ${normal}  "\
+         "$(gsettings get org.gnome.system.proxy.http use-authentication) "\
          "$(gsettings get org.gnome.system.proxy.http authentication-user) "\
          "$(gsettings get org.gnome.system.proxy.http authentication-password)"
     echo "${bold} https ${normal} "\
@@ -27,6 +28,8 @@ list_proxy() {
     echo "${bold} socks ${normal} "\
          "$(gsettings get org.gnome.system.proxy.socks host) "\
          "$(gsettings get org.gnome.system.proxy.socks port)"
+    echo "${bold} no_proxy ${normal} "\
+         "$(gsettings get org.gnome.system.proxy ignore-hosts) "
 }
 
 unset_proxy() {
@@ -38,12 +41,29 @@ set_proxy() {
     gsettings set org.gnome.system.proxy mode "manual"
     gsettings set org.gnome.system.proxy.http host "$http_host"
     gsettings set org.gnome.system.proxy.http port "$http_port"
-    gsettings set org.gnome.system.proxy.http authentication-password "$password"
-    gsettings set org.gnome.system.proxy.http authentication-user "$username"
     gsettings set org.gnome.system.proxy.https host "$https_host"
     gsettings set org.gnome.system.proxy.https port "$https_port"
     gsettings set org.gnome.system.proxy.ftp host "$ftp_host"
     gsettings set org.gnome.system.proxy.ftp port "$ftp_port"
+    gsettings set org.gnome.system.proxy.http authentication-password "$password"
+    gsettings set org.gnome.system.proxy.http authentication-user "$username"
+
+    if [ "$use_auth" = "y" ]; then
+        gsettings set org.gnome.system.proxy.http use-authentication true
+    else
+        gsettings set org.gnome.system.proxy.http use-authentication false
+    fi
+
+    if [[ $no_proxy =~ .*,.* ]]; then
+        IFS=',' read -r -a array <<< "$no_proxy"
+        _no_proxy=$(printf ",'%s'" "${array[@]}")
+        _no_proxy="[${_no_proxy:1}]"
+        gsettings set org.gnome.system.proxy ignore-hosts "${_no_proxy}"
+    elif [[ $no_proxy != "" ]]; then
+            gsettings set org.gnome.system.proxy ignore-hosts "['${no_proxy}']"
+    else
+        gsettings set org.gnome.system.proxy ignore-hosts ""
+    fi
 }
 
 

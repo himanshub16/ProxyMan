@@ -48,12 +48,8 @@ set_proxy() {
 
     if [ "$use_auth" = "y" ]; then
         gsettings set org.gnome.system.proxy.http use-authentication true
-        gsettings set org.gnome.system.proxy.http authentication-password "$password"
-        gsettings set org.gnome.system.proxy.http authentication-user "$username"
     else
         gsettings set org.gnome.system.proxy.http use-authentication false
-        gsettings set org.gnome.system.proxy.http authentication-password ''
-        gsettings set org.gnome.system.proxy.http authentication-user ''
     fi
 
     if [[ $no_proxy =~ .*,.* ]]; then

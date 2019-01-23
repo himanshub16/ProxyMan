@@ -16,7 +16,7 @@ list_proxy() {
          "$(gsettings get org.gnome.system.proxy.http host) "\
          "$(gsettings get org.gnome.system.proxy.http port)"
     echo "${bold} Auth ${normal}  "\
-         "$(gsettings get org.gnome.system.proxy.http use-authentication) "\   
+         "$(gsettings get org.gnome.system.proxy.http use-authentication) "\
          "$(gsettings get org.gnome.system.proxy.http authentication-user) "\
          "$(gsettings get org.gnome.system.proxy.http authentication-password)"
     echo "${bold} https ${normal} "\
@@ -27,7 +27,7 @@ list_proxy() {
          "$(gsettings get org.gnome.system.proxy.ftp port)"
     echo "${bold} socks ${normal} "\
          "$(gsettings get org.gnome.system.proxy.socks host) "\
-         "$(gsettings get org.gnome.system.proxy.socks port)"   
+         "$(gsettings get org.gnome.system.proxy.socks port)"
     echo "${bold} no_proxy ${normal} "\
          "$(gsettings get org.gnome.system.proxy ignore-hosts) "
 }

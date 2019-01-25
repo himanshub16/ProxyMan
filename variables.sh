@@ -79,6 +79,7 @@ HELP_TEXT="ProxyMan lets you set system-wide proxy settings.
  ${star}${blue} https://github.com/himanshub16/ProxyMan ${normal}
 
 Usage: proxyman [command]
+  or   ./main.sh [command]
 
 Commands:
 ${bold} set     ${normal} \t  set proxy settings
@@ -104,6 +105,7 @@ HELP_TEXT="ProxyMan lets you set system-wide proxy settings.
  ${star}${blue} https://github.com/himanshub16/ProxyMan ${normal}
 
 Usage: proxyman [command]
+  or   ./main.sh [command]
 
 Commands:
 ${bold} set     ${normal} \t  set proxy settings
@@ -115,5 +117,4 @@ ${bold} delete  ${normal} \t  delete a profile
 ${bold} help    ${normal} \t  show this help
 
 Allowed options: set, unset, list, configs, load, delete, help
-> ./main.sh set
 "

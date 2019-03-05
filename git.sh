@@ -11,8 +11,8 @@ list_proxy() {
 }
 
 unset_proxy() {
-    git config --global --unset http.proxy
-    git config --global --unset https.proxy
+    git config --global --remove-section http
+    git config --global --remove-section https
 }
 
 set_proxy() {

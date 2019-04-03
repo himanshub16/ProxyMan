@@ -34,7 +34,7 @@ unset_proxy() {
         return
     fi
     for PROTOTYPE in "HTTP" "HTTPS" "FTP" "RSYNC" "NO"; do
-        sed -i "/${PROTOTYPE}_PROXY\=/d" "$CONF_FILE"
+        sed -i --follow-symlinks "/${PROTOTYPE}_PROXY\=/d" "$CONF_FILE"
     done
 }
 

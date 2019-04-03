@@ -25,10 +25,10 @@ unset_proxy() {
     # extra effort required to avoid removing custom environment variables set
     # by the user for personal use
     for proxytype in "http" "https" "ftp" "rsync" "no"; do
-        sed -i "/export ${proxytype}_proxy\=/d" "$SHELLRC"
+        sed -i --follow-symlinks "/export ${proxytype}_proxy\=/d" "$SHELLRC"
     done
     for PROTOTYPE in "HTTP" "HTTPS" "FTP" "RSYNC" "NO"; do
-        sed -i "/export ${PROTOTYPE}_PROXY\=/d" "$SHELLRC"
+        sed -i --follow-symlinks "/export ${PROTOTYPE}_PROXY\=/d" "$SHELLRC"
     done
 }
 

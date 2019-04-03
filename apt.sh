@@ -28,7 +28,7 @@ unset_proxy() {
         return
     fi
     if [ "$(cat $CONF_FILE | grep proxy -i | wc -l)" -gt 0 ]; then
-        sed -E "/^Acquire::(.)*::Proxy/d" $CONF_FILE -i
+        sed -E "/^Acquire::(.)*::Proxy/d" $CONF_FILE -i --follow-symlinks
     fi
 }
 

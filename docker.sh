@@ -2,7 +2,7 @@
 # plugin to set "dnf" proxy settings for ProxyMan
 # privileges has to be set by the process which starts this script
 
-CONF_FILE="/etc/systemd/system/docker.service.d/http-proxy.conf"
+CONF_FILE=`readlink -f /etc/systemd/system/docker.service.d/http-proxy.conf`
 
 
 reload_docker_service() {
@@ -34,7 +34,7 @@ unset_proxy() {
         return
     fi
     for PROTOTYPE in "HTTP" "HTTPS" "FTP" "RSYNC" "NO"; do
-        sed -i --follow-symlinks "/${PROTOTYPE}_PROXY\=/d" "$CONF_FILE"
+        sed -i "/${PROTOTYPE}_PROXY\=/d" "$CONF_FILE"
     done
 }
 

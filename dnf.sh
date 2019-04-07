@@ -3,7 +3,7 @@
 # privileges has to be set by the process which starts this script
 
 
-CONF_FILE="/etc/dnf/dnf.conf"
+CONF_FILE=`readlink -f /etc/dnf/dnf.conf`
 
 fix_new_line() {
     if [[ $(tail -c 1 "$CONF_FILE" | wc --lines ) = 0 ]]; then
@@ -28,7 +28,7 @@ unset_proxy() {
         return
     fi
     if [ "$(cat $CONF_FILE | grep proxy -i | wc -l)" -gt 0 ]; then
-        sed "/proxy/d" $CONF_FILE -i --follow-symlinks
+        sed "/proxy/d" $CONF_FILE -i
     fi
 }
 

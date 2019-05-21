@@ -16,6 +16,11 @@ else
 fi
 
 # copy the contents to ~/.proxyman/
+echo "This will create ~/.local/bin if it doesn't exist."
+echo "Also, add ~/.local/bin to \$PATH."
+echo "Press any key to continue, or Ctrl+C to break."
+read
+
 mkdir -p $TARGET_DIR
 cp * $TARGET_DIR
 

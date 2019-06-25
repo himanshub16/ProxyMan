@@ -23,7 +23,11 @@ set_proxy() {
 
     # caution: do not use / after stmt
     git config --global http.proxy "http://${stmt}${http_host}:${http_port}/"
-    git config --global https.proxy "https://${stmt}${https_host}:${https_port}/"
+    if [ "$USE_HTTP_PROXY_FOR_HTTPS" = "true" ]; then
+        git config --global https.proxy "http://${stmt}${https_host}:${https_port}/"
+    else
+        git config --global https.proxy "https://${stmt}${https_host}:${https_port}/"
+    fi
 }
 
 

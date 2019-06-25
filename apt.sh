@@ -46,8 +46,13 @@ set_proxy() {
     # caution: do not use / after stmt
     echo "Acquire::Http::Proxy \"http://${stmt}${http_host}:${http_port}\";" \
          >> "$CONF_FILE"
-    echo "Acquire::Https::Proxy \"https://${stmt}${https_host}:${https_port}\";" \
+    if [ "$USE_HTTP_PROXY_FOR_HTTPS" = "true" ]; then
+        echo "Acquire::Https::Proxy \"http://${stmt}${https_host}:${https_port}\";" \
          >> "$CONF_FILE"
+    else
+        echo "Acquire::Https::Proxy \"https://${stmt}${https_host}:${https_port}\";" \
+         >> "$CONF_FILE"
+    fi
     echo "Acquire::Ftp::Proxy \"ftp://${stmt}${ftp_host}:${ftp_port}\";" \
          >> "$CONF_FILE"
 }

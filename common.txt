@@ -1,12 +1,11 @@
 # expected command line arguments 
 #
-# Created by "yourgoodname"
-# For ProxyMan "https://github.com/himanshub16/ProxyMan/"
-#
+# ProxyMan "https://github.com/himanshub16/ProxyMan/"
+# converted to proxywoman by barfin
 # convention to be followed across extension made / to be made
 # include this comment section in all plugins to avoid confusions while coding 
 #
-# plugin to set "TARGET ENVIRON" proxy settings for ProxyMan
+# plugin to set "TARGET ENVIRON" proxy settings for Proxywoman
 #
 # The arguments are given in bash syntax to maintain universality and ease
 # across all UNIX systems. 

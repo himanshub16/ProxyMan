@@ -1,5 +1,5 @@
 #!/bin/bash
-# plugin to set "apt" proxy settings for ProxyMan
+# plugin to set "apt" proxy settings for ProxyWoman
 # privileges has to be set by the process which starts this script
 
 

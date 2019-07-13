@@ -31,5 +31,7 @@ Open a new terminal window and start playing.
 If you find any bugs/edge-cases not taken care of :see_no_evil:, feel free to open an [issue](https://github.com/ProxyMan/issues).
 
 
-### DISCLAIMER
+## DISCLAIMER
 Please don't save your passwords on public machines. Instead use proxywoman without providing password and log-in from the browser.
+
+### the difference between fork and the main repository is that i got rid of the word MAN

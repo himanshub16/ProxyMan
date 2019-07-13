@@ -1,4 +1,4 @@
-ProxyMan changelog
+ProxyWoman changelog
 ===============================================================
 ## v2.1 : Version 2 update : Release : November 20, 2016
 ---------------------------------------------------------------
@@ -16,7 +16,7 @@ ProxyMan changelog
 
 ## v2.0 : Version 2 1st Release : October 7, 2016
 ---------------------------------------------------------------
-* Proxyman became modular.
+* Proxywoman became modular.
 * Settings are governed by individual scripts rather than the
   main file
 * Bug fixes from version 1

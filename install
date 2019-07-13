@@ -2,20 +2,20 @@
 # This script does not download the package to install it.
 # This is because I assume wget/curl might not work as proxy hasn't been set.
 
-# Working from current directory having proxyman
+# Working from current directory having proxywoman
 
-TARGET_DIR="$HOME/.proxyman"
+TARGET_DIR="$HOME/.proxywoman"
 
 
 # verify if this is current directory
 if [[ -f "main.sh" && -f "shellrc.sh" && -f "dropbox.sh" ]]; then
     :
 else
-    echo "please cd to the folder containing proxyman"
+    echo "please cd to the folder containing proxywoman"
     exit 1
 fi
 
-# copy the contents to ~/.proxyman/
+# copy the contents to ~/.proxywoman/
 echo "This will create ~/.local/bin if it doesn't exist."
 echo "Also, add ~/.local/bin to \$PATH."
 echo "Press any key to continue, or Ctrl+C to break."
@@ -26,10 +26,10 @@ cp * $TARGET_DIR
 
 # add to path
 mkdir -p $HOME/.local/bin
-cp proxyman $HOME/.local/bin
-chmod +x $HOME/.local/bin/proxyman
+cp proxywoman $HOME/.local/bin
+chmod +x $HOME/.local/bin/proxywoman
 
-which proxyman &> /dev/null
+which proxywoman &> /dev/null
 if [ "$?" != 0 ]; then
     echo "Failed to install :("
     echo "You can still use it > ./main.sh set"

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cd $HOME/.proxyman
+cd $HOME/.proxywoman
 ./main.sh $@
 cd $OLDPWD

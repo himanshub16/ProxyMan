@@ -2,6 +2,7 @@
 #
 # If you have found some issues, or some feature request :
 # Raise them here : https://github.com/himanshub16/ProxyMan/issues
+# converted to proxywoman by barfin
 # This file lists the variables required across all scripts.
 # Credits : https://unix.stackexchange.com/a/10065/147140
 

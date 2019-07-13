@@ -60,7 +60,7 @@ function save_config() {
     local profile_path="$config_dir/$profile_name"
     mkdir -p "$config_dir"
 
-    echo "# Proxyman profile : $profile_name
+    echo "# Proxywoman profile : $profile_name
 
 # Example: 127.0.0.1
 http_host=$http_host

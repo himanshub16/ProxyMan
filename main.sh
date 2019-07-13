@@ -2,6 +2,7 @@
 #
 # If you have found some issues, or some feature request :
 # Raise them here : https://github.com/himanshub16/ProxyMan/issues
+# converted to proxywoman by barfin
 # This is the main script which calls other respective scripts.
 # In case of doubts regarding how to use, refer the README.md file.
 

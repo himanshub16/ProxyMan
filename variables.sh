@@ -2,10 +2,6 @@
 #
 # If you have found some issues, or some feature request :
 # Raise them here : https://github.com/himanshub16/ProxyMan/issues
-#
-# Author : Himanshu Shekhar (@himanshub16)
-# GitHub : "https://github.com/himanshub16/ProxyMan/"
-#
 # This file lists the variables required across all scripts.
 # Credits : https://unix.stackexchange.com/a/10065/147140
 
@@ -33,7 +29,7 @@ if test -t 1; then
     fi
 fi
 
-export config_dir="$HOME/.config/proxyman"
+export config_dir="$HOME/.config/proxywoman"
 export default_config="default"
 export SHELLRC="$HOME/.bashrc"
 
@@ -75,36 +71,36 @@ fi
 
 
 # This help text contains examples for each command
-HELP_TEXT="ProxyMan lets you set system-wide proxy settings.
+HELP_TEXT="ProxyWoman lets you set system-wide proxy settings.
  ${star}${blue} https://github.com/himanshub16/ProxyMan ${normal}
 
-Usage: proxyman [command]
+Usage: proxywoman [command]
   or   ./main.sh [command]
 
 Commands:
 ${bold} set     ${normal} \t  set proxy settings
-  > proxyman set
+  > proxywoman set
 ${bold} unset   ${normal} \t  unset proxy settings
-  > proxyman unset
+  > proxywoman unset
 ${bold} list    ${normal} \t  list current settings
-  > proxyman list
+  > proxywoman list
 ${bold} configs ${normal} \t  lists available configs
-  > proxyman configs
+  > proxywoman configs
 ${bold} load    ${normal} \t  load a profile
-  > proxyman load 'profile_name'
+  > proxywoman load 'profile_name'
 ${bold} delete  ${normal} \t  delete a profile
-  > proxyman delete 'profile_name'
+  > proxywoman delete 'profile_name'
 ${bold} help    ${normal} \t  show this help
-  > proxyman help
+  > proxywoman help
 
 Allowed options: set, unset, list, configs, load, delete, help
 "
 
 # This help text contains each command, but without examples.
-HELP_TEXT="ProxyMan lets you set system-wide proxy settings.
+HELP_TEXT="ProxyWoman lets you set system-wide proxy settings.
  ${star}${blue} https://github.com/himanshub16/ProxyMan ${normal}
 
-Usage: proxyman [command]
+Usage: proxywoman [command]
   or   ./main.sh [command]
 
 Commands:

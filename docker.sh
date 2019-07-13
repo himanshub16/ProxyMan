@@ -1,5 +1,5 @@
 #!/bin/bash
-# plugin to set "dnf" proxy settings for ProxyMan
+# plugin to set "dnf" proxy settings for ProxyWoman
 # privileges has to be set by the process which starts this script
 
 CONF_FILE=`readlink -f /etc/systemd/system/docker.service.d/http-proxy.conf`

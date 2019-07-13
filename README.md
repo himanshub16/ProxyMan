@@ -32,4 +32,4 @@ If you find any bugs/edge-cases not taken care of :see_no_evil:, feel free to op
 
 
 ### DISCLAIMER
-Please don't save your passwords on public machines. Instead use proxyman without providing password and log-in from the browser.
+Please don't save your passwords on public machines. Instead use proxywoman without providing password and log-in from the browser.

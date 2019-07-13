@@ -2,8 +2,8 @@
 #
 # If you have found some issues, or some feature request :
 # Raise them here : https://github.com/himanshub16/ProxyMan/issues
-# Author : Himanshu Shekhar (@himanshub16)
-#
+# Author : Himanshu Shekhar (@himanshub16) 
+# converted to proxywoman by @barfin
 # This file contains the functions (CRUD) required for config managements.
 # * list_configs()
 # * load_config(profile_name)

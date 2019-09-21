@@ -20,25 +20,6 @@
 # arguments and comments.
 # If you don't need any particular proxy settings, ignore the variables.
 
-# $#  : number of arguments
-# $1  : http_host
-# if this argument is "unset", proxy settings should be unset.
-# if this is "toggle", toggle settings.
-
-
-# $2  : http_port
-# $3  : use_same ; "y" or "n"
-# $4  : use_auth
-# $5  : username ; send empty string if not available
-# $6  : password ; send empty string if not available
-#
-# if use same is y, then no further arguments are considered
-#
-# $7  : https_host
-# $8  : https_port
-# $9  : ftp_host
-# $10 : ftp_port
-
 # here your code starts
 
 # privileges has to be set by the process which starts this script
@@ -59,7 +40,7 @@ fix_new_line() {
 
 list_proxy() {
 	echo
-	echo -e "\e[1m Environment proxy settings \e[0m"
+	echo "${bold}Environment proxy settings : /etc/environment${normal}"
 	lines="$(cat /etc/environment | grep proxy -i | wc -l)"
 	if [ "$lines" -gt 0 ]; then
 		cat "/etc/environment" | grep proxy -i | sed "s/\=/\ /g"
@@ -81,38 +62,30 @@ set_proxy() {
 		touch "/etc/environment"
 	fi
 
-	var=
-	if [ "$4" = "y" ]; then
-		var="$5:$6@"
+	local stmt=""
+	if [ "$use_auth" = "y" ]; then
+	stmt="${username}:${password}@"
 	fi
 
 	echo -n "" > bash_config.tmp
-	if [ "$3" = "y" ]; then
-		newvar="://$var$1:$2"
-		echo "http_proxy=\"http$newvar\"" >> bash_config.tmp
-		echo "https_proxy=\"http$newvar\"" >> bash_config.tmp
-		echo "ftp_proxy=\"ftp$newvar\"" >> bash_config.tmp
-		echo "HTTP_PROXY=\"http$newvar\"" >> bash_config.tmp
-		echo "HTTPS_PROXY=\"http$newvar\"" >> bash_config.tmp
-		echo "FTP_PROXY=\"ftp$newvar\"" >> bash_config.tmp
 
-		cat bash_config.tmp | tee -a /etc/environment > /dev/null
-		rm bash_config.tmp
-		return
+	echo "http_proxy=\"http://${stmt}${http_host}:${http_port}\"" >> bash_config.tmp
+	echo "ftp_proxy=\"ftp://${stmt}${ftp_host}:${ftp_port}\"" >> bash_config.tmp
+	echo "HTTP_PROXY=\"http://${stmt}${http_host}:${http_port}\"" >> bash_config.tmp
+	echo "FTP_PROXY=\"ftp://${stmt}${ftp_host}:${ftp_port}\"" >> bash_config.tmp
 
-	elif [ "$3" = "n" ]; then
-		echo "http_proxy=\"http://$var$1:$2\"" >> bash_config.tmp
-		echo "https_proxy=\"http://$var$7:$8\"" >> bash_config.tmp
-		echo "ftp_proxy=\"ftp://$var$9:$10\"" >> bash_config.tmp
-		echo "HTTP_PROXY=\"http://$var$1:$2\"" >> bash_config.tmp
-		echo "HTTPS_PROXY=\"http://$var$7:$8\"" >> bash_config.tmp
-		echo "FTP_PROXY=\"ftp://$var$9:$10\"" >> bash_config.tmp
-
-    fix_new_line "/etc/environment"
-		cat bash_config.tmp | tee -a /etc/environment > /dev/null
-		rm bash_config.tmp
-		return
+	if [ "$USE_HTTP_PROXY_FOR_HTTPS" = "true" ]; then
+		echo "https_proxy=\"http://${stmt}${http_host}:${http_port}\"" >> bash_config.tmp
+		echo "HTTPS_PROXY=\"http://${stmt}${http_host}:${http_port}\"" >> bash_config.tmp
+	else
+		echo "https_proxy=\"https://${stmt}${https_host}:${https_port}\"" >> bash_config.tmp
+		echo "HTTPS_PROXY=\"https://${stmt}${https_host}:${https_port}\"" >> bash_config.tmp
 	fi
+
+	fix_new_line "/etc/environment"
+	cat bash_config.tmp | tee -a /etc/environment > /dev/null
+	rm bash_config.tmp
+	return
 }
 
 
@@ -134,4 +107,4 @@ fi
 
 
 unset_proxy
-set_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10
+set_proxy

@@ -58,6 +58,8 @@ unset_proxy() {
 }
 
 set_proxy() {
+	unset_proxy
+
 	if [ ! -e "/etc/environment" ]; then
 		touch "/etc/environment"
 	fi
@@ -93,18 +95,16 @@ if [ "$#" = 0 ]; then
 	exit
 fi
 
-if [ "$1" = "unset" ]; then
-	# that's what is needed
-	unset_proxy
-	exit
-# elif [ "$1" = "toggle" ]; then
-# 	toggle_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11 $12
-	# exit
-elif [ "$1" = "list" ]; then
-	list_proxy
-	exit
-fi
-
-
-unset_proxy
-set_proxy
+what_to_do=$1
+case $what_to_do in
+	set) set_proxy
+			 ;;
+	unset) unset_proxy
+				 ;;
+	list) list_proxy
+				 ;;
+	#toggle) toggle_proxy $1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11 $12
+	#      ;;
+	*)
+				 ;;
+esac

@@ -19,7 +19,7 @@ function _do_it_for_all() {
     local what_to_do="$1"
     if [[ -z "$targets" || "$targets" = "1" ]]; then
         bash "bash-zsh.sh" "$what_to_do"
-        # sudo bash "environment.sh" "$what_to_do"
+        sudo -E bash "environment.sh" "$what_to_do"
         bash "gsettings.sh" "$what_to_do"
         bash "kde5.sh" "$what_to_do"
         bash "npm.sh" "$what_to_do"

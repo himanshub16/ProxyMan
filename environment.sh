@@ -75,6 +75,8 @@ set_proxy() {
 	echo "ftp_proxy=\"ftp://${stmt}${ftp_host}:${ftp_port}\"" >> bash_config.tmp
 	echo "HTTP_PROXY=\"http://${stmt}${http_host}:${http_port}\"" >> bash_config.tmp
 	echo "FTP_PROXY=\"ftp://${stmt}${ftp_host}:${ftp_port}\"" >> bash_config.tmp
+	echo "no_proxy=\"${no_proxy}\"" >> bash_config.tmp
+	echo "NO_PROXY=\"${no_proxy}\"" >> bash_config.tmp
 
 	if [ "$USE_HTTP_PROXY_FOR_HTTPS" = "true" ]; then
 		echo "https_proxy=\"http://${stmt}${http_host}:${http_port}\"" >> bash_config.tmp

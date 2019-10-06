@@ -34,9 +34,17 @@ set_proxy() {
     kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key httpProxy "http://$http_host $http_port"
     kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key httpsProxy "http://$https_host $https_port"
     kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key ftpProxy "ftp://$ftp_host $ftp_port"
-    kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key socksProxy "socks://$socks_host $socks_port"
+    if [[ "$socks_host" != "" ]]; then
+        kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key socksProxy "socks://$socks_host $socks_port"
+    else
+        kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key socksProxy ""
+    fi
+    if [[ "$no_proxy" != "" ]]; then
+        kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key NoProxyFor "$no_proxy"
+    else
+        kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key NoProxyFor ""
+    fi
 
-    kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key NoProxyFor "$no_proxy"
 }
 
 

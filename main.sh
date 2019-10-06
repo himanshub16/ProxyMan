@@ -21,6 +21,7 @@ function _do_it_for_all() {
         bash "bash-zsh.sh" "$what_to_do"
         # sudo bash "environment.sh" "$what_to_do"
         bash "gsettings.sh" "$what_to_do"
+        bash "kde5.sh" "$what_to_do"
         bash "npm.sh" "$what_to_do"
         bash "dropbox.sh" "$what_to_do"
         bash "git.sh" "$what_to_do"
@@ -46,6 +47,7 @@ function _do_it_for_all() {
                    sudo -E bash "dnf.sh" "$what_to_do"
                    ;;
                 5) bash "gsettings.sh" "$what_to_do"
+                   bash "kde5.sh" "$what_to_do"
                    ;;
                 6) bash "npm.sh" "$what_to_do"
                    ;;
@@ -141,7 +143,7 @@ function prompt_for_proxy_targets() {
     echo "|${bold}${red} 2 ${normal}| Terminal / bash / zsh (current user) "
     echo "|${bold}${red} 3 ${normal}| /etc/environment"
     echo "|${bold}${red} 4 ${normal}| apt/dnf (Package manager)"
-    echo "|${bold}${red} 5 ${normal}| Desktop settings (GNOME/Ubuntu)"
+    echo "|${bold}${red} 5 ${normal}| Desktop settings (GNOME/Ubuntu/KDE)"
     echo "|${bold}${red} 6 ${normal}| npm & yarn"
     echo "|${bold}${red} 7 ${normal}| Dropbox"
     echo "|${bold}${red} 8 ${normal}| Git"

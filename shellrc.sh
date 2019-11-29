@@ -1,4 +1,7 @@
 #!/bin/bash
+# plugin to set "generic shellrc" proxy settings for ProxyMan
+# shellrc - ~/.bashrc, ~/.zshrc, /etc/environment
+# privileges has to be set by the process which starts this script
 
 # This is required for Elementary OS which contains ~/.bashrc without \n
 _fix_new_line() {

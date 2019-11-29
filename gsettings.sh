@@ -1,5 +1,5 @@
 #!/bin/bash
-# plugin to set "dnf" proxy settings for ProxyMan
+# plugin to set "GNOME" proxy settings for ProxyMan
 # privileges has to be set by the process which starts this script
 
 

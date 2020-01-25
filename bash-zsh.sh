@@ -1,7 +1,18 @@
 #!/bin/bash
 
-BASHRC=`readlink -f $HOME/.bashrc`
-ZSHRC=`readlink -f $HOME/.zshrc`
+case $os in
+    "Linux") 
+        BASHRC=`readlink -f $HOME/.bashrc`
+        ZSHRC=`readlink -f $HOME/.zshrc`
+    ;;
+    "Darwin") 
+        BASHRC=`realpath $HOME/.zshrc`
+        ZSHRC=`realpath $HOME/.zshrc`
+    ;;
+    *) echo "Operating system not supported. Exiting."
+       exit 1
+    ;;
+esac
 
 which bash &> /dev/null
 first="$?"

@@ -81,6 +81,6 @@ function prompt_for_proxy_targets() {
     echo "|${bold}${red} 9 ${normal}| Docker"
     echo
     echo "Separate multiple choices with space"
-    echo -n "${bold} ? ${normal}" ; read targets # 
+    echo -n "${bold} ? ${normal}" ; read targets
     export targets=(`echo ${targets}`)
 }

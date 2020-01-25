@@ -21,10 +21,10 @@ function _do_it_for_selection() {
             3) sudo -E bash "environment.sh" "$what_to_do"
                 ;;
             4) sudo -E bash "apt.sh" "$what_to_do"
-                sudo -E bash "dnf.sh" "$what_to_do"
+               sudo -E bash "dnf.sh" "$what_to_do"
                 ;;
             5) bash "gsettings.sh" "$what_to_do"
-                bash "kde5.sh" "$what_to_do"
+               bash "kde5.sh" "$what_to_do"
                 ;;
             6) bash "npm.sh" "$what_to_do"
                 ;;

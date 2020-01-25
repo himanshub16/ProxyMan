@@ -9,7 +9,7 @@
 
 function _do_it_for_selection() {
     local what_to_do="$1"
-    for t in "${targets[@]}"
+    for t in ${targets[@]}
     do
         case "$t" in
             # THIS stmt WILL CAUSE INFINITE RECURSION. DO NOT USE THIS.
@@ -18,11 +18,11 @@ function _do_it_for_selection() {
             #    ;;
             2) bash "bash-zsh.sh" "$what_to_do"
                 ;;
-            3) bash "npm.sh" "$what_to_do"
+            3) bash "networksetup.sh" "$what_to_do"
                 ;;
-            3) echo "networksetup not yet implemented. skipping." #bash "networksetup.sh" "$what_to_do"
+            4) bash "npm.sh" "$what_to_do"
                 ;;
-            4) bash "git.sh" "$what_to_do"
+            5) bash "git.sh" "$what_to_do"
                 ;;
             *) ;;
         esac
@@ -37,6 +37,7 @@ function _do_it_for_all() {
     if [[ -z "$targets" || "$targets" = "1" ]]; then
 
         bash "bash-zsh.sh" "$what_to_do"
+        # bash "networksetup.sh" "$what_to_do"
         bash "npm.sh" "$what_to_do"
         bash "git.sh" "$what_to_do"
 
@@ -55,6 +56,6 @@ function prompt_for_proxy_targets() {
     echo "|${bold}${red} 5 ${normal}| Git"
     echo
     echo "Separate multiple choices with space"
-    echo -n "${bold} ? ${normal}" ; read targets # 
+    echo -n "${bold} ? ${normal}" ; read targets
     export targets=(`echo ${targets}`)
 }

@@ -58,7 +58,8 @@ function _unset_proxy_for_networkservice() {
 
 function list_proxy() {
     # TODO
-    echo "Listing proxies for system on macOS is not yet implemented"
+    echo "Listing proxies for system-wide settings on macOS is not yet implemented."
+    echo "Please look into System Preferences -> Network -> <Networkdevice> -> Advanced -> Proxies for now."
 }
 
 function unset_proxy() {

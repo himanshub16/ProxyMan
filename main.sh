@@ -13,9 +13,9 @@ source "./configs.sh"
 
 # Load main functions for current operating system
 case $os in
-    "Linux") source "./main_linux.sh"
+    "Linux") source "./linux_functions.sh"
     ;;
-    "Darwin") source "./main_macos.sh"
+    "Darwin") source "./macos_functions.sh"
     ;;
     *) echo "Operating system not supported. Exiting."
        exit 1

@@ -92,7 +92,6 @@ function set_proxy() {
         # Set for all services
         local IFS=$'\n'
         for networkservice in ${networkservices_array[*]}; do
-            echo "$networkservice"
             _set_proxy_for_networkservice "$networkservice"
         done
     else

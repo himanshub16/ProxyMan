@@ -6,7 +6,7 @@ case $os in
         ZSHRC=`readlink -f $HOME/.zshrc`
     ;;
     "Darwin") 
-        BASHRC=`realpath $HOME/.zshrc`
+        BASHRC=`realpath $HOME/.bashrc`
         ZSHRC=`realpath $HOME/.zshrc`
     ;;
     *) echo "Operating system not supported. Exiting."

@@ -1,4 +1,7 @@
 #!/bin/bash
+set -x
+# macOS does not come with readlink or realpath, so we need to take a portable substitute
+source "./util/realpath.sh"
 
 case $os in
     "Linux") 

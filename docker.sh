@@ -27,6 +27,20 @@ list_proxy() {
             echo -e "${red}None${normal}"
         fi
     fi
+
+    if ! type "jq" > /dev/null; then
+        echo ""
+    else
+        echo ""
+        echo -e "${bold}docker Config.Json Proxy settings: ${normal}"
+        echo ""
+        if [ ! -e "$CONF_INSDIE_DOCKER" ]; then
+            echo -e "${red}None${normal}"
+            return
+        else
+            jq '.proxies' "$CONF_INSDIE_DOCKER"
+        fi
+    fi
 }
 
 

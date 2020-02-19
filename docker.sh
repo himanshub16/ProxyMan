@@ -80,9 +80,9 @@ set_proxy() {
             echo "please install jq"
         else
             JSON_STRING=$( jq \
-                --arg httpProxy "${stmt}${http_host}:${http_port}" \
-                --arg httpsProxy "${stmt}${http_host}:${http_port}" \
-                --arg noProxy "${stmt}${http_host}:${http_port}" \
+                --arg httpProxy "http://${stmt}${http_host}:${http_port}" \
+                --arg httpsProxy "http://${stmt}${http_host}:${http_port}" \
+                --arg noProxy "${no_proxy}" \
                 '. + { proxies: { default : {httpProxy: $httpProxy, httpsProxy: $httpsProxy, noProxy: $noProxy }}}' \
                 "$CONF_INSDIE_DOCKER")
 
@@ -96,9 +96,9 @@ set_proxy() {
             echo "please install jq"
         else
             JSON_STRING=$( jq \
-                --arg httpProxy "${stmt}${http_host}:${http_port}" \
-                --arg httpsProxy "${stmt}${http_host}:${http_port}" \
-                --arg noProxy "${stmt}${http_host}:${http_port}" \
+                --arg httpProxy "http://${stmt}${http_host}:${http_port}" \
+                --arg httpsProxy "https://${stmt}${http_host}:${http_port}" \
+                --arg noProxy "${no_proxy}" \
                 '. + { proxies: { default : {httpProxy: $httpProxy, httpsProxy: $httpsProxy, noProxy: $noProxy }}}' \
                 "$CONF_INSDIE_DOCKER")
 

@@ -34,7 +34,7 @@ function _prompt_networkservices_targets() {
 function _set_proxy_for_networkservice() {
     local networkservice="$1"
     # Parameters: [-setwebproxy networkservice domain portnumber authenticated username password]
-    if [[ "$use_auth" ]]; then
+    if [[ "$use_auth" = "y" ]]; then
         networksetup -setwebproxy "$networkservice" "$http_host" "$http_port" on "$username" "$password"
         networksetup -setsecurewebproxy "$networkservice" "$https_host" "$https_port" on "$username" "$password"
         networksetup -setftpproxy "$networkservice" "$http_host" "$http_port" on "$username" "$password"

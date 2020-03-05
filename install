@@ -6,7 +6,6 @@
 
 TARGET_DIR="$HOME/.proxyman"
 
-
 # verify if this is current directory
 if [[ -f "main.sh" && -f "shellrc.sh" && -f "dropbox.sh" ]]; then
     :
@@ -17,17 +16,27 @@ fi
 
 # copy the contents to ~/.proxyman/
 echo "This will create ~/.local/bin if it doesn't exist."
+echo "Also will Copy this folder to $TARGET_DIR"
+echo "HOME Directory $HOME"
 echo "Also, add ~/.local/bin to \$PATH."
 echo "Press any key to continue, or Ctrl+C to break."
 read
 
 mkdir -p $TARGET_DIR
 cp * $TARGET_DIR
+sudo cp * /etc/skel
+
+# Template for new users etc/skel
+#path for global bin /usr/local/bin
+
+echo "copied proxy man to home dir"
 
 # add to path
 mkdir -p $HOME/.local/bin
-cp proxyman $HOME/.local/bin
-chmod +x $HOME/.local/bin/proxyman
+sudo cp proxyman /usr/local/bin
+sudo chmod +x /usr/local/bin/proxyman
+
+echo "added to path bin"
 
 which proxyman &> /dev/null
 if [ "$?" != 0 ]; then

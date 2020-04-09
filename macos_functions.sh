@@ -18,7 +18,7 @@ function _do_it_for_selection() {
             #    ;;
             2) bash "networksetup.sh" "$what_to_do"
                 ;;
-            3) bash "bash-zsh.sh" "$what_to_do"
+            3) bash "bash-zsh-fish.sh" "$what_to_do"
                 ;;
             4) bash "npm.sh" "$what_to_do"
                 ;;
@@ -36,7 +36,7 @@ function _do_it_for_all() {
     local what_to_do="$1"
     if [[ -z "$targets" || "$targets" = "1" ]]; then
 
-        bash "bash-zsh.sh" "$what_to_do"
+        bash "bash-zsh-fish.sh" "$what_to_do"
         bash "networksetup.sh" "$what_to_do"
         bash "npm.sh" "$what_to_do"
         bash "git.sh" "$what_to_do"
@@ -51,7 +51,7 @@ function prompt_for_proxy_targets() {
 
     echo "|${bold}${red} 1 ${normal}| All of them ... Don't bother me"
     echo "|${bold}${red} 2 ${normal}| System-wide settings (networksetup)"
-    echo "|${bold}${red} 3 ${normal}| Terminal / bash / zsh (current user)"
+    echo "|${bold}${red} 3 ${normal}| Terminal (bash/zsh/fish for current user) "
     echo "|${bold}${red} 4 ${normal}| npm & yarn"
     echo "|${bold}${red} 5 ${normal}| Git"
     echo

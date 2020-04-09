@@ -16,7 +16,7 @@ function _do_it_for_selection() {
             # COMMENTED FOR WARNING
             # 1) _do_it_for_all "$what_to_do"
             #    ;;
-            2) bash "bash-zsh.sh" "$what_to_do"
+            2) bash "bash-zsh-fish.sh" "$what_to_do"
                 ;;
             3) sudo -E bash "environment.sh" "$what_to_do"
                 ;;
@@ -45,7 +45,7 @@ function _do_it_for_all() {
 
     local what_to_do="$1"
     if [[ -z "$targets" || "$targets" = "1" ]]; then
-        bash "bash-zsh.sh" "$what_to_do"
+        bash "bash-zsh-fish.sh" "$what_to_do"
 	# avoiding /etc/environment in all because it requires logout after unset
 	# bashrc / zshrc is sufficient, and sudo -E might suffice
 	if [[ "$what_to_do" = "list" ]]; then
@@ -71,7 +71,7 @@ function prompt_for_proxy_targets() {
     echo "${bold}${blue} Select targets to modify ${normal}"
 
     echo "|${bold}${red} 1 ${normal}| All of them ... Don't bother me"
-    echo "|${bold}${red} 2 ${normal}| Terminal / bash / zsh (current user) "
+    echo "|${bold}${red} 2 ${normal}| Terminal (bash/zsh/fish for current user)  "
     echo "|${bold}${red} 3 ${normal}| /etc/environment"
     echo "|${bold}${red} 4 ${normal}| apt/dnf (Package manager)"
     echo "|${bold}${red} 5 ${normal}| Desktop settings (GNOME/Ubuntu/KDE)"

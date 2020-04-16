@@ -3,7 +3,7 @@
 # privileges has to be set by the process which starts this script
 
 CONF_FILE=`readlink -f /etc/systemd/system/docker.service.d/http-proxy.conf`
-
+CONF_INSDIE_DOCKER="$HOME/.docker/config.json"
 
 reload_docker_service() {
     echo "reloading docker"
@@ -27,7 +27,22 @@ list_proxy() {
             echo -e "${red}None${normal}"
         fi
     fi
+
+    if ! type "jq" > /dev/null; then
+        echo ""
+    else
+        echo ""
+        echo -e "${bold}docker Config.Json Proxy settings: ${normal}"
+        echo ""
+        if [ ! -e "$CONF_INSDIE_DOCKER" ]; then
+            echo -e "${red}None${normal}"
+            return
+        else
+            jq '.proxies' "$CONF_INSDIE_DOCKER"
+        fi
+    fi
 }
+
 
 unset_proxy() {
     if [ ! -e "$CONF_FILE" ]; then
@@ -36,14 +51,32 @@ unset_proxy() {
     for PROTOTYPE in "HTTP" "HTTPS" "FTP" "RSYNC" "NO"; do
         sed -i "/${PROTOTYPE}_PROXY\=/d" "$CONF_FILE"
     done
+    
+    if [ ! -e "$CONF_INSDIE_DOCKER" ]; then
+        return
+    fi
+
+    if ! type "jq" > /dev/null; then
+        echo "please install jq"
+    else
+        jq 'del(.proxies)' "$CONF_INSDIE_DOCKER" > "$HOME/.docker/config_new.json"
+        cat "$HOME/.docker/config_new.json" > "$CONF_INSDIE_DOCKER"
+        rm -f "$HOME/.docker/config_new.json"
+    fi
 }
 
 set_proxy() {
     unset_proxy
     mkdir -p /etc/systemd/system/docker.service.d
+    mkdir -p "$HOME/.docker/"
+
     if [[ ! -e "$CONF_FILE" ]]; then
         echo -n "" > $CONF_FILE
         echo "[Service]" >> $CONF_FILE
+    fi
+
+    if [[ ! -e "$CONF_INSDIE_DOCKER" ]]; then
+        echo -n "{}" > $CONF_INSDIE_DOCKER
     fi
 
     local stmt=""
@@ -51,18 +84,45 @@ set_proxy() {
         stmt="${username}:${password}@"
     fi
 
+
+
     if [ "$USE_HTTP_PROXY_FOR_HTTPS" = "true" ]; then
         echo 'Environment="HTTP_PROXY=http://'${stmt}${http_host}:${http_port}'/" "HTTPS_PROXY=http://'${stmt}${https_host}:${https_port}'/" "NO_PROXY='${no_proxy}'"'\
              >> $CONF_FILE
+        
+        if ! type "jq" > /dev/null; then
+            echo "please install jq"
+        else
+            JSON_STRING=$( jq \
+                --arg httpProxy "http://${stmt}${http_host}:${http_port}" \
+                --arg httpsProxy "http://${stmt}${http_host}:${http_port}" \
+                --arg noProxy "${no_proxy}" \
+                '. + { proxies: { default : {httpProxy: $httpProxy, httpsProxy: $httpsProxy, noProxy: $noProxy }}}' \
+                "$CONF_INSDIE_DOCKER")
+
+            jq '.' <<< $JSON_STRING > $CONF_INSDIE_DOCKER
+        fi
     else
         echo 'Environment="HTTP_PROXY=http://'${stmt}${http_host}:${http_port}'/" "HTTPS_PROXY=https://'${stmt}${https_host}:${https_port}'/" "NO_PROXY='${no_proxy}'"'\
              >> $CONF_FILE
+
+        if ! type "jq" > /dev/null; then
+            echo "please install jq"
+        else
+            JSON_STRING=$( jq \
+                --arg httpProxy "http://${stmt}${http_host}:${http_port}" \
+                --arg httpsProxy "https://${stmt}${http_host}:${http_port}" \
+                --arg noProxy "${no_proxy}" \
+                '. + { proxies: { default : {httpProxy: $httpProxy, httpsProxy: $httpsProxy, noProxy: $noProxy }}}' \
+                "$CONF_INSDIE_DOCKER")
+
+            jq '.' <<< $JSON_STRING > $CONF_INSDIE_DOCKER
+        fi
     fi
 
 
     return
 }
-
 
 which docker &> /dev/null
 if [ "$?" != 0 ]; then

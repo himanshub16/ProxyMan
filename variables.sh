@@ -36,6 +36,7 @@ fi
 export config_dir="$HOME/.config/proxyman"
 export default_config="default"
 export SHELLRC="$HOME/.bashrc"
+export os=`uname`
 
 case "$SHELL" in
     "$(which bash)") SHELLRC="$HOME/.bashrc"

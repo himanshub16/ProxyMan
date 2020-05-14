@@ -22,7 +22,7 @@ echo "Press any key to continue, or Ctrl+C to break."
 read
 
 mkdir -p $TARGET_DIR
-cp * $TARGET_DIR
+cp -r * $TARGET_DIR
 
 # add to path
 mkdir -p $HOME/.local/bin

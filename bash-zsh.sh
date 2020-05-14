@@ -1,7 +1,20 @@
 #!/bin/bash
+# macOS does not come with readlink or realpath, so we need to take a portable substitute
+source "./util/realpath.sh"
 
-BASHRC=`readlink -f $HOME/.bashrc`
-ZSHRC=`readlink -f $HOME/.zshrc`
+case $os in
+    "Linux") 
+        BASHRC=`readlink -f $HOME/.bashrc`
+        ZSHRC=`readlink -f $HOME/.zshrc`
+    ;;
+    "Darwin") 
+        BASHRC=`realpath $HOME/.bashrc`
+        ZSHRC=`realpath $HOME/.zshrc`
+    ;;
+    *) echo "Operating system not supported. Exiting."
+       exit 1
+    ;;
+esac
 
 which bash &> /dev/null
 first="$?"

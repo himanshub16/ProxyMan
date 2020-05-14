@@ -25,14 +25,33 @@ unset_proxy() {
     if [ ! -e "$SHELLRC" ]; then
         return
     fi
-    # extra effort required to avoid removing custom environment variables set
-    # by the user for personal use
-    for proxytype in "http" "https" "ftp" "rsync" "no"; do
-        sed -i "/export ${proxytype}_proxy\=/d" "$SHELLRC"
-    done
-    for PROTOTYPE in "HTTP" "HTTPS" "FTP" "RSYNC" "NO"; do
-        sed -i "/export ${PROTOTYPE}_PROXY\=/d" "$SHELLRC"
-    done
+
+    # macOS ships with BSD sed, which has different syntax from GNU sed
+    case $os in
+        "Linux") 
+            # extra effort required to avoid removing custom environment variables set
+            # by the user for personal use
+            for proxytype in "http" "https" "ftp" "rsync" "no"; do
+                sed -i "/export ${proxytype}_proxy\=/d" "$SHELLRC"
+            done
+            for PROXYTYPE in "HTTP" "HTTPS" "FTP" "RSYNC" "NO"; do
+                sed -i "/export ${PROXYTYPE}_PROXY\=/d" "$SHELLRC"
+            done
+        ;;
+        "Darwin")
+            # extra effort required to avoid removing custom environment variables set
+            # by the user for personal use
+            for proxytype in "http" "https" "ftp" "rsync" "no"; do
+                sed -i "" "/export ${proxytype}_proxy\=/d" "$SHELLRC"
+            done
+            for PROXYTYPE in "HTTP" "HTTPS" "FTP" "RSYNC" "NO"; do
+                sed -i "" "/export ${PROXYTYPE}_PROXY\=/d" "$SHELLRC"
+            done
+        ;;
+        *) echo "Operating system not supported. Exiting."
+        exit 1
+        ;;
+    esac
 }
 
 set_proxy() {

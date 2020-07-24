@@ -13,7 +13,7 @@ _fix_new_line() {
 list_proxy() {
     echo
     echo "${bold}Shell proxy settings : $SHELLRC ${normal}"
-    lines="$(cat $SHELLRC | grep proxy -i | wc -l)"
+    lines="$(cat $SHELLRC | grep proxy -i | cut -d"=" -f2 | wc -w)"
     if [ "$lines" -gt 0 ]; then
         cat $SHELLRC | grep proxy -i | sed -e 's/^/ /'
     else
@@ -29,9 +29,11 @@ unset_proxy() {
     # by the user for personal use
     for proxytype in "http" "https" "ftp" "rsync" "no"; do
         sed -i "/export ${proxytype}_proxy\=/d" "$SHELLRC"
+        echo "export ${proxytype}_proxy="     >> "$SHELLRC"
     done
     for PROTOTYPE in "HTTP" "HTTPS" "FTP" "RSYNC" "NO"; do
         sed -i "/export ${PROTOTYPE}_PROXY\=/d" "$SHELLRC"
+        echo "export ${PROTOTYPE}_PROXY="     >> "$SHELLRC"
     done
 }
 
@@ -45,6 +47,13 @@ set_proxy() {
     if [ "$use_auth" = "y" ]; then
         stmt="${username}:${password}@"
     fi
+
+    for proxytype in "http" "https" "ftp" "rsync" "no"; do
+        sed -i "/export ${proxytype}_proxy\=/d" "$SHELLRC"
+    done
+    for PROTOTYPE in "HTTP" "HTTPS" "FTP" "RSYNC" "NO"; do
+        sed -i "/export ${PROTOTYPE}_PROXY\=/d" "$SHELLRC"
+    done
 
     # caution: do not use / after stmt
     echo "export http_proxy=\"http://${stmt}${http_host}:${http_port}/\""     >> "$SHELLRC"

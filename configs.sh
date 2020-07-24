@@ -43,6 +43,11 @@ function load_config() {
     export username=`grep username\=     -i $profile_path | cut -d= -f2`
     export password=`grep password\=     -i $profile_path | cut -d= -f2`
     export no_proxy=`grep no_proxy\=     -i $profile_path | cut -d= -f2`
+    export include_proxy=`grep include_proxy\=     -i $profile_path | cut -d= -f2`
+    export use_cntlm_auth=`grep use_cntlm_auth\=     -i $profile_path | cut -d= -f2`
+    export cntlm_domain=`grep cntlm_domain\=     -i $profile_path | cut -d= -f2`
+    export cntlm_username=`grep cntlm_username\=     -i $profile_path | cut -d= -f2`
+    export cntlm_conf=`grep cntlm_conf\=     -i $profile_path | cut -d= -f2`
 }
 
 function load_default_config() {
@@ -71,6 +76,12 @@ http_port=$http_port
 # Use same values for https and ftp
 use_same=$use_same
 
+# use cntlm auth is 'y' or 'n', and provide domain, username and password
+use_cntlm_auth=$use_cntlm_auth
+cntlm_domain=$cntlm_domain
+cntlm_username=$cntlm_username
+cntlm_conf=${cntlm_conf}
+
 # use auth is 'y' or 'n', and provide username and password
 use_auth=$use_auth
 username=$username
@@ -84,6 +95,9 @@ ftp_port=$ftp_port
 
 # URLs that should be excluded from proxying
 no_proxy=$no_proxy
+
+# URLs that should be included for proxying by cntlm
+include_proxy=$include_proxy
 " > $profile_path
 
     echo "${green}Saved to $profile_path.${normal}"

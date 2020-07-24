@@ -29,6 +29,7 @@ function _do_it_for_all() {
         bash "npm.sh" "$what_to_do"
         bash "dropbox.sh" "$what_to_do"
         bash "git.sh" "$what_to_do"
+        bash "cntlm.sh" "$what_to_do"
 
         # isn't required, but still checked to avoid sudo in main all the time
         SUDO_CMDS="apt dnf docker"
@@ -60,6 +61,8 @@ function _do_it_for_all() {
                 8) bash "git.sh" "$what_to_do"
                    ;;
                 9) sudo -E bash "docker.sh" "$what_to_do"
+                   ;;
+                10) sudo -E bash "cntlm.sh" "$what_to_do" 
                    ;;
                 *) ;;
             esac
@@ -99,13 +102,29 @@ function prompt_for_proxy_values() {
 
     echo -n " HTTP Proxy ${bold} Host ${normal}"; read http_host
     echo -n " HTTP Proxy ${bold} Port ${normal}"; read http_port
-    echo -n " Use auth - userid/password (y/n)? "; read use_auth
-
-    if [[ "$use_auth" = "y" || "$use_auth" = "Y" ]]; then
-        echo "${bold}${red} Please don't save your passwords on shared computers.${normal}"
-        read -p " Enter username                 : " username
-        echo -n " Enter password (use %40 for @) : " ; read -s password
+    echo -n " Use auth with cntlm - encrypted userid/password (y/n)? "; read use_cntlm_auth
+    if [[ "$use_cntlm_auth" = "y" || "$use_cntlm_auth" = "Y" ]]; then
+        which cntlm &> /dev/null
+        if [ "$?" != 0 ]; then
+            echo "cntlm not installed"
+            exit
+        fi
+        read -p " Enter domain                   : " cntlm_domain
+        read -p " Enter username                 : " cntlm_username
+        echo -n " Enter password                 : " ;
+        cntlm_conf=`cntlm -H -u $cntlm_username -d $cntlm_domain`
+        cntlm_conf=`echo "${cntlm_conf}" | grep "PassNTLMv2"`
+        use_auth="n"
         echo
+    else
+        echo -n " Use auth - userid/password (y/n)? "; read use_auth
+
+        if [[ "$use_auth" = "y" || "$use_auth" = "Y" ]]; then
+            echo "${bold}${red} Please don't save your passwords on shared computers.${normal}"
+            read -p " Enter username                 : " username
+            echo -n " Enter password (use %40 for @) : " ; read -s password
+            echo
+        fi
     fi
 
     echo -n " Use same for HTTPS and FTP (y/n)? "; read use_same
@@ -131,6 +150,11 @@ function prompt_for_proxy_values() {
         no_proxy=$_no_proxy
     fi
 
+    echo -n " Proxy ${green} (default $include_proxy) ${normal}"; read _include_proxy
+    if [[ $_include_proxy != "" ]]; then
+        include_proxy=$_include_proxy
+    fi
+
     echo -n "Save profile for later use (y/n)? "; read save_for_reuse
     if [[ "$save_for_reuse" = "y" || "$save_for_reuse" = "Y" ]]; then
         read -p " Enter profile name  : " config_name
@@ -143,15 +167,16 @@ function prompt_for_proxy_values() {
 function prompt_for_proxy_targets() {
     echo "${bold}${blue} Select targets to modify ${normal}"
 
-    echo "|${bold}${red} 1 ${normal}| All of them ... Don't bother me"
-    echo "|${bold}${red} 2 ${normal}| Terminal / bash / zsh (current user) "
-    echo "|${bold}${red} 3 ${normal}| /etc/environment"
-    echo "|${bold}${red} 4 ${normal}| apt/dnf (Package manager)"
-    echo "|${bold}${red} 5 ${normal}| Desktop settings (GNOME/Ubuntu/KDE)"
-    echo "|${bold}${red} 6 ${normal}| npm & yarn"
-    echo "|${bold}${red} 7 ${normal}| Dropbox"
-    echo "|${bold}${red} 8 ${normal}| Git"
-    echo "|${bold}${red} 9 ${normal}| Docker"
+    echo "|${bold}${red} 1  ${normal}| All of them ... Don't bother me"
+    echo "|${bold}${red} 2  ${normal}| Terminal / bash / zsh (current user) "
+    echo "|${bold}${red} 3  ${normal}| /etc/environment"
+    echo "|${bold}${red} 4  ${normal}| apt/dnf (Package manager)"
+    echo "|${bold}${red} 5  ${normal}| Desktop settings (GNOME/Ubuntu/KDE)"
+    echo "|${bold}${red} 6  ${normal}| npm & yarn"
+    echo "|${bold}${red} 7  ${normal}| Dropbox"
+    echo "|${bold}${red} 8  ${normal}| Git"
+    echo "|${bold}${red} 9  ${normal}| Docker"
+    echo "|${bold}${red} 10 ${normal}| cntlm"
     echo
     echo "Separate multiple choices with space"
     echo -ne "\e[5m ? \e[0m" ; read targets

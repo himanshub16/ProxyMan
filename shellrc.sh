@@ -15,7 +15,7 @@ list_proxy() {
     echo "${bold}Shell proxy settings : $SHELLRC ${normal}"
     lines="$(cat $SHELLRC | grep proxy -i | wc -l)"
     if [ "$lines" -gt 0 ]; then
-        cat $SHELLRC | grep proxy -i
+        cat $SHELLRC | grep proxy -i | sed -e 's/^/ /'
     else
         echo "${red}None${normal}"
     fi

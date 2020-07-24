@@ -6,8 +6,21 @@
 list_proxy() {
     echo
     echo "${bold}git proxy settings : ${normal}"
-    echo "http $(git config --global http.proxy)"
-    echo "https $(git config --global https.proxy)"
+    local git_http_current=$(git config --global http.proxy)
+    if [ -z $git_http_current ]; then
+        echo "http.proxy ${red}None${normal}"
+    else
+        echo "${bold} http ${normal}  "\
+            "$(git config --global http.proxy) "
+    fi
+
+    local git_https_current=$(git config --global https.proxy)
+    if [ -z $git_https_current ]; then
+        echo "https.proxy ${red}None${normal}"
+    else
+        echo "${bold} https ${normal}  "\
+            "$(git config --global https.proxy) "
+    fi
 }
 
 unset_proxy() {

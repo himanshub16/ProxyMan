@@ -17,7 +17,7 @@ list_proxy() {
     echo "${bold}APT proxy settings : ${normal}"
     lines="$(cat $CONF_FILE | grep proxy -i | wc -l)"
     if [ "$lines" -gt 0 ]; then
-        cat "$CONF_FILE" | grep proxy -i | wc -l
+        cat "$CONF_FILE" | grep proxy -i | sed -e 's/^/ /'
     else
         echo "${red}None${normal}"
     fi

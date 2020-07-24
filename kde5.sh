@@ -32,7 +32,7 @@ set_proxy() {
     # do quote the variables as blank variables mean nothing when not quoted and show errors
     kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key ProxyType 1
     kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key httpProxy "http://$http_host $http_port"
-    kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key httpsProxy "http://$https_host $https_port"
+    kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key httpsProxy "https://$https_host $https_port"
     kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key ftpProxy "ftp://$ftp_host $ftp_port"
     if [[ "$socks_host" != "" ]]; then
         kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key socksProxy "socks://$socks_host $socks_port"

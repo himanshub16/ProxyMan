@@ -16,7 +16,7 @@ list_proxy() {
 
 unset_proxy() {
     sudo rm $CONF_FILE 2> /dev/null
-    sudo service cntlm stop
+    sudo systemctl stop cntlm
 }
 
 set_proxy() {
@@ -34,7 +34,7 @@ Listen          ${https_port}
         echo "Proxy $i" | sudo tee -a $CONF_FILE > /dev/null
     done
     fi
-    sudo service cntlm restart
+    sudo systemctl restart cntlm
 }
 
 

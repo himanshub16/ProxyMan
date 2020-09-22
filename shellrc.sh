@@ -6,7 +6,7 @@
 # This is required for Elementary OS which contains ~/.bashrc without \n
 _fix_new_line() {
     if [[ $(tail -c 1 "$SHELLRC" | wc --lines) = 0 ]]; then
-        echo >> "$1"
+        echo >>"$1"
     fi
 }
 

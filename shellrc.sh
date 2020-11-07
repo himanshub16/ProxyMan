@@ -29,10 +29,32 @@ unset_proxy() {
     # by the user for personal use
     for proxytype in "http" "https" "ftp" "rsync" "no"; do
         sed -i "/export ${proxytype}_proxy\=/d" "$SHELLRC"
+        sed -i "/unset ${proxytype}/d" "$SHELLRC"
     done
     for PROTOTYPE in "HTTP" "HTTPS" "FTP" "RSYNC" "NO"; do
         sed -i "/export ${PROTOTYPE}_PROXY\=/d" "$SHELLRC"
+        sed -i "/unset ${PROTOTYPE}/d" "$SHELLRC"
     done
+
+    # caution: do not use / after stmt
+    echo "unset http_proxy"     >> "$SHELLRC"
+    # $https_proxy at the end
+    echo "unset ftp_proxy"         >> "$SHELLRC"
+    echo "unset rsync_proxy" >> "$SHELLRC"
+    echo "unset no_proxy"                                    >> "$SHELLRC"
+    echo "unset HTTP_PROXY"     >> "$SHELLRC"
+    # $HTTPS_PROXY at the end
+    echo "unset FTP_PROXY"         >> "$SHELLRC"
+    echo "unset RSYNC_PROXY" >> "$SHELLRC"
+    echo "unset NO_PROXY"                                    >> "$SHELLRC"
+
+    if [ "$USE_HTTP_PROXY_FOR_HTTPS" = "true" ]; then
+        echo "unset https_proxy" >> "$SHELLRC"
+        echo "unset HTTPS_PROXY" >> "$SHELLRC"
+    else
+        echo "unset https_proxy" >> "$SHELLRC"
+        echo "unset HTTPS_PROXY" >> "$SHELLRC"
+    fi
 }
 
 set_proxy() {

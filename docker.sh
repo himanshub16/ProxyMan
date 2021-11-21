@@ -15,6 +15,7 @@ reload_docker_service() {
 
 list_proxy() {
     # inefficient way as the file is read twice.. think of some better way
+    echo
     echo -e "${bold}docker proxy settings: ${normal}"
     if [ ! -e "$CONF_FILE" ]; then
         echo -e "${red}None${normal}"
@@ -22,7 +23,7 @@ list_proxy() {
     else
         lines="$(cat $CONF_FILE | grep proxy -i | wc -l)"
         if [ "$lines" -gt 0 ]; then
-            cat $CONF_FILE | grep proxy -i | sed -e "s/Environment=//g" -e "s/\_/\ /g"
+            cat $CONF_FILE | grep proxy -i | sed -e "s/Environment=//g" -e "s/\_/\ /g" | sed -e 's/^/ /'
         else
             echo -e "${red}None${normal}"
         fi

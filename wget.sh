@@ -9,8 +9,7 @@ list_proxy() {
     echo "${bold}wget proxy settings ${normal}"
     lines="$(cat $CONF_FILE | grep proxy -i | cut -d"=" -f2 | wc -w)"
     if [ "$lines" -gt 0 ]; then
-        cat $CONF_FILE | grep proxy -i 
-        # cat $CONF_FILE | grep proxy -i | sed -e 's/^/ /'
+        cat $CONF_FILE | grep proxy -i | sed -e 's/^/ /'
     else
         echo "${red}None${normal}"
     fi

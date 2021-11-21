@@ -28,6 +28,7 @@ function _do_it_for_all() {
         bash "cntlm.sh" "$what_to_do"
         bash "wget.sh" "$what_to_do"
         bash "curl.sh" "$what_to_do"
+        sudo -E bash "resolvconf.sh" "$what_to_do"
 
         # isn't required, but still checked to avoid sudo in main all the time
         SUDO_CMDS="apt dnf docker"
@@ -65,6 +66,8 @@ function _do_it_for_all() {
                 11) bash "wget.sh" "$what_to_do"
                    ;;
                 12) bash "curl.sh" "$what_to_do"
+                   ;;
+                13) sudo -E bash "resolvconf.sh" "$what_to_do"
                    ;;
                 *) ;;
             esac
@@ -181,6 +184,7 @@ function prompt_for_proxy_targets() {
     echo "|${bold}${red} 10 ${normal}| cntlm"
     echo "|${bold}${red} 11 ${normal}| wget"
     echo "|${bold}${red} 12 ${normal}| curl"
+    echo "|${bold}${red} 13 ${normal}| resolvconf"
     echo
     echo "Separate multiple choices with space"
     echo -ne "\e[5m ? \e[0m" ; read targets

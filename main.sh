@@ -18,8 +18,8 @@ function _do_it_for_all() {
 
     local what_to_do="$1"
     if [[ -z "$targets" || "$targets" = "1" ]]; then
-        bash "bash-zsh.sh" "$what_to_do"
         sudo -E bash "environment.sh" "$what_to_do"
+        bash "bash-zsh.sh" "$what_to_do"
         bash "gsettings.sh" "$what_to_do"
         bash "kde5.sh" "$what_to_do"
         bash "npm.sh" "$what_to_do"
@@ -193,6 +193,11 @@ function main() {
                      prompt_for_proxy_targets
                      set_all_proxy
                      ;;
+        "load-all" ) echo "Loading profile : ${blue} $2 ${normal}"
+                     load_config "$2"
+                     _dump_it_all
+                     set_all_proxy
+                     ;;
         "delete"   ) echo "Deleting profile : ${red} $2 ${normal}"
                      delete_config "$2"
                      ;;
@@ -204,6 +209,8 @@ function main() {
                         prompt_for_proxy_targets
                      fi
                      unset_all_proxy
+                     ;;
+        "unset-all") unset_all_proxy
                      ;;
         "list"     ) show_current_settings
                      ;;

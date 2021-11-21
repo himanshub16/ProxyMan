@@ -86,18 +86,22 @@ ${bold} set     ${normal} \t  set proxy settings
   > proxyman set
 ${bold} unset   ${normal} \t  unset proxy settings
   > proxyman unset
+${bold} unset-all${normal} \t  unset proxy settings for all targets
+  > proxyman unset-all
 ${bold} list    ${normal} \t  list current settings
   > proxyman list
 ${bold} configs ${normal} \t  lists available configs
   > proxyman configs
 ${bold} load    ${normal} \t  load a profile
   > proxyman load 'profile_name'
+${bold} load-all${normal} \t  load a profile for all targets
+  > proxyman load-all 'profile_name'
 ${bold} delete  ${normal} \t  delete a profile
   > proxyman delete 'profile_name'
 ${bold} help    ${normal} \t  show this help
   > proxyman help
 
-Allowed options: set, unset, list, configs, load, delete, help
+Allowed options: set, unset, unset-all, list, configs, load, load-all, delete, help
 "
 
 # This help text contains each command, but without examples.
@@ -108,13 +112,15 @@ Usage: proxyman [command]
   or   ./main.sh [command]
 
 Commands:
-${bold} set     ${normal} \t  set proxy settings
-${bold} unset   ${normal} \t  unset proxy settings
-${bold} list    ${normal} \t  list current settings
-${bold} configs ${normal} \t  lists available configs
-${bold} load    ${normal} \t  load a profile
-${bold} delete  ${normal} \t  delete a profile
-${bold} help    ${normal} \t  show this help
+${bold} set         ${normal} \t  set proxy settings
+${bold} unset       ${normal} \t  unset proxy settings
+${bold} unset-all   ${normal} \t  unset proxy settings for all target
+${bold} list        ${normal} \t  list current settings
+${bold} configs     ${normal} \t  lists available configs
+${bold} load        ${normal} \t  load a profile
+${bold} load-all    ${normal} \t  load a profile for all targets
+${bold} delete      ${normal} \t  delete a profile
+${bold} help        ${normal} \t  show this help
 
-Allowed options: set, unset, list, configs, load, delete, help
+Allowed options: set, unset, unset-all, list, configs, load, load-all, delete, help
 "

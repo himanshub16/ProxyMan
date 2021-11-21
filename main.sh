@@ -27,6 +27,7 @@ function _do_it_for_all() {
         bash "git.sh" "$what_to_do"
         bash "cntlm.sh" "$what_to_do"
         bash "wget.sh" "$what_to_do"
+        bash "curl.sh" "$what_to_do"
 
         # isn't required, but still checked to avoid sudo in main all the time
         SUDO_CMDS="apt dnf docker"
@@ -59,9 +60,11 @@ function _do_it_for_all() {
                    ;;
                 9) sudo -E bash "docker.sh" "$what_to_do"
                    ;;
-                10) sudo -E bash "cntlm.sh" "$what_to_do" 
+                10) sudo -E bash "cntlm.sh" "$what_to_do"
                    ;;
-                11) sudo -E bash "wget.sh" "$what_to_do" 
+                11) sudo -E bash "wget.sh" "$what_to_do"
+                   ;;
+                12) sudo -E bash "curl.sh" "$what_to_do"
                    ;;
                 *) ;;
             esac
@@ -177,6 +180,7 @@ function prompt_for_proxy_targets() {
     echo "|${bold}${red} 9  ${normal}| Docker"
     echo "|${bold}${red} 10 ${normal}| cntlm"
     echo "|${bold}${red} 11 ${normal}| wget"
+    echo "|${bold}${red} 12 ${normal}| curl"
     echo
     echo "Separate multiple choices with space"
     echo -ne "\e[5m ? \e[0m" ; read targets

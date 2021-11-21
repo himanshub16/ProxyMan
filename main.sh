@@ -62,9 +62,9 @@ function _do_it_for_all() {
                    ;;
                 10) sudo -E bash "cntlm.sh" "$what_to_do"
                    ;;
-                11) sudo -E bash "wget.sh" "$what_to_do"
+                11) bash "wget.sh" "$what_to_do"
                    ;;
-                12) sudo -E bash "curl.sh" "$what_to_do"
+                12) bash "curl.sh" "$what_to_do"
                    ;;
                 *) ;;
             esac

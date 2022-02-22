@@ -144,7 +144,7 @@ function prompt_for_proxy_targets() {
     echo "${bold}${blue} Select targets to modify ${normal}"
 
     echo "|${bold}${red} 1 ${normal}| All of them ... Don't bother me"
-    echo "|${bold}${red} 2 ${normal}| Terminal / bash / zsh (current user) "
+    echo "|${bold}${red} 2 ${normal}| Terminal / bash / zsh / fish (current user)"
     echo "|${bold}${red} 3 ${normal}| /etc/environment"
     echo "|${bold}${red} 4 ${normal}| apt/dnf (Package manager)"
     echo "|${bold}${red} 5 ${normal}| Desktop settings (GNOME/Ubuntu/KDE)"

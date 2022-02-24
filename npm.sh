@@ -30,7 +30,7 @@ set_proxy() {
 
     if [ "$USE_HTTP_PROXY_FOR_HTTPS" = "true" ]; then
         npm config set https-proxy "http://${stmt}${http_host}:${http_port}/"
-    else
+    elif [ -n "$https_host" ]; then
         npm config set https-proxy "https://${stmt}${https_host}:${https_port}/"
     fi
 }

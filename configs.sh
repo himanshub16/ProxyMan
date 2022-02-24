@@ -17,7 +17,7 @@
 function list_configs() {
     # Arguments : None
 
-    echo "${bold}${cyan}Here are available configs!${normal}"
+    echo "${bold}${cyan}Here are the available configs!${normal}"
     ls -1 $config_dir
 }
 

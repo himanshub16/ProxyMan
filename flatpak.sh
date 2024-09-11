@@ -6,7 +6,7 @@
 
 
 
-CONF_FILE=`readlink -f $HOME/.local/share/flatpak/overrides/global`
+CONF_FILE=`readlink -m $HOME/.local/share/flatpak/overrides/global`
 
 fix_new_line() {
     if [[ $(tail -c 1 "$CONF_FILE" | wc --lines ) = 0 ]]; then
@@ -41,6 +41,7 @@ unset_proxy() {
 set_proxy() {
     unset_proxy
     if [ ! -e "$CONF_FILE" ]; then
+        mkdir -p $(dirname "$CONF_FILE")
         touch "$CONF_FILE"
     fi
 

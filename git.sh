@@ -26,6 +26,7 @@ list_proxy() {
 unset_proxy() {
     git config --global --unset http.proxy
     git config --global --unset https.proxy
+    echo "${blue}git proxy unset ${normal}"
 }
 
 set_proxy() {
@@ -41,6 +42,7 @@ set_proxy() {
     else
         git config --global https.proxy "https://${stmt}${https_host}:${https_port}/"
     fi
+    list_proxy
 }
 
 

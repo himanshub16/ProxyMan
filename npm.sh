@@ -17,6 +17,7 @@ list_proxy() {
 unset_proxy() {
     npm config delete proxy
     npm config delete https-proxy
+    echo "${blue}npm proxy unset ${normal}"
 }
 
 set_proxy() {
@@ -33,6 +34,7 @@ set_proxy() {
     else
         npm config set https-proxy "https://${stmt}${https_host}:${https_port}/"
     fi
+    list_proxy
 }
 
 which npm &> /dev/null

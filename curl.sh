@@ -24,6 +24,7 @@ unset_proxy() {
     for proxytype in "http" ; do
         sed -i "/proxy\=/d" "$CONF_FILE"
     done
+    echo "${blue}curl proxy unset ${normal}"
 }
 
 set_proxy() {
@@ -41,6 +42,7 @@ set_proxy() {
 
     # caution: do not use / after stmt
     echo "proxy=\"http://${stmt}${http_host}:${http_port}/\""     >> "$CONF_FILE"
+    list_proxy
 }
 
 

@@ -34,6 +34,7 @@ list_proxy() {
 
 unset_proxy() {
     gsettings set org.gnome.system.proxy mode none
+    echo "${blue}GNOME proxy unset ${normal}"
 }
 
 set_proxy() {
@@ -64,6 +65,7 @@ set_proxy() {
     else
         gsettings set org.gnome.system.proxy ignore-hosts ""
     fi
+    list_proxy
 }
 
 

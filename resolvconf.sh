@@ -9,7 +9,8 @@ list_proxy() {
     echo "${bold}resolv.conf proxy settings ${normal}"
     lines="$(cat $CONF_FILE | grep nameserver -i | wc -w)"
     if [ "$lines" -gt 0 ]; then
-        cat $CONF_FILE | grep nameserver -i | sed -e 's/^/ /'
+        # cat $CONF_FILE | grep nameserver -i | sed -e 's/^/ /'
+        cat $CONF_FILE 
     else
         echo "${red}None${normal}"
     fi
@@ -21,8 +22,11 @@ unset_proxy() {
     fi
 
     sed -i "/nameserver/d" "$CONF_FILE"
+    sed -i "/search/d" "$CONF_FILE"
     echo "nameserver 8.8.8.8" >> "$CONF_FILE"
     echo "nameserver 8.8.8.4" >> "$CONF_FILE"
+    
+    echo "${blue}/etc/resolvonf.sh proxy unset ${normal}"
 }
 
 set_proxy() {
@@ -34,8 +38,10 @@ set_proxy() {
     sed -i "/nameserver/d" "$CONF_FILE"
     echo "${red}Add nameservers in resolvconf.sh ${normal}"
     # Update the addresses here...
-    echo "nameserver 8.8.8.8" >> "$CONF_FILE"
-    echo "nameserver 8.8.8.4" >> "$CONF_FILE"
+    echo "nameserver 10.47.194.85" >> "$CONF_FILE"
+    echo "nameserver 10.171.221.11" >> "$CONF_FILE"
+    echo "search cob.apac.bosch.com" >> "$CONF_FILE"
+    list_proxy
 }
 
 

@@ -35,6 +35,8 @@ unset_proxy() {
         sed -i "/export ${PROTOTYPE}_PROXY\=/d" "$SHELLRC"
         echo "export ${PROTOTYPE}_PROXY="     >> "$SHELLRC"
     done
+    
+    echo "${blue}$SHELLRC unset${normal}"
 }
 
 set_proxy() {
@@ -74,6 +76,7 @@ set_proxy() {
         echo "export https_proxy=\"https://${stmt}${https_host}:${https_port}/\"" >> "$SHELLRC"
         echo "export HTTPS_PROXY=\"https://${stmt}${https_host}:${https_port}/\"" >> "$SHELLRC"
     fi
+    list_proxy
 }
 
 

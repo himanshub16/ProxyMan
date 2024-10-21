@@ -30,6 +30,8 @@ unset_proxy() {
     if [ "$(cat $CONF_FILE | grep proxy -i | wc -l)" -gt 0 ]; then
         sed "/proxy/d" $CONF_FILE -i
     fi
+    
+    echo "${blue}dnf proxy unset ${normal}"
 }
 
 set_proxy() {
@@ -44,6 +46,7 @@ set_proxy() {
         echo "proxy_username=${username}" >> "$CONF_FILE"
         echo "proxy_password=${password}" >> "$CONF_FILE"
     fi
+    list_proxy
 }
 
 

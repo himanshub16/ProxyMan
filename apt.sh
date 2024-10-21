@@ -14,7 +14,7 @@ fix_new_line() {
 list_proxy() {
     # inefficient way as the file is read twice.. think of some better way
     echo
-    echo "${bold}APT proxy settings : ${normal}"
+    echo "${blue}APT proxy settings: ${normal}"
     lines="$(cat $CONF_FILE | grep proxy -i | wc -l)"
     if [ "$lines" -gt 0 ]; then
         cat "$CONF_FILE" | grep proxy -i | sed -e 's/^/ /'
@@ -28,8 +28,9 @@ unset_proxy() {
         return
     fi
     if [ "$(cat $CONF_FILE | grep proxy -i | wc -l)" -gt 0 ]; then
-        sed -E "/^Acquire::(.)*::Proxy/d" $CONF_FILE -i
+        sed -E "/^Acquire::(.)*::proxy/Id" $CONF_FILE -i
     fi
+    echo "${blue}APT proxy unset ${normal}"
 }
 
 set_proxy() {
@@ -44,17 +45,19 @@ set_proxy() {
     fi
 
     # caution: do not use / after stmt
-    echo "Acquire::Http::Proxy \"http://${stmt}${http_host}:${http_port}\";" \
+    echo "Acquire::HTTP::Proxy \"http://${stmt}${http_host}:${http_port}\";" \
          >> "$CONF_FILE"
     if [ "$USE_HTTP_PROXY_FOR_HTTPS" = "true" ]; then
-        echo "Acquire::Https::Proxy \"http://${stmt}${https_host}:${https_port}\";" \
+        echo "Acquire::HTTPS::Proxy \"http://${stmt}${https_host}:${https_port}\";" \
          >> "$CONF_FILE"
     else
-        echo "Acquire::Https::Proxy \"https://${stmt}${https_host}:${https_port}\";" \
+        echo "Acquire::HTTPS::Proxy \"https://${stmt}${https_host}:${https_port}\";" \
          >> "$CONF_FILE"
+        echo "setting https as https"
     fi
-    echo "Acquire::Ftp::Proxy \"ftp://${stmt}${ftp_host}:${ftp_port}\";" \
+    echo "Acquire::FTP::Proxy \"ftp://${stmt}${ftp_host}:${ftp_port}\";" \
          >> "$CONF_FILE"
+    list_proxy
 }
 
 

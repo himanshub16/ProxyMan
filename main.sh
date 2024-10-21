@@ -18,23 +18,53 @@ function _do_it_for_all() {
 
     local what_to_do="$1"
     if [[ -z "$targets" || "$targets" = "1" ]]; then
-        sudo -E bash "environment.sh" "$what_to_do"
+        echo "${bold}${underline}bash-zsh:${normal}"
         bash "bash-zsh.sh" "$what_to_do"
+
+        echo "${bold}${underline}environment:${normal}"
+        sudo -E bash "environment.sh" "$what_to_do"
+
+        echo "${bold}${underline}apt:${normal}"
+        sudo -E bash "apt.sh" "$what_to_do"
+
+        echo "${bold}${underline}dnf:${normal}"
+        sudo -E bash "dnf.sh" "$what_to_do"
+
+        echo "${bold}${underline}GNOME:${normal}"
         bash "gsettings.sh" "$what_to_do"
+
+        echo "${bold}${underline}KDE:${normal}"
         bash "kde5.sh" "$what_to_do"
+
+        echo "${bold}${underline}npm:${normal}"
         bash "npm.sh" "$what_to_do"
+
+        echo "${bold}${underline}dropbox:${normal}"
         bash "dropbox.sh" "$what_to_do"
+
+        echo "${bold}${underline}git:${normal}"
         bash "git.sh" "$what_to_do"
-        bash "cntlm.sh" "$what_to_do"
+
+        echo "${bold}${underline}docker:${normal}"
+        sudo -E bash "docker.sh" "$what_to_do"
+
+        echo "${bold}${underline}cntlm:${normal}"
+        sudo -E bash "cntlm.sh" "$what_to_do"
+
+        echo "${bold}${underline}wget:${normal}"
         bash "wget.sh" "$what_to_do"
+
+        echo "${bold}${underline}curl:${normal}"
         bash "curl.sh" "$what_to_do"
+
+        echo "${bold}${underline}resolvconf:${normal}"
         sudo -E bash "resolvconf.sh" "$what_to_do"
 
         # isn't required, but still checked to avoid sudo in main all the time
-        SUDO_CMDS="apt dnf docker"
-        for cmd in $SUDO_CMDS; do
-            command -v $cmd > /dev/null && sudo -E bash "${cmd}.sh" "$what_to_do" || :
-        done
+        # SUDO_CMDS="apt dnf docker"
+        # for cmd in $SUDO_CMDS; do
+        #     command -v $cmd > /dev/null && sudo -E bash "${cmd}.sh" "$what_to_do" || :
+        # done
     else
         for t in "${targets[@]}"
         do
@@ -43,31 +73,45 @@ function _do_it_for_all() {
                 # COMMENTED FOR WARNING
                 # 1) _do_it_for_all "$what_to_do"
                 #    ;;
-                2) bash "bash-zsh.sh" "$what_to_do"
+                2) echo "${bold}${underline}bash-zsh:${normal}"
+                   bash "bash-zsh.sh" "$what_to_do"
                    ;;
-                3) sudo -E bash "environment.sh" "$what_to_do"
+                3) echo "${bold}${underline}environment:${normal}"
+                   sudo -E bash "environment.sh" "$what_to_do"
                    ;;
-                4) sudo -E bash "apt.sh" "$what_to_do"
+                4) echo "${bold}${underline}apt:${normal}"
+                   sudo -E bash "apt.sh" "$what_to_do"
+                   echo "${bold}${underline}dnf:${normal}"
                    sudo -E bash "dnf.sh" "$what_to_do"
                    ;;
-                5) bash "gsettings.sh" "$what_to_do"
+                5) echo "${bold}${underline}GNOME:${normal}"
+                   bash "gsettings.sh" "$what_to_do"
+                   echo "${bold}${underline}KDE:${normal}"
                    bash "kde5.sh" "$what_to_do"
                    ;;
-                6) bash "npm.sh" "$what_to_do"
+                6) echo "${bold}${underline}npm:${normal}"
+                   bash "npm.sh" "$what_to_do"
                    ;;
-                7) bash "dropbox.sh" "$what_to_do"
+                7) echo "${bold}${underline}dropbox:${normal}"
+                   bash "dropbox.sh" "$what_to_do"
                    ;;
-                8) bash "git.sh" "$what_to_do"
+                8) echo "${bold}${underline}git:${normal}"
+                   bash "git.sh" "$what_to_do"
                    ;;
-                9) sudo -E bash "docker.sh" "$what_to_do"
+                9) echo "${bold}${underline}docker:${normal}"
+                   sudo -E bash "docker.sh" "$what_to_do"
                    ;;
-                10) sudo -E bash "cntlm.sh" "$what_to_do"
+                10) echo "${bold}${underline}cntlm:${normal}"
+                   sudo -E bash "cntlm.sh" "$what_to_do"
                    ;;
-                11) bash "wget.sh" "$what_to_do"
+                11) echo "${bold}${underline}wget:${normal}"
+                   bash "wget.sh" "$what_to_do"
                    ;;
-                12) bash "curl.sh" "$what_to_do"
+                12) echo "${bold}${underline}curl:${normal}"
+                   bash "curl.sh" "$what_to_do"
                    ;;
-                13) sudo -E bash "resolvconf.sh" "$what_to_do"
+                13) echo "${bold}${underline}resolvconf:${normal}"
+                   sudo -E bash "resolvconf.sh" "$what_to_do"
                    ;;
                 *) ;;
             esac

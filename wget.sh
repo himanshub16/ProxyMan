@@ -30,6 +30,7 @@ unset_proxy() {
         echo "${PROTOTYPE}_PROXY="     >> "$CONF_FILE"
     done
     sed -i "/use_proxy/d" "$CONF_FILE"
+    echo "${blue}wget proxy unset ${normal}"
 }
 
 set_proxy() {
@@ -65,6 +66,7 @@ set_proxy() {
         echo "https_proxy=\"https://${stmt}${https_host}:${https_port}/\"" >> "$CONF_FILE"
         echo "HTTPS_PROXY=\"https://${stmt}${https_host}:${https_port}/\"" >> "$CONF_FILE"
     fi
+    list_proxy
 }
 
 

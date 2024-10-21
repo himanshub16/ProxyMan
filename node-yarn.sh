@@ -17,6 +17,7 @@ list_proxy() {
 unset_proxy() {
     yarn config delete proxy
     yarn config delete https-proxy
+    echo "${blue}yarn proxy unset ${normal}"
 }
 
 set_proxy() {
@@ -33,6 +34,7 @@ set_proxy() {
     else
         yarn config set https-proxy "https://${stmt}${https_host}:${https_port}/"
     fi
+    list_proxy
 }
 
 which yarn &> /dev/null

@@ -2,6 +2,7 @@
 # plugin to set "KDE plasma 5" proxy settings for ProxyMan
 # privileges has to be set by the process which starts this script
 
+echo "${blue}Setting kde${normal}"
 
 list_proxy() {
     echo
@@ -26,6 +27,7 @@ list_proxy() {
 
 unset_proxy() {
     kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key ProxyType 0
+    echo "${blue}kde proxy unset ${normal}"
 }
 
 set_proxy() {
@@ -44,7 +46,7 @@ set_proxy() {
     else
         kwriteconfig5 --file kioslaverc --group "Proxy Settings" --key NoProxyFor ""
     fi
-
+    list_proxy
 }
 
 

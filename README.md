@@ -1,4 +1,11 @@
-## ProxyMan [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/proxyman-linux/Lobby)
+## ProxyMan [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+```
+This project is no longer maintained.
+Back in 2015-2017, configuring proxy settings was a pain on Linux due to too many configuration files.
+Recent versions of Ubuntu tend to work quite well, and most other apps can use the system settings UI.
+For other cases, you are free to use this tool.
+```
 
 ### Configuring proxy made so simple on Linux ([releases](https://github.com/himanshub16/ProxyMan/releases/))
 

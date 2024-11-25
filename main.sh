@@ -165,7 +165,11 @@ function main() {
         "load"     ) echo "Loading profile : ${blue} $2 ${normal}"
                      load_config "$2"
                      _dump_it_all
-                     prompt_for_proxy_targets
+                     if [ -z "$3" ]; then
+                        prompt_for_proxy_targets
+                     else
+                        export targets=(`echo ${3}`)
+                     fi
                      set_all_proxy
                      ;;
         "delete"   ) echo "Deleting profile : ${red} $2 ${normal}"
@@ -175,8 +179,10 @@ function main() {
                      prompt_for_proxy_targets
                      set_all_proxy
                      ;;
-        "unset"    ) if test -t 1; then
+        "unset"    ) if [ -z "$2" ]; then
                         prompt_for_proxy_targets
+                     else
+                        export targets=(`echo ${2}`)
                      fi
                      unset_all_proxy
                      ;;

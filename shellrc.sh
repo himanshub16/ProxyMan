@@ -6,7 +6,7 @@
 # This is required for Elementary OS which contains ~/.bashrc without \n
 _fix_new_line() {
     if [[ $(tail -c 1 "$SHELLRC" | wc --lines) = 0 ]]; then
-        echo >> "$1"
+        echo >>"$1"
     fi
 }
 
@@ -21,22 +21,45 @@ list_proxy() {
     fi
 }
 
+_modify_shellrc_variable_line() {
+    PROXY_VARIABLE_NAME="$1"
+    DELETE="$2"
+
+    # Fish shell needs the variables to be explicitely unset, so we replace, if on Fish
+    # If $DELETE is empty, we will delete the whole line, even when we are on Fish
+    # This is needed for cleaning the $SHELLRC file before setting a new proxy
+    if [[ ("$SHELLRC" == *"fish"*) && (-z "$DELETE") ]]; then
+        SED_STRING="s/.*${PROXY_VARIABLE_NAME}.*/set -e ${PROXY_VARIABLE_NAME}/g"
+    else
+        SED_STRING="/.*${PROXY_VARIABLE_NAME}.*/d"
+    fi
+
+    # We use -i.bak and delete the backup file afterwards to be compatible with GNU sed and BSD sed at the same time
+    # (as in https://stackoverflow.com/questions/5694228/sed-in-place-flag-that-works-both-on-mac-bsd-and-linux)
+    sed -i.bak "$SED_STRING" "$SHELLRC" && rm ${SHELLRC}.bak
+}
+
 unset_proxy() {
     if [ ! -e "$SHELLRC" ]; then
         return
     fi
-    # extra effort required to avoid removing custom environment variables set
-    # by the user for personal use
+
+    # Option to definitely delete the whole line
+    DELETE="$1"
+
     for proxytype in "http" "https" "ftp" "rsync" "no"; do
-        sed -i "/export ${proxytype}_proxy\=/d" "$SHELLRC"
-    done
-    for PROTOTYPE in "HTTP" "HTTPS" "FTP" "RSYNC" "NO"; do
-        sed -i "/export ${PROTOTYPE}_PROXY\=/d" "$SHELLRC"
+        # Handle lower case entries
+        PROXY_VARIABLE_NAME="${proxytype}_proxy"
+        _modify_shellrc_variable_line $PROXY_VARIABLE_NAME "$DELETE"
+
+        # Handle upper case entries
+        PROXY_VARIABLE_NAME=$(echo "$PROXY_VARIABLE_NAME" | awk '{print toupper($0)}')
+        _modify_shellrc_variable_line $PROXY_VARIABLE_NAME "$DELETE"
     done
 }
 
 set_proxy() {
-    unset_proxy
+    unset_proxy "DELETE"
     if [ ! -e "$SHELLRC" ]; then
         touch "$SHELLRC"
     fi
